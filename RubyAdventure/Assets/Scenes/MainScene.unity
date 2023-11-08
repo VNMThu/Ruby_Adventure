@@ -2041,6 +2041,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ruby
       objectReference: {fileID: 0}
+    - target: {fileID: 8178705942803280774, guid: 5d40d5f8eb4574c8dbc62aa9403b9a0c, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 3221207481687157363, guid: bf07bddc663b04ea68b6e10a6b13a4fe, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2435,11 +2439,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4207027489093291671, guid: 5ae2d9576a7e74e4ea5feb9b2d0e21aa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.04
+      value: -1.28
       objectReference: {fileID: 0}
     - target: {fileID: 4207027489093291671, guid: 5ae2d9576a7e74e4ea5feb9b2d0e21aa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.19
+      value: -1.83
       objectReference: {fileID: 0}
     - target: {fileID: 4207027489093291671, guid: 5ae2d9576a7e74e4ea5feb9b2d0e21aa, type: 3}
       propertyPath: m_LocalPosition.z
