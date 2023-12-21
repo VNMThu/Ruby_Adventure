@@ -78,5 +78,6 @@ public class EnemyController : MonoBehaviour
     {
         isBroken = false;
         rigidBody.simulated = false;
+        GameManager.Instance.FixSingleRobot();
     }
 }

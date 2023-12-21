@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4684584327427351296}
   - component: {fileID: -1701722920714937945}
   - component: {fileID: 2406271764154702127}
+  - component: {fileID: 798144372589382592}
   m_Layer: 8
   m_Name: Ruby
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4908712, y: 1.4908712, z: 1.4908712}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 8db93209cc4ca403fb66a4595503f4ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -103,7 +104,7 @@ MonoBehaviour:
   speed: 3
   maxHealth: 5
   timeInvincible: 2
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 3221207481687157363, guid: bf07bddc663b04ea68b6e10a6b13a4fe, type: 3}
 --- !u!50 &4684584327427351296
 Rigidbody2D:
   serializedVersion: 4
@@ -128,7 +129,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!61 &-1701722920714937945
@@ -163,10 +164,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.016027823, y: 0.18473172}
+  m_Offset: {x: -0.00665769, y: 0.09802045}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.49341562, y: 0.057613198}
     oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 1.28, y: 1.28}
     adaptiveTilingThreshold: 0.5
@@ -174,7 +175,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4041042, y: 0.36946344}
+  m_Size: {x: 0.42284447, y: 0.37705633}
   m_EdgeRadius: 0
 --- !u!95 &2406271764154702127
 Animator:
@@ -197,3 +198,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!210 &798144372589382592
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7141493263463636852}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
