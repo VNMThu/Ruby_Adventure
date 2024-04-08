@@ -4,34 +4,49 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    Rigidbody2D rigidBody;
-
+    // Start is called before the first frame update
+    Rigidbody2D rigid_body;
+    public AudioClip hitClip;
+    private Renderer myRenderer;
     void Awake()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
+        rigid_body = GetComponent<Rigidbody2D>();
+        myRenderer = GetComponent<Renderer>();
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (transform.position.magnitude > 100)
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     public void Launch(Vector2 direction, float force)
     {
-        rigidBody.AddForce(direction * force);
+
+        rigid_body.AddForce(direction * force);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        EnemyController enemyController = collision.collider.GetComponent<EnemyController>();
-        if (enemyController != null)
+        if (other.tag == "Enemy")
         {
-            enemyController.Fix();
-        }
+            EnemyController enemyController = other.GetComponent<EnemyController>();
+            enemyController.PlayAudio(hitClip);
+            enemyController.ChangeHp(-1);
 
+        }
+        else if (other.tag == "Collectible")
+        {
+            return;
+        }
         Destroy(gameObject);
+
     }
 
-    void Update()
-    {
-        if (transform.position.magnitude > 1000.0f)
-        {
-            Destroy(gameObject);
-        }
-    }
+
 }

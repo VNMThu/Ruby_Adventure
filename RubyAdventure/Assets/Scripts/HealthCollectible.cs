@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class HealthCollectible : MonoBehaviour
 {
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-        RubyController rubyController = collider.GetComponent<RubyController>();
-
-        if (rubyController != null)
-        {
-            if (rubyController.health < rubyController.maxHealth)
-            {
-                rubyController.ChangeHealth(1);
-                Destroy(gameObject);
-            }
+    public AudioClip collectedClip;
+    private void OnTriggerEnter2D(Collider2D other) {
+        RubyController controller = other.GetComponent<RubyController>();
+        if(controller != null && controller.Health < controller.maxHealth){
+            controller.ChangeHealth(1);
+            controller.PlayAudio(collectedClip);
+            gameObject.SetActive(false);
         }
     }
 }

@@ -4,27 +4,46 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    [SerializeField]
+    private int maxHp = 2;
+    public int hp { get; private set; }
     public float speed;
     public bool vertical;
-    public float changeTime = 3.0f;
+    public float changeTime = 2.0f;
 
-    Rigidbody2D rigidBody;
+    Rigidbody2D rigid_body;
     float timer;
     int direction = 1;
 
+    public bool isBroken = true;
     Animator animator;
 
-    bool isBroken = true;
+    public ParticleSystem smokeEffect;
+    private AudioSource audioSource;
 
+    [SerializeField]
+    private AudioClip fixedClip;
+
+    private MissionManager mM;
+
+    // Start is called before the first frame update
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
+        rigid_body = GetComponent<Rigidbody2D>();
         timer = changeTime;
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        hp = maxHp;
+        mM = FindObjectOfType<MissionManager>();
     }
 
     void Update()
     {
+        if (!isBroken)
+        {
+            return;
+        }
+
         timer -= Time.deltaTime;
 
         if (timer < 0)
@@ -33,15 +52,17 @@ public class EnemyController : MonoBehaviour
             timer = changeTime;
         }
 
-        if (!isBroken)
-        {
-            return;
-        }
+
     }
 
     void FixedUpdate()
     {
-        Vector2 position = rigidBody.position;
+        if (!isBroken)
+        {
+            return;
+        }
+
+        Vector2 position = rigid_body.position;
 
         if (vertical)
         {
@@ -56,28 +77,53 @@ public class EnemyController : MonoBehaviour
             animator.SetFloat("Move Y", 0);
         }
 
-        if (!isBroken)
-        {
-            return;
-        }
 
-        rigidBody.MovePosition(position);
+
+        rigid_body.MovePosition(position);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        RubyController player = collision.gameObject.GetComponent<RubyController>();
-
-        if (player != null)
+        RubyController rubyController = other.gameObject.GetComponent<RubyController>();
+        if (rubyController != null)
         {
-            player.ChangeHealth(-1);
+            rubyController.ChangeHealth(-1);
         }
     }
 
-    public void Fix()
+    public void FixRobot()
     {
         isBroken = false;
-        rigidBody.simulated = false;
-        GameManager.Instance.FixSingleRobot();
+        rigid_body.simulated = false;
+        animator.SetTrigger("Fixed");
+        smokeEffect.Stop();
+        audioSource.Stop();
+        mM.ChangeRobotNum();
+    }
+
+    public void FixRobotOnly()
+    {
+        isBroken = false;
+        rigid_body.simulated = false;
+        animator.SetTrigger("Fixed");
+        smokeEffect.Stop();
+        audioSource.Stop();
+    }
+
+
+    public void PlayAudio(AudioClip audioClip)
+    {
+        audioSource.PlayOneShot(audioClip);
+    }
+
+    public void ChangeHp(int value)
+    {
+        hp += value;
+        if (hp <= 0)
+        {
+            PlayAudio(fixedClip);
+            FixRobot();
+        }
     }
 }
+

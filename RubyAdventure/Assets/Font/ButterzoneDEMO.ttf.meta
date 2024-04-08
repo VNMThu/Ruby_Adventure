@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: b42fffb63d44aaf4ea7fb7c01ef44d50
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Butterzone DEMO
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 4075b129b99105444b669cc4aa4ac038, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
