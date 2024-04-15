@@ -1,51 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
     // Start is called before the first frame update
-    Rigidbody2D rigid_body;
+    private Rigidbody2D _rigidBody;
     public AudioClip hitClip;
-    private Renderer myRenderer;
-    void Awake()
-    {
-        rigid_body = GetComponent<Rigidbody2D>();
-        myRenderer = GetComponent<Renderer>();
 
+    private void Awake()
+    {
+        _rigidBody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (transform.position.magnitude > 100)
         {
-            Destroy(gameObject);
+            ObjectsPoolManager.ReturnObjectToPool(gameObject);
         }
+    }
 
+    private void OnDisable()
+    {
+        _rigidBody.velocity = Vector3.zero;
     }
 
     public void Launch(Vector2 direction, float force)
     {
-
-        rigid_body.AddForce(direction * force);
+        _rigidBody.AddForce(direction * force);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Enemy")
+        switch (other.tag)
         {
-            EnemyController enemyController = other.GetComponent<EnemyController>();
-            enemyController.PlayAudio(hitClip);
-            enemyController.ChangeHp(-1);
-
+            case "Enemy":
+            {
+                EnemyController enemyController = other.GetComponent<EnemyController>();
+                enemyController.PlayAudio(hitClip);
+                enemyController.ChangeHp(-1);
+                break;
+            }
+            case "Collectible":
+                return;
         }
-        else if (other.tag == "Collectible")
-        {
-            return;
-        }
-        Destroy(gameObject);
 
+        ObjectsPoolManager.ReturnObjectToPool(gameObject);
     }
 
 

@@ -163,12 +163,15 @@ public class RubyController : MonoBehaviour
             }
             _isInvincible = true;
             _invincibleTimer = timeInvincible;
-            Instantiate(getHitEffect, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity);
+
+            ObjectsPoolManager.SpawnObject(getHitEffect.gameObject, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity,
+                ObjectsPoolManager.PoolType.ParticleSystem);
             PlayAudio(getHitClip);
         }
         else if (amount > 0)
         {
-            Instantiate(pickHealthEffect, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity);
+            ObjectsPoolManager.SpawnObject(pickHealthEffect.gameObject, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity,
+                ObjectsPoolManager.PoolType.ParticleSystem);
         }
         Health = Mathf.Clamp(Health + amount, 0, maxHealth);
         UIHealthBar.instance.SetValue(Health / (float)maxHealth);
@@ -176,7 +179,7 @@ public class RubyController : MonoBehaviour
 
     private void Launch()
     {
-        GameObject projectileObject = Instantiate(projectilePrefab, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity);
+        GameObject projectileObject = ObjectsPoolManager.SpawnObject(projectilePrefab, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity,ObjectsPoolManager.PoolType.Bullet);
         Projectile projectile = projectileObject.GetComponent<Projectile>();
         projectile.Launch(_lookDirection, 300);
         _animator.SetTrigger("Launch");
@@ -193,8 +196,8 @@ public class RubyController : MonoBehaviour
     {
         if (value > 0)
         {
-            Instantiate(pickHealthEffect, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity);
-
+            ObjectsPoolManager.SpawnObject(pickHealthEffect.gameObject, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity,
+                ObjectsPoolManager.PoolType.ParticleSystem);
         }
         numberOfClog += value;
         bulletTxt.text = numberOfClog.ToString();
