@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1843783274}
   - component: {fileID: 3980358640540255178}
   - component: {fileID: 8983953809487122606}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MrClockwork
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -313,6 +313,10 @@ PrefabInstance:
     - target: {fileID: 2003573186190264506, guid: 98f505fbf39e97647819d109722c8caa, type: 3}
       propertyPath: m_Name
       value: SmokeEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003573186190264506, guid: 98f505fbf39e97647819d109722c8caa, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2003573186190264511, guid: 98f505fbf39e97647819d109722c8caa, type: 3}
       propertyPath: m_RootOrder
