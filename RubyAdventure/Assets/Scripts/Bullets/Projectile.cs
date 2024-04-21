@@ -4,12 +4,13 @@ public class Projectile : MonoBehaviour
 {
     // Start is called before the first frame update
     private Rigidbody2D _rigidBody;
-    public AudioClip hitClip;
-
+    [SerializeField] private AudioClip hitClip;
+    [SerializeField] private ParticleSystem sparkHit;
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
     }
+    
 
     // Update is called once per frame
     private void Update()
@@ -27,25 +28,34 @@ public class Projectile : MonoBehaviour
 
     public void Launch(Vector2 direction, float force)
     {
-        _rigidBody.AddForce(direction * force);
+        _rigidBody.AddForce(direction * force,ForceMode2D.Impulse);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Enter Trigger:"+other.gameObject.name);
         switch (other.tag)
         {
             case "Enemy":
             {
                 EnemyController enemyController = other.GetComponent<EnemyController>();
+                
+                //Spawn Particle
+                ObjectsPoolManager.SpawnObject(sparkHit.gameObject, transform.position, transform.rotation,
+                    ObjectsPoolManager.PoolType.ParticleSystem);
+                
+                //Play audio
                 enemyController.PlayAudio(hitClip);
-                enemyController.ChangeHp(-1);
+                
+                //Change HP
+                // enemyController.ChangeHp(-1);
+                
+                ObjectsPoolManager.ReturnObjectToPool(gameObject);
+
                 break;
             }
-            case "Collectible":
-                return;
         }
 
-        ObjectsPoolManager.ReturnObjectToPool(gameObject);
     }
 
 

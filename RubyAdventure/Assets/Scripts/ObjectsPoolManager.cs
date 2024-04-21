@@ -16,7 +16,7 @@ public class ObjectsPoolManager : MonoBehaviour
     public enum PoolType
     {
         ParticleSystem,
-        Bullet,
+        Projectile,
         Others
     }
 
@@ -43,7 +43,7 @@ public class ObjectsPoolManager : MonoBehaviour
         {
             case PoolType.ParticleSystem:
                 return _particleSystemParent;
-            case PoolType.Bullet:
+            case PoolType.Projectile:
                 return _bulletSystemParent;
             default:
                 return _othersSystemParent;

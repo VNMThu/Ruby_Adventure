@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class RubyHand : MonoBehaviour
 {
-    private BaseWeapon weapon;
-    private Transform currentTarget;
+    private Weapon _weapon;
+    private Transform _currentTarget;
     private bool _isSpriteFlipLeft;
     private bool _isRotating;
 
     private void Attack()
     {
-        weapon.Attack();
+        _weapon.Attack();
     }
 
     private void Start()
@@ -21,7 +21,7 @@ public class RubyHand : MonoBehaviour
 
     private void SetWeapon()
     {
-        weapon = GetComponentInChildren<BaseWeapon>();
+        _weapon = GetComponentInChildren<Weapon>();
     }
 
     private IEnumerator C_RotateWeapon()
@@ -31,8 +31,8 @@ public class RubyHand : MonoBehaviour
         //Rotate to target
         while (_isRotating)
         {
-            float angle = Mathf.Atan2(currentTarget.position.y - transform.position.y,
-                currentTarget.position.x - transform.position.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(_currentTarget.position.y - transform.position.y,
+                _currentTarget.position.x - transform.position.x) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
             var rotation = transform.rotation;
             
@@ -48,11 +48,11 @@ public class RubyHand : MonoBehaviour
             switch (currentAngleOfGun)
             {
                 case > 90 and < 270 when !_isSpriteFlipLeft:
-                    weapon.FlipSprite();
+                    _weapon.FlipSprite();
                     _isSpriteFlipLeft = true;
                     break;
                 case < 90 or > 270 when _isSpriteFlipLeft:
-                    weapon.FlipSprite();
+                    _weapon.FlipSprite();
                     _isSpriteFlipLeft = false;
                     break;
             }
@@ -73,17 +73,17 @@ public class RubyHand : MonoBehaviour
 
         //Find the enemy that closer
         
-        if (currentTarget != null)
+        if (_currentTarget != null)
         {
             if (Vector3.Distance(other.transform.position, transform.position) <
-                Vector3.Distance(currentTarget.position, transform.position))
+                Vector3.Distance(_currentTarget.position, transform.position))
             {
-                currentTarget = other.transform;
+                _currentTarget = other.transform;
             }
         }
         else
         {
-            currentTarget = other.transform;
+            _currentTarget = other.transform;
         }
 
 
@@ -104,7 +104,7 @@ public class RubyHand : MonoBehaviour
             StopCoroutine(C_RotateWeapon());
         }
 
-        weapon.StopAttack();
+        _weapon.StopAttack();
         _isRotating = false;
     }
 }

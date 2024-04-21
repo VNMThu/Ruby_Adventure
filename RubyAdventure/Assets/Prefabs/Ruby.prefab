@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6989508565234943778}
   m_Layer: 8
   m_Name: Ruby
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -402,8 +402,8 @@ GameObject:
   - component: {fileID: 6877095341015775910}
   - component: {fileID: 2949796987855334574}
   m_Layer: 8
-  m_Name: Hand1
-  m_TagString: Untagged
+  m_Name: Hand
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -508,7 +508,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 632327192439097518, guid: 61d0bdf202f9ad842be30ff5f58b7465, type: 3}
       propertyPath: m_Name
-      value: Weapon
+      value: Pistol
       objectReference: {fileID: 0}
     - target: {fileID: 2062563123622631815, guid: 61d0bdf202f9ad842be30ff5f58b7465, type: 3}
       propertyPath: m_LocalPosition.x

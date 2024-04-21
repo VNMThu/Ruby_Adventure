@@ -179,7 +179,7 @@ public class RubyController : MonoBehaviour
 
     private void Launch()
     {
-        GameObject projectileObject = ObjectsPoolManager.SpawnObject(projectilePrefab, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity,ObjectsPoolManager.PoolType.Bullet);
+        GameObject projectileObject = ObjectsPoolManager.SpawnObject(projectilePrefab, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity,ObjectsPoolManager.PoolType.Projectile);
         Projectile projectile = projectileObject.GetComponent<Projectile>();
         projectile.Launch(_lookDirection, 300);
         _animator.SetTrigger("Launch");
