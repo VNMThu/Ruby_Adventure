@@ -11,7 +11,6 @@ public class RubyHand : MonoBehaviour
     private bool _isAttacking;
     private void Attack()
     {
-        Debug.Log("Attack get call");
         _weapon.Attack();
     }
 
