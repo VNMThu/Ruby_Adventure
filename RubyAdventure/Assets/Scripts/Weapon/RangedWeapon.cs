@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
@@ -14,21 +15,35 @@ public class RangedWeapon : Weapon
     private readonly int _shoot = Animator.StringToHash(AnimationCondition);
     private readonly int _isStanding = Animator.StringToHash("IsStanding");
     private SpriteRenderer _spriteRenderer;
-    
+    private bool _isAttacking;
+    private Coroutine _attackCoroutine;
     protected void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        //Set firing speed
-        animator.speed = fireRate;
+
+        //Default stand
+        animator.SetBool(_isStanding,true);    
+
+        
         //Turn off muzzle flash
         muzzleFlash.gameObject.SetActive(false);
     }
 
     public override void Attack()
     {
-        //Start animation
-        animator.SetBool(_shoot,true);
+        //Start animation - Over Call
+        _isAttacking = true;
+        _attackCoroutine = StartCoroutine(C_AttackCoroutine());
     }
+
+    private IEnumerator C_AttackCoroutine()
+    {
+        while (_isAttacking)
+        {
+            animator.SetTrigger(_shoot);
+            yield return new WaitForSeconds(1 / fireRate);
+        }
+    } 
 
     //This is call inside animation clip
     public virtual void FireProjectile()
@@ -38,19 +53,15 @@ public class RangedWeapon : Weapon
             ObjectsPoolManager.PoolType.Projectile).GetComponent<Projectile>();
         
         //Launch it
-
-        Vector2 lookDirection = (transform.rotation.eulerAngles.z * Vector2.one).normalized;
         projectile.Launch(transform.right,40);
     }
 
     public override void StopAttack()
     {
         //Stop firing
-        if (animator.GetBool(_shoot))
-        {
-            animator.SetBool(_shoot, false);
-        }
-        animator.SetTrigger(_isStanding);    
+        if (!_isAttacking) return;
+        _isAttacking = false;
+        StopCoroutine(_attackCoroutine);
     }
 
     public override void FlipSprite()

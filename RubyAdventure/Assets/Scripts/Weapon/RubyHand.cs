@@ -8,9 +8,10 @@ public class RubyHand : MonoBehaviour
     private Transform _currentTarget;
     private bool _isSpriteFlipLeft;
     private bool _isRotating;
-
+    private bool _isAttacking;
     private void Attack()
     {
+        Debug.Log("Attack get call");
         _weapon.Attack();
     }
 
@@ -35,16 +36,16 @@ public class RubyHand : MonoBehaviour
                 _currentTarget.position.x - transform.position.x) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
             var rotation = transform.rotation;
-            
+
             rotation = Quaternion.RotateTowards(rotation, targetRotation,
                 360f);
-            
+
             transform.rotation = rotation;
-            
+
             float currentAngleOfGun = rotation.eulerAngles.z;
-            
+
             //Flip sprite correct to rotation
-            
+
             switch (currentAngleOfGun)
             {
                 case > 90 and < 270 when !_isSpriteFlipLeft:
@@ -58,7 +59,12 @@ public class RubyHand : MonoBehaviour
             }
 
             //Attack weapon
-            Attack();
+            if (!_isAttacking)
+            {
+                Attack();
+                _isAttacking = true;
+            }
+
             yield return null;
 
         }
@@ -106,5 +112,6 @@ public class RubyHand : MonoBehaviour
 
         _weapon.StopAttack();
         _isRotating = false;
+        _isAttacking = false;
     }
 }
