@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] protected float moveSpeed; 
     [SerializeField] protected float damage;
     [SerializeField] protected float fullHealth;
     [SerializeField] protected float speed;
+    [SerializeField] protected Animator animator;
+    [SerializeField] protected SpriteRenderer[] spriteRenderer;
+
     protected float currentHealth;
     protected bool isAlive;
 
@@ -16,6 +18,7 @@ public class Enemy : MonoBehaviour
     {
         currentHealth = fullHealth;
         isAlive = true;
+        MovePattern();
     }
 
     //Move Pattern
@@ -27,9 +30,14 @@ public class Enemy : MonoBehaviour
     protected virtual void Attack()
     {
     }
+
+    protected virtual void StopAttack()
+    {
+        
+    }
     
     //React when hit by different kind of attack
-    protected virtual void GetHitNormal(float damageDeal)
+    public virtual void GetHitNormal(float damageDeal)
     {
         currentHealth -= damageDeal;
         if (currentHealth <= 0)
@@ -45,9 +53,15 @@ public class Enemy : MonoBehaviour
         ObjectsPoolManager.ReturnObjectToPool(gameObject);
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
         Attack();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+        StopAttack();
     }
 }

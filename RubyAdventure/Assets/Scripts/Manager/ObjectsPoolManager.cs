@@ -10,6 +10,8 @@ public class ObjectsPoolManager : MonoBehaviour
     public static List<PoolObjectInfo> ObjectPools = new();
     private static GameObject _particleSystemParent;
     private static GameObject _bulletSystemParent;
+    private static GameObject _enemySystemParent;
+
     private static GameObject _othersSystemParent;
 
 
@@ -17,6 +19,7 @@ public class ObjectsPoolManager : MonoBehaviour
     {
         ParticleSystem,
         Projectile,
+        Enemy,
         Others
     }
 
@@ -30,11 +33,14 @@ public class ObjectsPoolManager : MonoBehaviour
     {
         _particleSystemParent = new GameObject("Particle Effect Pool");
         _bulletSystemParent = new GameObject("Bullets Pool");
+        _enemySystemParent = new GameObject("Enemy Pool");
+
         _othersSystemParent = new GameObject("Others GameObjects Pool");
         
         _particleSystemParent.transform.SetParent(gameObject.transform);
         _bulletSystemParent.transform.SetParent(gameObject.transform);
         _othersSystemParent.transform.SetParent(gameObject.transform);
+        _enemySystemParent.transform.SetParent(gameObject.transform);
     }
 
     private static GameObject SetParentObject(PoolType poolType)

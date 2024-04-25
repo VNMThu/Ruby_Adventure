@@ -38,17 +38,17 @@ public class Projectile : MonoBehaviour
         {
             case "Enemy":
             {
-                EnemyController enemyController = other.GetComponent<EnemyController>();
+                Enemy enemyController = other.GetComponent<Enemy>();
                 
                 //Spawn Particle
                 ObjectsPoolManager.SpawnObject(sparkHit.gameObject, transform.position, transform.rotation,
                     ObjectsPoolManager.PoolType.ParticleSystem);
                 
                 //Play audio
-                enemyController.PlayAudio(hitClip);
+                // enemyController.PlayAudio(hitClip);
                 
                 //Change HP
-                // enemyController.ChangeHp(-1);
+                enemyController.GetHitNormal(1);
                 
                 ObjectsPoolManager.ReturnObjectToPool(gameObject);
 
