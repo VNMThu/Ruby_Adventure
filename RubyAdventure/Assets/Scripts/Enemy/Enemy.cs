@@ -6,6 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] protected float damage;
+    [SerializeField] protected float detectedRange;
     [SerializeField] protected float fullHealth;
     [SerializeField] protected float speed;
     [SerializeField] protected Animator animator;
@@ -13,6 +14,7 @@ public class Enemy : MonoBehaviour
 
     protected float currentHealth;
     protected bool isAlive;
+    protected bool isAttacking;
 
     protected virtual void OnEnable()
     {
@@ -56,12 +58,12 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-        Attack();
+        // Attack();
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-        StopAttack();
+        // StopAttack();
     }
 }
