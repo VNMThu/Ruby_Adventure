@@ -138,6 +138,7 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  appearEffect: {fileID: 442907092464650958, guid: 5773b0d31791d874097ec8f946dbefdc, type: 3}
 --- !u!50 &6066843974360539533
 Rigidbody2D:
   serializedVersion: 4

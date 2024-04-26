@@ -6,13 +6,15 @@ public class MeleeSoldier : Enemy
     private static readonly int IsAttacking = Animator.StringToHash("IsAttacking");
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask playerLayerMask;
+    [SerializeField] private ParticleSystem appearEffect;
     private static readonly int IsDeath = Animator.StringToHash("IsDeath");
 
     protected override void OnEnable()
     {
         base.OnEnable();
         animator.SetBool(IsAttacking,false);
-
+        ObjectsPoolManager.SpawnObject(appearEffect.gameObject, transform.position, Quaternion.identity,
+            ObjectsPoolManager.PoolType.ParticleSystem);
     }
     
     protected override void StartMoving()
