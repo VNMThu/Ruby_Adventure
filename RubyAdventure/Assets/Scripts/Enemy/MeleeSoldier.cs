@@ -12,8 +12,8 @@ public class MeleeSoldier : Enemy
         animator.SetBool(IsAttacking,false);
 
     }
-
-    protected override void MovePattern()
+    
+    protected override void StartMoving()
     {
         StartCoroutine(MoveToRuby());
     }

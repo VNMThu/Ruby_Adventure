@@ -21,11 +21,10 @@ public class Enemy : MonoBehaviour
     {
         currentHealth = fullHealth;
         isAlive = true;
-        MovePattern();
     }
 
-    //Move Pattern
-    protected virtual void MovePattern()
+    //Move Pattern - This will get call inside animation
+    protected virtual void StartMoving()
     {
     }
     
