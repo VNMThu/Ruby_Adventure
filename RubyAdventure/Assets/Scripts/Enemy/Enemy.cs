@@ -58,6 +58,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Death()
     {
         isAlive = false;
+        isAttacking = false;
         ObjectsPoolManager.ReturnObjectToPool(gameObject);
     }
 }

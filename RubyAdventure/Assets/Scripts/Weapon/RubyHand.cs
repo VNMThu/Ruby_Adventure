@@ -29,7 +29,7 @@ public class RubyHand : MonoBehaviour
         _isRotating = true;
         
         //Rotate to target
-        while (_isRotating)
+        while (_isRotating && _currentTarget.gameObject.activeInHierarchy)
         {
             float angle = Mathf.Atan2(_currentTarget.position.y - transform.position.y,
                 _currentTarget.position.x - transform.position.x) * Mathf.Rad2Deg;
@@ -68,10 +68,12 @@ public class RubyHand : MonoBehaviour
 
         }
         
+        StopRotate();
+        
         //If rotate hit enemy -> Fire bullet
 
     }
-
+    
     private void OnTriggerStay2D(Collider2D other)
     {
         if (!other.CompareTag("Enemy")) return;
@@ -102,13 +104,19 @@ public class RubyHand : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         if (!other.CompareTag("Enemy")) return;
-        
+
+        StopRotate();
+    }
+
+    private void StopRotate()
+    {
         //Fire
         if (_isRotating)
         {
             StopCoroutine(C_RotateWeapon());
         }
 
+        _currentTarget = null;
         _weapon.StopAttack();
         _isRotating = false;
         _isAttacking = false;

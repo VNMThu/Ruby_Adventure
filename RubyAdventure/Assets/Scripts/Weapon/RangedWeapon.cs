@@ -32,6 +32,10 @@ public class RangedWeapon : Weapon
     public override void Attack()
     {
         //Start animation - Over Call
+        if (_isAttacking)
+        {
+            StopCoroutine(_attackCoroutine);
+        }
         _isAttacking = true;
         _attackCoroutine = StartCoroutine(C_AttackCoroutine());
     }
@@ -40,8 +44,8 @@ public class RangedWeapon : Weapon
     {
         while (_isAttacking)
         {
-            animator.SetTrigger(_shoot);
             yield return new WaitForSeconds(1 / fireRate);
+            animator.SetTrigger(_shoot);
         }
     } 
 

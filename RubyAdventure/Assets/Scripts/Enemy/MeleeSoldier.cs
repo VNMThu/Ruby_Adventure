@@ -109,6 +109,7 @@ public class MeleeSoldier : Enemy
     protected override void Death()
     {
         base.Death();
+        animator.SetBool(IsAttacking,false);
     }
 
     private void OnDrawGizmosSelected()

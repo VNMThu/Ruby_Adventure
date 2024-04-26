@@ -12518,7 +12518,7 @@ MonoBehaviour:
   - {fileID: 693213620}
   - {fileID: 1447836861}
   - {fileID: 911419287}
-  spawnInterval: 5
+  spawnInterval: 3
   meleeSoldierPrefab: {fileID: 7099191634836985210, guid: ee972e5c924f6d54e807520643dfd78a, type: 3}
 --- !u!1001 &1042709225
 PrefabInstance:
@@ -81021,7 +81021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7877145492783807276, guid: 66a79ea255a37a246901075fdd8cc888, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
