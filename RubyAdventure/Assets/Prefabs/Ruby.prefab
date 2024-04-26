@@ -510,6 +510,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol
       objectReference: {fileID: 0}
+    - target: {fileID: 632327192439097518, guid: 61d0bdf202f9ad842be30ff5f58b7465, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2062563123622631815, guid: 61d0bdf202f9ad842be30ff5f58b7465, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] protected float damage;
-    [SerializeField] protected float detectedRange;
+    [SerializeField] protected int damage;
+    [SerializeField] protected float attackRange;
     [SerializeField] protected float fullHealth;
     [SerializeField] protected float speed;
     [SerializeField] protected Animator animator;
@@ -29,13 +30,18 @@ public class Enemy : MonoBehaviour
     }
     
     //Attack
-    protected virtual void Attack()
+    protected virtual void StartAttack()
     {
     }
 
     protected virtual void StopAttack()
     {
         
+    }
+
+    // This function use for checking attack hit box, should be call inside attack animation for exact frame checking
+    protected virtual void AttackConnect()
+    {
     }
     
     //React when hit by different kind of attack
@@ -53,17 +59,5 @@ public class Enemy : MonoBehaviour
     {
         isAlive = false;
         ObjectsPoolManager.ReturnObjectToPool(gameObject);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.CompareTag("Player")) return;
-        // Attack();
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (!other.CompareTag("Player")) return;
-        // StopAttack();
     }
 }

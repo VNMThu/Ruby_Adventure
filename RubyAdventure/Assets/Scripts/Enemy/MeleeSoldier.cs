@@ -1,11 +1,11 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeSoldier : Enemy
 {
     private static readonly int IsAttacking = Animator.StringToHash("IsAttacking");
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private LayerMask playerLayerMask;
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -23,11 +23,11 @@ public class MeleeSoldier : Enemy
         if (isAlive)
         {
             Vector3 rubyPosition = GameManager.Instance.Ruby.transform.position;
-            if (Vector2.Distance(transform.position, rubyPosition) <= detectedRange && !isAttacking)
+            if (Vector2.Distance(transform.position, rubyPosition) <= attackRange && !isAttacking)
             {
-                Attack();
+                StartAttack();
             }
-            else if (Vector2.Distance(transform.position, rubyPosition) > detectedRange && isAttacking)
+            else if (Vector2.Distance(transform.position, rubyPosition) > attackRange && isAttacking)
             {
                 StopAttack();
             }
@@ -69,12 +69,34 @@ public class MeleeSoldier : Enemy
     
     
     
-    protected override void Attack()
+    protected override void StartAttack()
     {
-        base.Attack();
+        base.StartAttack();
+        
+        //Play animation attack
         isAttacking = true;
         animator.SetBool(IsAttacking,true);
+    }
+
+    protected override void AttackConnect()
+    {
+        //Detect if player in range
         Debug.Log("Enemy Attacking");
+        var results = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayerMask);
+        Debug.Log("Enemy Attacking1:"+results.Length);
+
+        //Hit nothing so return here
+        if (results.Length <= 0) return;
+        
+        //Check all collider
+        foreach (var VARIABLE in results)
+        {
+            if (VARIABLE.CompareTag("Player"))
+            {
+                //Hit Ruby
+                VARIABLE.GetComponent<RubyController>().ChangeHealth(-damage);
+            }
+        }
     }
 
     protected override void StopAttack()
@@ -88,6 +110,9 @@ public class MeleeSoldier : Enemy
     {
         base.Death();
     }
-    
-    
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(attackPoint.position,attackRange);
+    }
 }
