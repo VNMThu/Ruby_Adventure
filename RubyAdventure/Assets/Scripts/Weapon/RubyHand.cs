@@ -6,6 +6,7 @@ public class RubyHand : MonoBehaviour
 {
     private Weapon _weapon;
     private Transform _currentTarget;
+    private Enemy _currentTargetEnemy;
     private bool _isSpriteFlipLeft;
     private bool _isRotating;
     private bool _isAttacking;
@@ -29,7 +30,7 @@ public class RubyHand : MonoBehaviour
         _isRotating = true;
         
         //Rotate to target
-        while (_isRotating && _currentTarget.gameObject.activeInHierarchy)
+        while (_isRotating && _currentTargetEnemy.IsAlive)
         {
             float angle = Mathf.Atan2(_currentTarget.position.y - transform.position.y,
                 _currentTarget.position.x - transform.position.x) * Mathf.Rad2Deg;
@@ -65,7 +66,6 @@ public class RubyHand : MonoBehaviour
             }
 
             yield return null;
-
         }
         
         StopRotate();
@@ -93,6 +93,7 @@ public class RubyHand : MonoBehaviour
             _currentTarget = other.transform;
         }
 
+        _currentTargetEnemy = _currentTarget.GetComponent<Enemy>();
 
         //Start rotate toward that enemy
         if (!_isRotating)
@@ -105,7 +106,10 @@ public class RubyHand : MonoBehaviour
     {
         if (!other.CompareTag("Enemy")) return;
 
-        StopRotate();
+        if (other.transform == _currentTarget)
+        {
+            StopRotate();
+        }
     }
 
     private void StopRotate()

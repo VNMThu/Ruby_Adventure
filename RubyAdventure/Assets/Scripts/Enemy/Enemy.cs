@@ -14,13 +14,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected SpriteRenderer[] spriteRenderer;
 
     protected float currentHealth;
-    protected bool isAlive;
+    public bool IsAlive { get; private set; }
     protected bool isAttacking;
 
     protected virtual void OnEnable()
     {
         currentHealth = fullHealth;
-        isAlive = true;
+        IsAlive = true;
     }
 
     //Move Pattern - This will get call inside animation
@@ -56,8 +56,7 @@ public class Enemy : MonoBehaviour
     //Get Kill
     protected virtual void Death()
     {
-        isAlive = false;
+        IsAlive = false;
         isAttacking = false;
-        ObjectsPoolManager.ReturnObjectToPool(gameObject);
     }
 }

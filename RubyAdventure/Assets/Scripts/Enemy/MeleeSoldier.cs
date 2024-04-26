@@ -6,6 +6,8 @@ public class MeleeSoldier : Enemy
     private static readonly int IsAttacking = Animator.StringToHash("IsAttacking");
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask playerLayerMask;
+    private static readonly int IsDeath = Animator.StringToHash("IsDeath");
+
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -20,7 +22,7 @@ public class MeleeSoldier : Enemy
 
     private void Update()
     {
-        if (isAlive)
+        if (IsAlive)
         {
             Vector3 rubyPosition = GameManager.Instance.Ruby.transform.position;
             if (Vector2.Distance(transform.position, rubyPosition) <= attackRange && !isAttacking)
@@ -36,7 +38,7 @@ public class MeleeSoldier : Enemy
 
     private IEnumerator MoveToRuby()
     {
-        while (isAlive)
+        while (IsAlive)
         {
             if (!isAttacking)
             {
@@ -110,7 +112,16 @@ public class MeleeSoldier : Enemy
     {
         base.Death();
         animator.SetBool(IsAttacking,false);
+        //Start death animation
+        animator.SetTrigger(IsDeath);
     }
+
+    //Get call in animation
+    public void ReturnToPool()
+    {
+        ObjectsPoolManager.ReturnObjectToPool(gameObject);
+    }
+
 
     private void OnDrawGizmosSelected()
     {

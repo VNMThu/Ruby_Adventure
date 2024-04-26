@@ -33,7 +33,6 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Enter Trigger:"+other.gameObject.name);
         switch (other.tag)
         {
             case "Enemy":

@@ -12518,7 +12518,7 @@ MonoBehaviour:
   - {fileID: 693213620}
   - {fileID: 1447836861}
   - {fileID: 911419287}
-  spawnInterval: 3
+  spawnInterval: 4
   meleeSoldierPrefab: {fileID: 7099191634836985210, guid: ee972e5c924f6d54e807520643dfd78a, type: 3}
 --- !u!1001 &1042709225
 PrefabInstance:
