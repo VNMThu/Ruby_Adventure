@@ -18,28 +18,20 @@ public class GameOverController : MonoBehaviour
     private AudioClip gameOverSound;
     private RubyController ruby;
     private AudioSource bgAudioSource;
-    private MissionManager mM;
     [SerializeField]
     private AudioClip gameVictorySound;
     [SerializeField]
     private TMP_Text TimeTxt;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         //Đăng ký vào sự kiện
         ruby = FindObjectOfType<RubyController>();
-        mM = FindObjectOfType<MissionManager>();
         ruby.OnPlayerDeath += OnGameOver;
-        mM.OnMissionComplete += OnGameWin;
         bgAudioSource = BackGround.GetComponent<AudioSource>();
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 
     public void RestartGame(){
         TitleController.instance.btnChoice = "Play";

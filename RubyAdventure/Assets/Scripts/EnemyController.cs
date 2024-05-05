@@ -24,7 +24,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private AudioClip fixedClip;
 
-    private MissionManager mM;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +33,6 @@ public class EnemyController : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         hp = maxHp;
-        mM = FindObjectOfType<MissionManager>();
     }
 
     void Update()
@@ -98,7 +96,6 @@ public class EnemyController : MonoBehaviour
         animator.SetTrigger("Fixed");
         smokeEffect.Stop();
         audioSource.Stop();
-        mM.ChangeRobotNum();
     }
 
     public void FixRobotOnly()

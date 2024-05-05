@@ -72,14 +72,9 @@ public class PauseGame : MonoBehaviour
         {
             File.Delete(path);
         }
-        FileStream file = File.Create(path);
         //Create SaveData
-        RubyController rubyController = FindObjectOfType<RubyController>();
-        MissionManager missionManager = FindObjectOfType<MissionManager>();
-        SaveData data = new SaveData(rubyController.Health, rubyController.NumberOfClog, rubyController.transform.position.x, rubyController.transform.position.y, missionManager.robotCount, missionManager.robots, missionManager.items);
+        FileStream file = File.Create(path);
         //Create binary 
-        BinaryFormatter formatter = new BinaryFormatter();
-        formatter.Serialize(file, data);
         file.Close();
         Debug.Log("Game Saved:" + path);
         SaveSuccesfully.SetActive(true);
