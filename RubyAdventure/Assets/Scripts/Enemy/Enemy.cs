@@ -12,7 +12,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float speed;
     [SerializeField] protected Animator animator;
     [SerializeField] protected SpriteRenderer[] spriteRenderer;
-
+    [Header("EXP Drop")]
+    [SerializeField] protected float percentageDrop;
+    [SerializeField] protected ExpSharp expSharp;
     protected float currentHealth;
     public bool IsAlive { get; private set; }
     protected bool isAttacking;
@@ -58,5 +60,6 @@ public class Enemy : MonoBehaviour
     {
         IsAlive = false;
         isAttacking = false;
+        //Random and spawn exp
     }
 }

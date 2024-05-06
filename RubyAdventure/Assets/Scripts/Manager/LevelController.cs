@@ -25,6 +25,12 @@ public class LevelController : MonoBehaviour
         _isSpawning = false;
     }
 
+    private void Start()
+    {
+        timeCountDownUI.text = "Preparing";
+    }
+
+
     private IEnumerator C_Spawn()
     {
         yield return new WaitForSeconds(1f);

@@ -116,6 +116,7 @@ public class MeleeSoldier : Enemy
         animator.SetBool(IsAttacking,false);
         //Start death animation
         animator.SetTrigger(IsDeath);
+        
     }
 
     //Get call in animation
