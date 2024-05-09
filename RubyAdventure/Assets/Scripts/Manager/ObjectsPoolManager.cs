@@ -11,7 +11,7 @@ public class ObjectsPoolManager : MonoBehaviour
     private static GameObject _particleSystemParent;
     private static GameObject _bulletSystemParent;
     private static GameObject _enemySystemParent;
-
+    private static GameObject _expSystemParent;
     private static GameObject _othersSystemParent;
 
 
@@ -20,6 +20,7 @@ public class ObjectsPoolManager : MonoBehaviour
         ParticleSystem,
         Projectile,
         Enemy,
+        Exp,
         Others
     }
 
@@ -34,11 +35,13 @@ public class ObjectsPoolManager : MonoBehaviour
         _particleSystemParent = new GameObject("Particle Effect Pool");
         _bulletSystemParent = new GameObject("Bullets Pool");
         _enemySystemParent = new GameObject("Enemy Pool");
+        _expSystemParent = new GameObject("Exp Pool");
         _othersSystemParent = new GameObject("Others GameObjects Pool");
         
         _particleSystemParent.transform.SetParent(gameObject.transform);
         _bulletSystemParent.transform.SetParent(gameObject.transform);
         _othersSystemParent.transform.SetParent(gameObject.transform);
+        _expSystemParent.transform.SetParent(gameObject.transform);
         _enemySystemParent.transform.SetParent(gameObject.transform);
     }
 
@@ -52,6 +55,8 @@ public class ObjectsPoolManager : MonoBehaviour
                 return _bulletSystemParent;
             case PoolType.Enemy:
                 return _enemySystemParent;
+            case PoolType.Exp:
+                return _expSystemParent;
             default:
                 return _othersSystemParent;
         }

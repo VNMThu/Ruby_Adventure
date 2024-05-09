@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -61,5 +62,12 @@ public class Enemy : MonoBehaviour
         IsAlive = false;
         isAttacking = false;
         //Random and spawn exp
+        int randomValue = Random.Range(1, 11);
+        if (percentageDrop >= randomValue)
+        {
+            //Drop it
+            ObjectsPoolManager.SpawnObject(expSharp.gameObject, transform.position, Quaternion.identity,
+                ObjectsPoolManager.PoolType.Exp);
+        }
     }
 }

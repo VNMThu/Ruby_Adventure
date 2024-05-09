@@ -134,6 +134,8 @@ MonoBehaviour:
   - {fileID: 1501000157181493716}
   - {fileID: 1501000157329532320}
   - {fileID: 1501000158286547391}
+  percentageDrop: 10
+  expSharp: {fileID: 2949721577349369614, guid: 921c28df18446bb46bcce9d537b92f09, type: 3}
   attackPoint: {fileID: 6666706692151247654}
   playerLayerMask:
     serializedVersion: 2

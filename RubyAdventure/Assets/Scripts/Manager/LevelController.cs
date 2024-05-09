@@ -47,7 +47,9 @@ public class LevelController : MonoBehaviour
         TimeSpan timeLeft = new TimeSpan(0,0,timeInLevel,0); //minutes
         while (timeLeft.Seconds >= 0)
         {
-            timeCountDownUI.text = timeLeft.Minutes + ":" + timeLeft.Seconds;
+            string formattedTime = $"{timeLeft.Minutes:D2}:{timeLeft.Seconds:D2}";
+            timeCountDownUI.text = formattedTime;
+
             timeLeft = timeLeft.Subtract(new TimeSpan(0, 0, 0, 1));
             yield return new WaitForSeconds(1f);
         }

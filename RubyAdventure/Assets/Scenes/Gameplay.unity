@@ -805,6 +805,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CollectibleHealth (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 3634058424084151431, guid: c8b05947f3248fa4bbbcd420b27ad36c, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2562,6 +2566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CollectibleHealth (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3634058424084151431, guid: c8b05947f3248fa4bbbcd420b27ad36c, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3227,6 +3235,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CollectibleHealth
       objectReference: {fileID: 0}
+    - target: {fileID: 3634058424084151431, guid: c8b05947f3248fa4bbbcd420b27ad36c, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3641,6 +3653,10 @@ PrefabInstance:
     - target: {fileID: 3634058424084151431, guid: c8b05947f3248fa4bbbcd420b27ad36c, type: 3}
       propertyPath: m_Name
       value: CollectibleHealth (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3634058424084151431, guid: c8b05947f3248fa4bbbcd420b27ad36c, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5819,6 +5835,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CollectibleHealth (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3634058424084151431, guid: c8b05947f3248fa4bbbcd420b27ad36c, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7066,6 +7086,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CollectibleHealth (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 3634058424084151431, guid: c8b05947f3248fa4bbbcd420b27ad36c, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8200,7 +8224,7 @@ MonoBehaviour:
   timeInLevel: 1
   spawnInterval: {x: 0, y: 3}
   centerSpawnPoint: {fileID: 1834811362}
-  spawnAreaSize: {x: 79.9, y: 29.2}
+  spawnAreaSize: {x: 40.5, y: 13.8}
 --- !u!1001 &1044380657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12099,10 +12123,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 11:00
+  m_text: Preparing
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2139a48239574544697b910edc1fcec8, type: 2}
+  m_sharedMaterial: {fileID: -2037497089164596517, guid: 2139a48239574544697b910edc1fcec8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12126,7 +12150,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 47.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -12188,12 +12212,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1927946235}
+  m_Father: {fileID: 1734174765}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000007629211, y: -121}
-  m_SizeDelta: {x: 390.1117, y: 100.91577}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 2.8342, y: 12}
+  m_SizeDelta: {x: 250.7044, y: 100.9158}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1552034623
 GameObject:
@@ -13687,6 +13711,82 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Keyboard>/x
+--- !u!1 &1734174764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1734174765}
+  - component: {fileID: 1734174767}
+  - component: {fileID: 1734174766}
+  m_Layer: 5
+  m_Name: Time Count Down
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1734174765
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734174764}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1538185515}
+  m_Father: {fileID: 1927946235}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -9.3547, y: 413.23}
+  m_SizeDelta: {x: 349.1906, y: 160.45}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1734174766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734174764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 5f3346fa9c54f0e4c9ad4ff8315f983b, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1734174767
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734174764}
+  m_CullTransparentMesh: 1
 --- !u!1 &1740976716
 GameObject:
   m_ObjectHideFlags: 0
@@ -14510,7 +14610,7 @@ Transform:
   m_GameObject: {fileID: 1834811361}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 11.5, z: 0}
+  m_LocalPosition: {x: -0.7, y: 3.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15060,7 +15160,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 658561165}
-  - {fileID: 1538185515}
+  - {fileID: 1734174765}
   - {fileID: 697536341}
   - {fileID: 965987697}
   - {fileID: 927885629}
@@ -15946,6 +16046,10 @@ PrefabInstance:
     - target: {fileID: 3634058424084151431, guid: c8b05947f3248fa4bbbcd420b27ad36c, type: 3}
       propertyPath: m_Name
       value: CollectibleHealth (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3634058424084151431, guid: c8b05947f3248fa4bbbcd420b27ad36c, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25504,6 +25608,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1
+  - first: {x: 0, y: 0, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 18
+      m_TileSpriteIndex: 18
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1
   - first: {x: 1, y: 0, z: 0}
     second:
       serializedVersion: 2
@@ -30822,7 +30936,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 5c31cb0efbf129b468c013ed469cec20, type: 2}
   - m_RefCount: 3
     m_Data: {fileID: 11400000, guid: e3fe009b5c4a31249a73ff793e6ef15d, type: 2}
-  - m_RefCount: 8
+  - m_RefCount: 9
     m_Data: {fileID: 11400000, guid: 16563007ae2af324dbc841edbba03388, type: 2}
   - m_RefCount: 3
     m_Data: {fileID: 11400000, guid: cdab6d3e5535b8a40b4d9baa1c9d555e, type: 2}
@@ -30913,7 +31027,7 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 3
     m_Data: {fileID: -1188908986143349998, guid: 2ff4c9799e22f1b4c95766cc11f47530, type: 3}
-  - m_RefCount: 8
+  - m_RefCount: 9
     m_Data: {fileID: 8602544657761587596, guid: 2e6ecdf01ba70e3489b17b3f6525fec2, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 4942817686469557064, guid: 2e6ecdf01ba70e3489b17b3f6525fec2, type: 3}
@@ -30968,7 +31082,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 26713980818622677, guid: 2ff4c9799e22f1b4c95766cc11f47530, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 1425
+  - m_RefCount: 1426
     m_Data:
       e00: 1
       e01: 0
@@ -30987,7 +31101,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 1425
+  - m_RefCount: 1426
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
