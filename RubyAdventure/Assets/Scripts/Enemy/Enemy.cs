@@ -16,6 +16,9 @@ public class Enemy : MonoBehaviour
     [Header("EXP Drop")]
     [SerializeField] protected float percentageDrop;
     [SerializeField] protected ExpSharp expSharp;
+
+    [Header("Flash effect when die")] [SerializeField]
+    protected FlashEffect flashEffect;
     protected float currentHealth;
     public bool IsAlive { get; private set; }
     protected bool isAttacking;
@@ -50,6 +53,8 @@ public class Enemy : MonoBehaviour
     public virtual void GetHitNormal(float damageDeal)
     {
         currentHealth -= damageDeal;
+        flashEffect.Flash();
+
         if (currentHealth <= 0)
         {
             Death();
@@ -70,4 +75,6 @@ public class Enemy : MonoBehaviour
                 ObjectsPoolManager.PoolType.Exp);
         }
     }
+    
+    
 }

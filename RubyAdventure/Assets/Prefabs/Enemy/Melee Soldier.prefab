@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7099191634836985210}
   - component: {fileID: 6066843974360539533}
   - component: {fileID: 4347726133117402987}
+  - component: {fileID: 8953888307413366189}
   m_Layer: 12
   m_Name: Melee Soldier
   m_TagString: Enemy
@@ -136,6 +137,7 @@ MonoBehaviour:
   - {fileID: 1501000158286547391}
   percentageDrop: 10
   expSharp: {fileID: 2949721577349369614, guid: 921c28df18446bb46bcce9d537b92f09, type: 3}
+  flashEffect: {fileID: 8953888307413366189}
   attackPoint: {fileID: 6666706692151247654}
   playerLayerMask:
     serializedVersion: 2
@@ -213,6 +215,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.46899486, y: 0.7482883}
   m_EdgeRadius: 0
+--- !u!114 &8953888307413366189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501000157181493719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b69cd52e9c2ae040b721cc1b47b179b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 52b54363e1f505d4da44ae50627754f4, type: 2}
+  duration: 0.125
 --- !u!1 &1501000157329532322
 GameObject:
   m_ObjectHideFlags: 0
