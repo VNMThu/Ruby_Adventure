@@ -6,6 +6,9 @@ public class Projectile : MonoBehaviour
     private Rigidbody2D _rigidBody;
     [SerializeField] private AudioClip hitClip;
     [SerializeField] private ParticleSystem sparkHit;
+    private float _damageDeal;
+    private float _forcePushBack;
+
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
@@ -26,9 +29,11 @@ public class Projectile : MonoBehaviour
         _rigidBody.velocity = Vector3.zero;
     }
 
-    public void Launch(Vector2 direction, float force)
+    public void Launch(Vector2 direction, float force,float damageDealValue,float forcePushBackValue)
     {
         _rigidBody.AddForce(direction * force,ForceMode2D.Impulse);
+        _damageDeal = damageDealValue;
+        _forcePushBack = forcePushBackValue;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -47,7 +52,7 @@ public class Projectile : MonoBehaviour
                 // enemyController.PlayAudio(hitClip);
                 
                 //Change HP
-                enemyController.GetHitNormal(1);
+                enemyController.GetHitNormal(_damageDeal,_forcePushBack);
                 
                 ObjectsPoolManager.ReturnObjectToPool(gameObject);
 

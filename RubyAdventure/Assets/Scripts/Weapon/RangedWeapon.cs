@@ -57,7 +57,7 @@ public class RangedWeapon : Weapon
             ObjectsPoolManager.PoolType.Projectile).GetComponent<Projectile>();
         
         //Launch it
-        projectile.Launch(transform.right,40);
+        projectile.Launch(transform.right,40,damagePerAttack,forcePushBack);
     }
 
     public override void StopAttack()

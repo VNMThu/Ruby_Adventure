@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -16,9 +17,11 @@ public class Enemy : MonoBehaviour
     [Header("EXP Drop")]
     [SerializeField] protected float percentageDrop;
     [SerializeField] protected ExpSharp expSharp;
-
+    
     [Header("Flash effect when die")] [SerializeField]
     protected FlashEffect flashEffect;
+
+    protected Rigidbody2D rigidbody2D;
     protected float currentHealth;
     public bool IsAlive { get; private set; }
     protected bool isAttacking;
@@ -27,6 +30,10 @@ public class Enemy : MonoBehaviour
     {
         currentHealth = fullHealth;
         IsAlive = true;
+        if (rigidbody2D == null)
+        {
+            rigidbody2D = GetComponent<Rigidbody2D>();
+        }
     }
 
     //Move Pattern - This will get call inside animation
@@ -50,10 +57,21 @@ public class Enemy : MonoBehaviour
     }
     
     //React when hit by different kind of attack
-    public virtual void GetHitNormal(float damageDeal)
+    public virtual void GetHitNormal(float damageDeal,float forcePushPower = 0f)
     {
         currentHealth -= damageDeal;
         flashEffect.Flash();
+        if (forcePushPower != 0)
+        {
+            Vector2 force = (transform.position - GameManager.Instance.Ruby.transform.position).normalized;
+            rigidbody2D.AddForce(forcePushPower * force,ForceMode2D.Impulse);
+            
+            //Apply opposite force to stop 
+            DOVirtual.DelayedCall(0.1f, () =>
+            {
+                rigidbody2D.AddForce(-forcePushPower * force, ForceMode2D.Impulse);
+            });
+        }
 
         if (currentHealth <= 0)
         {

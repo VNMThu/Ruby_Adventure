@@ -122,7 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 1
-  damagePerAttack: 0
+  damagePerAttack: 1
+  forcePushBack: 2
   animator: {fileID: 5758839873938541424}
   muzzleFlash: {fileID: 5760943459057554299}
   projectilePrefab: {fileID: 2781493690843927216, guid: 0a7f3fdfeadbe664ab635db46bc87ada, type: 3}
