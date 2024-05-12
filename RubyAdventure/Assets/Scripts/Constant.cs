@@ -4,4 +4,5 @@ using UnityEngine;
 
 public static class Constant
 {
+    public const int XpConstant = 4;
 }

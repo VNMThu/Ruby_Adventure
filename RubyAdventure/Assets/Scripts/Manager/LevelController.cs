@@ -25,7 +25,7 @@ public class LevelController : MonoBehaviour
         _isSpawning = false;
     }
 
-    private void Start()
+    private void OnEnable()
     {
         timeCountDownUI.text = "Preparing";
     }

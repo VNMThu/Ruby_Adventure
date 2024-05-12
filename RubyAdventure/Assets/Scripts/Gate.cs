@@ -22,6 +22,7 @@ public class Gate : MonoBehaviour
         _collider2D.enabled = false;
         
         //Start Level
+        
         GameManager.Instance.LevelController.StartLevel();
     }
 }

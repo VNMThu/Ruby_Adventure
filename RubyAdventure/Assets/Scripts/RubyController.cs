@@ -10,7 +10,8 @@ public class RubyController : MonoBehaviour
     public int NumberOfClog => numberOfClog;
 
     //Health
-    public int maxHealth = 5;
+    [SerializeField] private  int maxHealth = 5;
+    public int MaxHealth => maxHealth;
 
     public int Health { get; private set; }
 
@@ -47,9 +48,6 @@ public class RubyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        UIHealthBar.instance.MaxSize();
-
         if (TitleController.instance.btnChoice == "Load")
         {
             LoadGame loadGame = FindObjectOfType<LoadGame>();
@@ -59,7 +57,6 @@ public class RubyController : MonoBehaviour
                 transform.position = new Vector2(rubyData._currentPositionX, rubyData._currentPositionY);
                 numberOfClog = rubyData._bulletAmount;
                 Health = rubyData._health;
-                UIHealthBar.instance.SetValue(Health / (float)maxHealth);
             }
 
         }
@@ -174,7 +171,8 @@ public class RubyController : MonoBehaviour
                 ObjectsPoolManager.PoolType.ParticleSystem);
         }
         Health = Mathf.Clamp(Health + amount, 0, maxHealth);
-        UIHealthBar.instance.SetValue(Health / (float)maxHealth);
+        EventDispatcher
+            .Instance.PostEvent(EventID.OnHealthChange,Health);
     }
 
     private void Launch()

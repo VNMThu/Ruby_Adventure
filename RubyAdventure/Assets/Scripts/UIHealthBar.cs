@@ -1,44 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class UIHealthBar : MonoBehaviour
 {
-    public static UIHealthBar instance { get; private set; }
-    public Image mask;
-    float originalSize;
-
-    private void Awake()
+    [SerializeField] private Slider healthSliderUI;
+    private Action<object> _onHealthChange;
+    private int _maxHealth;
+    private void OnEnable()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        //Register event
+        _onHealthChange = param => OnHealthChange((int)param);
+        EventDispatcher.Instance.RegisterListener(EventID.OnHealthChange,_onHealthChange);
+
+        //
+        _maxHealth = GameManager.Instance.Ruby.MaxHealth;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnDisable()
     {
-        //originalSize = mask.rectTransform.rect.width;
+        EventDispatcher.Instance.RemoveListener(EventID.OnHealthChange,_onHealthChange);
     }
 
-    public void SetValue(float value)
+    private void OnHealthChange(int currentHealth)
     {
-        mask.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, originalSize * value);
-    }
-
-
-    public void MaxSize(){
-        originalSize = mask.rectTransform.rect.width;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        float percent = currentHealth /(float)_maxHealth;
+        healthSliderUI.value = percent;
     }
 }
