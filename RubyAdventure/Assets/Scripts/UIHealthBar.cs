@@ -18,10 +18,10 @@ public class UIHealthBar : MonoBehaviour
         _maxHealth = GameManager.Instance.Ruby.MaxHealth;
     }
 
-    private void OnDisable()
-    {
-        EventDispatcher.Instance.RemoveListener(EventID.OnHealthChange,_onHealthChange);
-    }
+    // private void OnDisable()
+    // {
+    //     EventDispatcher.Instance.RemoveListener(EventID.OnHealthChange,_onHealthChange);
+    // }
 
     private void OnHealthChange(int currentHealth)
     {

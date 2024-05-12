@@ -20,10 +20,10 @@ public class ExpManager : MonoBehaviour
         EventDispatcher.Instance.RegisterListener(EventID.OnExpReceive,_onExpReceiveRef);
     }
 
-    private void OnDisable()
-    {
-        EventDispatcher.Instance.RemoveListener(EventID.OnExpReceive,_onExpReceiveRef);
-    }
+    // private void OnDisable()
+    // {
+    //     EventDispatcher.Instance.RemoveListener(EventID.OnExpReceive,_onExpReceiveRef);
+    // }
 
     private void OnExpReceive(int expReceive)
     {

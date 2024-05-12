@@ -77,12 +77,18 @@ using System;
 		/// <summary>
 		/// Clears all the listener.
 		/// </summary>
-		public void ClearAllListener ()
+		private void ClearAllListener ()
 		{
 			_listeners.Clear();
 		}
 		#endregion
+
+		private void OnDisable()
+		{
+			ClearAllListener();
+		}
 	}
+
 
 
 	#region Extension class
