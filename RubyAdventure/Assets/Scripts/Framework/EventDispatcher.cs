@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System;
 
@@ -8,7 +7,7 @@ using System;
 	{
 		#region Fields
 		/// Store all "listener"
-		Dictionary<EventID, Action<object>> _listeners = new Dictionary<EventID, Action<object>>();
+		private Dictionary<EventID, Action<object>> _listeners = new();
 		#endregion
 
 
