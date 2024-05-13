@@ -37,7 +37,7 @@ public class ObjectsPoolManager : MonoBehaviour
         _enemySystemParent = new GameObject("Enemy Pool");
         _expSystemParent = new GameObject("Exp Pool");
         _othersSystemParent = new GameObject("Others GameObjects Pool");
-        
+
         _particleSystemParent.transform.SetParent(gameObject.transform);
         _bulletSystemParent.transform.SetParent(gameObject.transform);
         _othersSystemParent.transform.SetParent(gameObject.transform);
@@ -62,7 +62,8 @@ public class ObjectsPoolManager : MonoBehaviour
         }
     }
 
-    public static GameObject SpawnObject(GameObject objectToSpawn, Vector3 spawnPosition, Quaternion spawnRotation, PoolType poolType = PoolType.Others )
+    public static GameObject SpawnObject(GameObject objectToSpawn, Vector3 spawnPosition, Quaternion spawnRotation,
+        PoolType poolType = PoolType.Others)
     {
         //Find that pool 
         PoolObjectInfo pool = null;
@@ -75,7 +76,7 @@ public class ObjectsPoolManager : MonoBehaviour
                 break;
             }
         }
-        
+
         //Pool not found => Create it
         if (pool == null)
         {
@@ -84,12 +85,11 @@ public class ObjectsPoolManager : MonoBehaviour
             {
                 LookUpString = objectToSpawn.name
             };
-            
+
             //Add it to pool manager
             ObjectPools.Add(pool);
-            
         }
-        
+
         //Check any inactive object can be used
         GameObject spawnedObject = null;
         foreach (var VARIABLE in pool.InActiveObjects)
@@ -106,7 +106,7 @@ public class ObjectsPoolManager : MonoBehaviour
         if (spawnedObject == null)
         {
             spawnedObject = Instantiate(objectToSpawn, spawnPosition, spawnRotation);
-            
+
             //Set parent to look nice :)
             spawnedObject.transform.SetParent(SetParentObject(poolType).transform);
         }
@@ -124,9 +124,9 @@ public class ObjectsPoolManager : MonoBehaviour
 
         return spawnedObject;
     }
-    
+
     //Overload the first spawn => This is for if want to have specific parent
-    public static GameObject SpawnObject(GameObject objectToSpawn, Transform parentTransform )
+    public static GameObject SpawnObject(GameObject objectToSpawn, Transform parentTransform)
     {
         //Find that pool 
         PoolObjectInfo pool = null;
@@ -139,7 +139,7 @@ public class ObjectsPoolManager : MonoBehaviour
                 break;
             }
         }
-        
+
         //Pool not found => Create it
         if (pool == null)
         {
@@ -148,12 +148,11 @@ public class ObjectsPoolManager : MonoBehaviour
             {
                 LookUpString = objectToSpawn.name
             };
-            
+
             //Add it to pool manager
             ObjectPools.Add(pool);
-            
         }
-        
+
         //Check any inactive object can be used
         GameObject spawnedObject = null;
         foreach (var VARIABLE in pool.InActiveObjects)
@@ -170,7 +169,6 @@ public class ObjectsPoolManager : MonoBehaviour
         if (spawnedObject == null)
         {
             spawnedObject = Instantiate(objectToSpawn, parentTransform);
-            
         }
         //Actually find inactive object in pool to use
         else
@@ -183,15 +181,14 @@ public class ObjectsPoolManager : MonoBehaviour
 
         return spawnedObject;
     }
-    
-    
-    
+
+
     //Call this instead of just delete the damn thing
     public static void ReturnObjectToPool(GameObject obj)
     {
         //Kinda bad here but ...
         string goName = obj.name.Substring(0, obj.name.Length - 7); //Remove the "(clone)" part of game object name
-        
+
         //Find that pool 
         PoolObjectInfo pool = null;
         foreach (var VARIABLE in ObjectPools)
@@ -209,16 +206,14 @@ public class ObjectsPoolManager : MonoBehaviour
             Debug.Log("Try to Delete Object not created in pool yet");
             return;
         }
-        
+
         //Turn it off
         obj.SetActive(false);
-        
+
         //Add it to inactive list for reused
         pool.InActiveObjects.Add(obj);
-        
     }
 }
-
 
 
 //Pool of this single object

@@ -12,11 +12,11 @@ public class MeleeSoldier : Enemy
     protected override void OnEnable()
     {
         base.OnEnable();
-        animator.SetBool(IsAttacking,false);
+        animator.SetBool(IsAttacking, false);
         ObjectsPoolManager.SpawnObject(appearEffect.gameObject, transform.position, Quaternion.identity,
             ObjectsPoolManager.PoolType.ParticleSystem);
     }
-    
+
     protected override void StartMoving()
     {
         StartCoroutine(MoveToRuby());
@@ -67,19 +67,19 @@ public class MeleeSoldier : Enemy
                     }
                 }
             }
+
             yield return null;
         }
-    } 
-    
-    
-    
+    }
+
+
     protected override void StartAttack()
     {
         base.StartAttack();
-        
+
         //Play animation attack
         isAttacking = true;
-        animator.SetBool(IsAttacking,true);
+        animator.SetBool(IsAttacking, true);
     }
 
     protected override void AttackConnect()
@@ -87,11 +87,11 @@ public class MeleeSoldier : Enemy
         //Detect if player in range
         Debug.Log("Enemy Attacking");
         var results = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayerMask);
-        Debug.Log("Enemy Attacking1:"+results.Length);
+        Debug.Log("Enemy Attacking1:" + results.Length);
 
         //Hit nothing so return here
         if (results.Length <= 0) return;
-        
+
         //Check all collider
         foreach (var VARIABLE in results)
         {
@@ -107,16 +107,15 @@ public class MeleeSoldier : Enemy
     {
         base.StopAttack();
         isAttacking = false;
-        animator.SetBool(IsAttacking,false);
+        animator.SetBool(IsAttacking, false);
     }
 
     protected override void Death()
     {
         base.Death();
-        animator.SetBool(IsAttacking,false);
+        animator.SetBool(IsAttacking, false);
         //Start death animation
         animator.SetTrigger(IsDeath);
-        
     }
 
     //Get call in animation
@@ -128,6 +127,6 @@ public class MeleeSoldier : Enemy
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(attackPoint.position,attackRange);
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }

@@ -1,28 +1,42 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class RubyController : MonoBehaviour
 {
-    
     //Use this for money now
-    [SerializeField]
-    private int numberOfClog;
+    [Header("Money")] [SerializeField] private int numberOfClog;
     public int NumberOfClog => numberOfClog;
 
     //Health
-    [SerializeField] private  int maxHealth = 5;
+    [Header("Max Health")] [SerializeField]
+    private int maxHealth = 5;
+
     public int MaxHealth => maxHealth;
 
     public int Health { get; private set; }
 
     //Move speed
+    [Header("Move Speed")] [SerializeField]
+    private float movingSpeed = 5.0f;
 
-    public float speed = 10.0f;
+    //Dash
+    [Header("Dash time and speed")] [SerializeField]
+    private float dashTime = 0.5f;
 
+    [SerializeField] private float dashSpeed = 0.5f;
+    [SerializeField] private float dashCoolDown = 5f;
+
+    private bool _isDashing;
+
+    [Header("Others")]
     //Time invincible after talking damage
-    public float timeInvincible = 0.5f;
+    [SerializeField]
+    private float timeInvincible = 0.5f;
+
     private bool _isInvincible;
-    private float _invincibleTimer;
+    private float _invincibleTimerWhenHurt;
 
     private Rigidbody2D _rigidBody;
 
@@ -30,18 +44,20 @@ public class RubyController : MonoBehaviour
     private Animator _animator;
     private Vector2 _lookDirection = new(1, 0);
 
-    public GameObject projectilePrefab;
 
     public ParticleSystem getHitEffect;
     public ParticleSystem pickHealthEffect;
-    [SerializeField]private ParticleSystem deathEffect;
+    [SerializeField] private ParticleSystem deathEffect;
     private AudioSource _audioSource;
     public AudioClip getHitClip;
     public AudioClip throwClip;
-    [SerializeField]
-    private TMP_Text bulletTxt;
 
     private RubyControl _rubyControl;
+    private readonly int _launch = Animator.StringToHash("Launch");
+    private readonly int _hit = Animator.StringToHash("Hit");
+    private readonly int _lookX = Animator.StringToHash("Look X");
+    private readonly int _lookY = Animator.StringToHash("Look Y");
+    private readonly int _speed = Animator.StringToHash("Speed");
 
     public event System.Action OnPlayerDeath;
 
@@ -58,14 +74,13 @@ public class RubyController : MonoBehaviour
                 numberOfClog = rubyData._bulletAmount;
                 Health = rubyData._health;
             }
-
         }
         else
         {
             numberOfClog = 0;
             Health = maxHealth;
         }
-        bulletTxt.text = numberOfClog.ToString();
+
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
@@ -74,8 +89,8 @@ public class RubyController : MonoBehaviour
     private void Awake()
     {
         _rubyControl = new RubyControl();
-
     }
+
     private void OnEnable()
     {
         _rubyControl.Enable();
@@ -94,95 +109,118 @@ public class RubyController : MonoBehaviour
             PlayerDeath();
         }
 
-        Vector2 move = _rubyControl.Player.Move.ReadValue<Vector2>();
-        if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
+        //If dashing then don't do anything else
+        if (!_isDashing)
         {
-            _lookDirection.Set(move.x, move.y);
-            _lookDirection.Normalize();
-        }
-        _animator.SetFloat("Look X", _lookDirection.x);
-        _animator.SetFloat("Look Y", _lookDirection.y);
-        _animator.SetFloat("Speed", move.magnitude);
-
-        if (_isInvincible)
-        {
-            _invincibleTimer -= Time.deltaTime;
-            if (_invincibleTimer < 0)
+            Vector2 move = _rubyControl.Player.Move.ReadValue<Vector2>();
+            if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
             {
-                _isInvincible = false;
+                _lookDirection.Set(move.x, move.y);
+                _lookDirection.Normalize();
             }
-        }
-        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("Launch"))
-        {
-            if (_rubyControl.Player.Fire.triggered)
+
+            _animator.SetFloat(_lookX, _lookDirection.x);
+            _animator.SetFloat(_lookY, _lookDirection.y);
+            _animator.SetFloat(_speed, move.magnitude);
+
+            if (_isInvincible)
             {
-                if (numberOfClog > 0)
+                _invincibleTimerWhenHurt -= Time.deltaTime;
+                if (_invincibleTimerWhenHurt < 0)
                 {
-                    Launch();
+                    _isInvincible = false;
                 }
             }
-        }
-        if (_rubyControl.Player.Talk.triggered)
-        {
-            RaycastHit2D hit = Physics2D.Raycast(_rigidBody.position + Vector2.up * 0.2f, _lookDirection, 1.5f, LayerMask.GetMask("NPC"));
-            if (hit.collider != null)
+
+            if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("Launch"))
             {
-                NPC character = hit.collider.GetComponent<NPC>();
-                if (character != null)
+                if (_rubyControl.Player.Fire.triggered)
                 {
-                    character.DisplayDialog();
+                    // Dash();
+                    StartCoroutine(C_Dash());
                 }
             }
         }
 
+        if (!_rubyControl.Player.Talk.triggered) return;
+        RaycastHit2D hit = Physics2D.Raycast(_rigidBody.position + Vector2.up * 0.2f, _lookDirection, 1.5f,
+            LayerMask.GetMask("NPC"));
+       
+        if (hit.collider == null) return;
+        
+        NPC character = hit.collider.GetComponent<NPC>();
+        
+        if (character != null)
+        {
+            character.DisplayDialog();
+        }
     }
 
     private void FixedUpdate()
     {
-        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("Launch"))
-        {
-            Vector2 position = _rigidBody.position;
-            position.x += speed * _rubyControl.Player.Move.ReadValue<Vector2>().x * Time.deltaTime;
-            position.y += speed * _rubyControl.Player.Move.ReadValue<Vector2>().y * Time.deltaTime;
-            _rigidBody.MovePosition(position);
-        }
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Launch")) return;
+        Vector2 position = _rigidBody.position;
+        position.x += movingSpeed * _rubyControl.Player.Move.ReadValue<Vector2>().x * Time.deltaTime;
+        position.y += movingSpeed * _rubyControl.Player.Move.ReadValue<Vector2>().y * Time.deltaTime;
+        _rigidBody.MovePosition(position);
     }
 
     public void ChangeHealth(int amount)
     {
-        if (amount < 0)
+        switch (amount)
         {
-            _animator.SetTrigger("Hit");
-
-            if (_isInvincible)
-            {
+            case < 0 when _isDashing:
                 return;
-            }
-            _isInvincible = true;
-            _invincibleTimer = timeInvincible;
+            case < 0:
+            {
+                _animator.SetTrigger(_hit);
 
-            ObjectsPoolManager.SpawnObject(getHitEffect.gameObject, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity,
-                ObjectsPoolManager.PoolType.ParticleSystem);
-            PlayAudio(getHitClip);
+                if (_isInvincible)
+                {
+                    return;
+                }
+
+                _isInvincible = true;
+                _invincibleTimerWhenHurt = timeInvincible;
+
+                ObjectsPoolManager.SpawnObject(getHitEffect.gameObject, _rigidBody.position + Vector2.up * 0.5f,
+                    Quaternion.identity,
+                    ObjectsPoolManager.PoolType.ParticleSystem);
+                PlayAudio(getHitClip);
+                break;
+            }
+            case > 0:
+                ObjectsPoolManager.SpawnObject(pickHealthEffect.gameObject, _rigidBody.position + Vector2.up * 0.5f,
+                    Quaternion.identity,
+                    ObjectsPoolManager.PoolType.ParticleSystem);
+                break;
         }
-        else if (amount > 0)
-        {
-            ObjectsPoolManager.SpawnObject(pickHealthEffect.gameObject, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity,
-                ObjectsPoolManager.PoolType.ParticleSystem);
-        }
+
         Health = Mathf.Clamp(Health + amount, 0, maxHealth);
         EventDispatcher
-            .Instance.PostEvent(EventID.OnHealthChange,Health);
+            .Instance.PostEvent(EventID.OnHealthChange, Health);
     }
 
-    private void Launch()
+    private IEnumerator C_Dash()
     {
-        GameObject projectileObject = ObjectsPoolManager.SpawnObject(projectilePrefab, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity,ObjectsPoolManager.PoolType.Projectile);
-        Projectile projectile = projectileObject.GetComponent<Projectile>();
-        // projectile.Launch(_lookDirection, 300);
-        _animator.SetTrigger("Launch");
+        //Animation and audio
+        _animator.SetTrigger(_launch);
         PlayAudio(throwClip);
-        ChangeBullet(-1);
+        _isDashing = true;
+        EventDispatcher.Instance.PostEvent(EventID.OnRubyDash,dashCoolDown);
+        //Dash movement
+        float currentDashTime = dashTime; // Reset the dash timer.
+        while (currentDashTime > 0f)
+        {
+            currentDashTime -= Time.deltaTime; // Lower the dash timer each frame.
+            _rigidBody.velocity = _lookDirection.normalized * dashSpeed; // Dash in the direction that was held down.
+            // No need to multiply by Time.DeltaTime here, physics are already consistent across different FPS.
+            yield return null; // Returns out of the coroutine this frame so we don't hit an infinite loop.
+        }
+
+        _isDashing = false;
+        //Stop the dash
+        _rigidBody.velocity = new Vector2(0f, 0f); // Stop dashing.
     }
 
     public void PlayAudio(AudioClip audioClip)
@@ -194,16 +232,17 @@ public class RubyController : MonoBehaviour
     {
         if (value > 0)
         {
-            ObjectsPoolManager.SpawnObject(pickHealthEffect.gameObject, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity,
+            ObjectsPoolManager.SpawnObject(pickHealthEffect.gameObject, _rigidBody.position + Vector2.up * 0.5f,
+                Quaternion.identity,
                 ObjectsPoolManager.PoolType.ParticleSystem);
         }
+
         numberOfClog += value;
-        bulletTxt.text = numberOfClog.ToString();
     }
 
     private void PlayerDeath()
     {
-        Instantiate(deathEffect, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity);
+        ObjectsPoolManager.SpawnObject(deathEffect.gameObject, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity);
         gameObject.SetActive(false);
         OnPlayerDeath?.Invoke();
     }

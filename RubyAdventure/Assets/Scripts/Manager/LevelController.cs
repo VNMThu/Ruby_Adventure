@@ -10,15 +10,18 @@ public class LevelController : MonoBehaviour
     [SerializeField] private MeleeSoldier meleeSoldierPrefab;
     [SerializeField] private TextMeshProUGUI timeCountDownUI;
     [SerializeField] private int timeInLevel;
-    [Header("Spawn Config")]
-    [SerializeField] private Vector2 spawnInterval; // how many seconds between 2 enemy
+
+    [Header("Spawn Config")] [SerializeField]
+    private Vector2 spawnInterval; // how many seconds between 2 enemy
+
     [SerializeField] private Transform centerSpawnPoint;
     [SerializeField] private Vector2 spawnAreaSize;
-    
+
     private Coroutine _coroutineSpawnEnemy;
     private Coroutine _coroutineWinLevel;
 
     private bool _isSpawning;
+
     // Start is called before the first frame update
     private void OnDisable()
     {
@@ -36,15 +39,16 @@ public class LevelController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         while (_isSpawning)
         {
-            ObjectsPoolManager.SpawnObject(meleeSoldierPrefab.gameObject,RandomPointInArea(centerSpawnPoint.position,spawnAreaSize.x,spawnAreaSize.y),
+            ObjectsPoolManager.SpawnObject(meleeSoldierPrefab.gameObject,
+                RandomPointInArea(centerSpawnPoint.position, spawnAreaSize.x, spawnAreaSize.y),
                 Quaternion.identity, ObjectsPoolManager.PoolType.Enemy);
-            yield return new WaitForSeconds(Random.Range(spawnInterval.x,spawnInterval.y+1)) ;
+            yield return new WaitForSeconds(Random.Range(spawnInterval.x, spawnInterval.y + 1));
         }
     }
-    
+
     private IEnumerator C_CountDownToEndLevel()
     {
-        TimeSpan timeLeft = new TimeSpan(0,0,timeInLevel,0); //minutes
+        TimeSpan timeLeft = new TimeSpan(0, 0, timeInLevel, 0); //minutes
         while (timeLeft.Seconds >= 0)
         {
             string formattedTime = $"{timeLeft.Minutes:D2}:{timeLeft.Seconds:D2}";
@@ -56,17 +60,17 @@ public class LevelController : MonoBehaviour
 
         //Stop spawning
         _isSpawning = false;
-        
+
         //Tick some actions to auto kill of enemy here
-        
-        
+
+
         Debug.Log("Level ended");
     }
 
     public void StartLevel()
     {
         Debug.Log("@Enemy spawner: Start Level Here");
-        
+
         //Spawn enemy
         _isSpawning = true;
         _coroutineSpawnEnemy = StartCoroutine(C_Spawn());
@@ -74,9 +78,9 @@ public class LevelController : MonoBehaviour
         //Finish level when spawn done
         _coroutineWinLevel = StartCoroutine(C_CountDownToEndLevel());
     }
-    
-    private Vector2 RandomPointInArea(Vector3 center, float sizeX,float sizeY) {
 
+    private Vector2 RandomPointInArea(Vector3 center, float sizeX, float sizeY)
+    {
         return center + new Vector3(
             (Random.value - 0.5f) * sizeX,
             (Random.value - 0.5f) * sizeY
@@ -86,6 +90,6 @@ public class LevelController : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(centerSpawnPoint.position,new Vector3(spawnAreaSize.x,spawnAreaSize.y));
+        Gizmos.DrawWireCube(centerSpawnPoint.position, new Vector3(spawnAreaSize.x, spawnAreaSize.y));
     }
 }

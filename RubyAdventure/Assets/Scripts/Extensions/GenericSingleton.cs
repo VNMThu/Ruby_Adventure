@@ -32,7 +32,7 @@ public class GenericSingleton<T> : MonoBehaviour where T : Component
 
     public virtual void Awake()
     {
-        Debug.Log("Singleton:Call Awake "+gameObject.name);
+        Debug.Log("Singleton:Call Awake " + gameObject.name);
 
         // create the instance
         if (_instance == null)
@@ -42,7 +42,7 @@ public class GenericSingleton<T> : MonoBehaviour where T : Component
         }
         else
         {
-            Debug.Log("Singleton:Call Destroy "+gameObject.name);
+            Debug.Log("Singleton:Call Destroy " + gameObject.name);
             Destroy(gameObject);
         }
     }

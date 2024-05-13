@@ -10,6 +10,7 @@ public class RubyHand : MonoBehaviour
     private bool _isSpriteFlipLeft;
     private bool _isRotating;
     private bool _isAttacking;
+
     private void Attack()
     {
         _weapon.Attack();
@@ -17,7 +18,7 @@ public class RubyHand : MonoBehaviour
 
     private void Start()
     {
-       SetWeapon();
+        SetWeapon();
     }
 
     private void SetWeapon()
@@ -28,7 +29,7 @@ public class RubyHand : MonoBehaviour
     private IEnumerator C_RotateWeapon()
     {
         _isRotating = true;
-        
+
         //Rotate to target
         while (_isRotating && _currentTargetEnemy.IsAlive)
         {
@@ -67,19 +68,18 @@ public class RubyHand : MonoBehaviour
 
             yield return null;
         }
-        
-        StopRotate();
-        
-        //If rotate hit enemy -> Fire bullet
 
+        StopRotate();
+
+        //If rotate hit enemy -> Fire bullet
     }
-    
+
     private void OnTriggerStay2D(Collider2D other)
     {
         if (!other.CompareTag("Enemy")) return;
 
         //Find the enemy that closer
-        
+
         if (_currentTarget != null)
         {
             if (Vector3.Distance(other.transform.position, transform.position) <

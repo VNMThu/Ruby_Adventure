@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+
 public class PauseGame : MonoBehaviour
 {
-    [SerializeField]
-    GameObject AskSave;
-    [SerializeField]
-    GameObject SaveSuccesfully;
-    [SerializeField]
-    GameObject PauseGameObject;
+    [SerializeField] GameObject AskSave;
+    [SerializeField] GameObject SaveSuccesfully;
+
+    [SerializeField] GameObject PauseGameObject;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,14 +20,12 @@ public class PauseGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     public void Resume()
     {
         Time.timeScale = 1f;
         PauseGameObject.SetActive(false);
-
     }
 
     public void Pause()
@@ -72,6 +70,7 @@ public class PauseGame : MonoBehaviour
         {
             File.Delete(path);
         }
+
         //Create SaveData
         FileStream file = File.Create(path);
         //Create binary 

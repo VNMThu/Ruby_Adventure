@@ -7,10 +7,8 @@ using UnityEngine.EventSystems;
 
 public class LoadingController : MonoBehaviour
 {
-    [SerializeField]
-    private Slider loadingSlider;
-    [SerializeField]
-    private GameObject loadingScene;
+    [SerializeField] private Slider loadingSlider;
+    [SerializeField] private GameObject loadingScene;
 
 
     // Start is called before the first frame update

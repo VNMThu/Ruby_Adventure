@@ -14,7 +14,8 @@ public class SaveData
     public bool[] robotState;
     public bool[] itemState;
 
-    public SaveData(int heath, int bulletAmount, float currentPosX, float currentPosY, int robotCount, GameObject[] robots,GameObject[] items)
+    public SaveData(int heath, int bulletAmount, float currentPosX, float currentPosY, int robotCount,
+        GameObject[] robots, GameObject[] items)
     {
         this._health = heath;
         this._bulletAmount = bulletAmount;
@@ -33,7 +34,6 @@ public class SaveData
         {
             itemState[i] = items[i].activeSelf;
         }
-
     }
 
     public void PrintOut()
@@ -53,5 +53,4 @@ public class SaveData
             Debug.Log(i + ": " + itemState[i]);
         }
     }
-
 }

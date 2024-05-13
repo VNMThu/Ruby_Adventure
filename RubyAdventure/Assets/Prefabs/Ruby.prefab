@@ -105,9 +105,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfClog: 0
   maxHealth: 5
-  speed: 4
+  movingSpeed: 5
+  dashTime: 0.3
+  dashSpeed: 14
+  dashCountDown: 5
   timeInvincible: 0.5
-  projectilePrefab: {fileID: 2139717630259604212, guid: e6cdd5e45994428459b3a1abc600da4c, type: 3}
   getHitEffect: {fileID: 2404540215338771794, guid: 8624469a0c437e74c8fd5ebf61615362, type: 3}
   pickHealthEffect: {fileID: 929360960937569150, guid: 1ebce0fcc0148f24ba31fce1e03230a5, type: 3}
   deathEffect: {fileID: 2405716254040553618, guid: 7ec724790ff72dc4992657b219800b18, type: 3}
@@ -139,7 +141,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &6686747564793469010
 BoxCollider2D:

@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
     {
         _rigidBody = GetComponent<Rigidbody2D>();
     }
-    
+
 
     // Update is called once per frame
     private void Update()
@@ -29,9 +29,9 @@ public class Projectile : MonoBehaviour
         _rigidBody.velocity = Vector3.zero;
     }
 
-    public void Launch(Vector2 direction, float force,float damageDealValue,float forcePushBackValue)
+    public void Launch(Vector2 direction, float force, float damageDealValue, float forcePushBackValue)
     {
-        _rigidBody.AddForce(direction * force,ForceMode2D.Impulse);
+        _rigidBody.AddForce(direction * force, ForceMode2D.Impulse);
         _damageDeal = damageDealValue;
         _forcePushBack = forcePushBackValue;
     }
@@ -43,24 +43,21 @@ public class Projectile : MonoBehaviour
             case "Enemy":
             {
                 Enemy enemyController = other.GetComponent<Enemy>();
-                
+
                 //Spawn Particle
                 ObjectsPoolManager.SpawnObject(sparkHit.gameObject, transform.position, transform.rotation,
                     ObjectsPoolManager.PoolType.ParticleSystem);
-                
+
                 //Play audio
                 // enemyController.PlayAudio(hitClip);
-                
+
                 //Change HP
-                enemyController.GetHitNormal(_damageDeal,_forcePushBack);
-                
+                enemyController.GetHitNormal(_damageDeal, _forcePushBack);
+
                 ObjectsPoolManager.ReturnObjectToPool(gameObject);
 
                 break;
             }
         }
-
     }
-
-
 }

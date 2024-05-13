@@ -6,18 +6,19 @@ public class ExpManager : MonoBehaviour
 {
     [SerializeField] private Slider expSliderUI;
     private Action<object> _onExpReceiveRef;
-    private int _currentLevel ;
+    private int _currentLevel;
     private int _currentExp;
+
     private void OnEnable()
     {
         //Reset value
         expSliderUI.value = 0;
         _currentLevel = 0;
         _currentExp = 0;
-        
+
         //Handle when ruby receive Exp
         _onExpReceiveRef = (param) => OnExpReceive((int)param);
-        EventDispatcher.Instance.RegisterListener(EventID.OnExpReceive,_onExpReceiveRef);
+        EventDispatcher.Instance.RegisterListener(EventID.OnExpReceive, _onExpReceiveRef);
     }
 
     // private void OnDisable()
@@ -27,10 +28,10 @@ public class ExpManager : MonoBehaviour
 
     private void OnExpReceive(int expReceive)
     {
-        Debug.Log("Receive:"+expReceive+" exp");
+        Debug.Log("Receive:" + expReceive + " exp");
         //Find out the current Max
-        int maxValueOfGauge = GetXpNeedBaseOnLevel(_currentLevel+1);
-        
+        int maxValueOfGauge = GetXpNeedBaseOnLevel(_currentLevel + 1);
+
         //Current exp
         _currentExp += expReceive;
 
@@ -40,7 +41,7 @@ public class ExpManager : MonoBehaviour
 
         //If not enough to level up then return
         if (_currentExp < maxValueOfGauge) return;
-        
+
         //Level up here
         _currentLevel++;
         _currentExp = 0;
@@ -56,14 +57,13 @@ public class ExpManager : MonoBehaviour
         // 2       9       5
         // 3       15      6
         // 4       22      7
-        
+
         int xpNeed = 0;
         for (int i = 0; i < level; i++)
         {
             xpNeed += Constant.XpConstant + i;
         }
-        return xpNeed;
 
+        return xpNeed;
     }
-    
 }

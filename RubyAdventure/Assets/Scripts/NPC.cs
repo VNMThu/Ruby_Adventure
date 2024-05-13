@@ -6,7 +6,9 @@ public class NPC : MonoBehaviour
 {
     public float displayTime = 4.0f;
     public GameObject diablogBox;
+
     private float timeDisplay;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,15 +19,18 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(timeDisplay >= 0 ){
+        if (timeDisplay >= 0)
+        {
             timeDisplay -= Time.deltaTime;
-            if(timeDisplay < 0){
+            if (timeDisplay < 0)
+            {
                 diablogBox.SetActive(false);
             }
         }
     }
 
-    public void DisplayDialog (){
+    public void DisplayDialog()
+    {
         timeDisplay = displayTime;
         diablogBox.SetActive(true);
     }

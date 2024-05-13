@@ -11,16 +11,13 @@ public class Weapon : MonoBehaviour
 
     public virtual void Attack()
     {
-        
     }
 
     public virtual void StopAttack()
     {
-        
     }
 
     public virtual void FlipSprite()
     {
-        
     }
 }

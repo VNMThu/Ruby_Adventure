@@ -17,12 +17,12 @@ public class Gate : MonoBehaviour
     {
         //Turn on gate to stop ruby from come back
         gate.SetActive(true);
-        
+
         //Turn off trigger
         _collider2D.enabled = false;
-        
+
         //Start Level
-        
+
         GameManager.Instance.LevelController.StartLevel();
     }
 }

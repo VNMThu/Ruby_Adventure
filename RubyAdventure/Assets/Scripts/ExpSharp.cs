@@ -26,8 +26,8 @@ public class ExpSharp : MonoBehaviour
         //Hit ruby
         _isMoving = true;
         Vector3 dir = (transform.position - GameManager.Instance.Ruby.transform.position).normalized;
-        Debug.Log("EXP dir:"+dir);
-        
+        Debug.Log("EXP dir:" + dir);
+
         //Move backward
         transform.DOMove(0.5f * dir + transform.position, 0.2f).OnComplete(() =>
         {
@@ -41,22 +41,22 @@ public class ExpSharp : MonoBehaviour
         while (true)
         {
             // Move our position a step closer to the target.
-            var step =  6f * Time.deltaTime; // calculate distance to move
-               
-            transform.position = Vector3.MoveTowards(transform.position, GameManager.Instance.Ruby.transform.position, step);
+            var step = 6f * Time.deltaTime; // calculate distance to move
+
+            transform.position =
+                Vector3.MoveTowards(transform.position, GameManager.Instance.Ruby.transform.position, step);
 
             if (Vector3.Distance(transform.position, GameManager.Instance.Ruby.transform.position) < 0.001f)
             {
                 Debug.Log("EXP hit ruby");
-                ObjectsPoolManager.SpawnObject(effectWhenHitRuby,GameManager.Instance.Ruby.transform);
-                EventDispatcher.Instance.PostEvent(EventID.OnExpReceive,expReceived);
+                ObjectsPoolManager.SpawnObject(effectWhenHitRuby, GameManager.Instance.Ruby.transform);
+                EventDispatcher.Instance.PostEvent(EventID.OnExpReceive, expReceived);
                 ObjectsPoolManager.ReturnObjectToPool(gameObject);
                 //Tick event exp receive
                 break;
             }
+
             yield return null;
         }
     }
-    
-
 }

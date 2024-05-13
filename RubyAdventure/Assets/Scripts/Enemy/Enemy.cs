@@ -14,10 +14,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float speed;
     [SerializeField] protected Animator animator;
     [SerializeField] protected SpriteRenderer[] spriteRenderer;
-    [Header("EXP Drop")]
-    [SerializeField] protected float percentageDrop;
+    [Header("EXP Drop")] [SerializeField] protected float percentageDrop;
     [SerializeField] protected ExpSharp expSharp;
-    
+
     [Header("Flash effect when die")] [SerializeField]
     protected FlashEffect flashEffect;
 
@@ -40,7 +39,7 @@ public class Enemy : MonoBehaviour
     protected virtual void StartMoving()
     {
     }
-    
+
     //Attack
     protected virtual void StartAttack()
     {
@@ -48,29 +47,25 @@ public class Enemy : MonoBehaviour
 
     protected virtual void StopAttack()
     {
-        
     }
 
     // This function use for checking attack hit box, should be call inside attack animation for exact frame checking
     protected virtual void AttackConnect()
     {
     }
-    
+
     //React when hit by different kind of attack
-    public virtual void GetHitNormal(float damageDeal,float forcePushPower = 0f)
+    public virtual void GetHitNormal(float damageDeal, float forcePushPower = 0f)
     {
         currentHealth -= damageDeal;
         flashEffect.Flash();
         if (forcePushPower != 0)
         {
             Vector2 force = (transform.position - GameManager.Instance.Ruby.transform.position).normalized;
-            rigidbody2D.AddForce(forcePushPower * force,ForceMode2D.Impulse);
-            
+            rigidbody2D.AddForce(forcePushPower * force, ForceMode2D.Impulse);
+
             //Apply opposite force to stop 
-            DOVirtual.DelayedCall(0.1f, () =>
-            {
-                rigidbody2D.AddForce(-forcePushPower * force, ForceMode2D.Impulse);
-            });
+            DOVirtual.DelayedCall(0.1f, () => { rigidbody2D.AddForce(-forcePushPower * force, ForceMode2D.Impulse); });
         }
 
         if (currentHealth <= 0)
@@ -93,6 +88,4 @@ public class Enemy : MonoBehaviour
                 ObjectsPoolManager.PoolType.Exp);
         }
     }
-    
-    
 }

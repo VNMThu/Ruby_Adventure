@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField]
-    private int maxHp = 2;
+    [SerializeField] private int maxHp = 2;
     public int hp { get; private set; }
     public float speed;
     public bool vertical;
@@ -21,8 +20,7 @@ public class EnemyController : MonoBehaviour
     public ParticleSystem smokeEffect;
     private AudioSource audioSource;
 
-    [SerializeField]
-    private AudioClip fixedClip;
+    [SerializeField] private AudioClip fixedClip;
 
 
     // Start is called before the first frame update
@@ -49,8 +47,6 @@ public class EnemyController : MonoBehaviour
             direction = -direction;
             timer = changeTime;
         }
-
-
     }
 
     void FixedUpdate()
@@ -74,7 +70,6 @@ public class EnemyController : MonoBehaviour
             animator.SetFloat("Move X", direction);
             animator.SetFloat("Move Y", 0);
         }
-
 
 
         rigid_body.MovePosition(position);
@@ -123,4 +118,3 @@ public class EnemyController : MonoBehaviour
         }
     }
 }
-

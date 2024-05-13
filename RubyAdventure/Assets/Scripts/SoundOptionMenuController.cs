@@ -12,24 +12,28 @@ public class SoundOptionMenuController : MonoBehaviour
 
     // Start is called before the first frame update
     public AudioMixer audioMixer;
-    private void Awake() {
-        SetVolumn("MasterVolumn",masterSlider);
-        SetVolumn("BGVolumn",bgSlider);
-        SetVolumn("SEVolumn",seSlider);
+
+    private void Awake()
+    {
+        SetVolumn("MasterVolumn", masterSlider);
+        SetVolumn("BGVolumn", bgSlider);
+        SetVolumn("SEVolumn", seSlider);
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
 
-    private void SetVolumn(string soundName, Slider slider){
+    private void SetVolumn(string soundName, Slider slider)
+    {
         float volumn;
-        if(audioMixer.GetFloat(soundName,out volumn)){
+        if (audioMixer.GetFloat(soundName, out volumn))
+        {
             slider.value = volumn;
         }
     }
+
     public void ChangeMasterVolumn(float volumn)
     {
         audioMixer.SetFloat("MasterVolumn", volumn);

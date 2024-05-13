@@ -4,24 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+
 public class GameOverController : MonoBehaviour
 {
+    [SerializeField] private GameObject gameOverScene;
 
-    [SerializeField]
-    private GameObject gameOverScene;
-
-    [SerializeField]
-    private GameObject gameVictoryScene;
-    [SerializeField]
-    private GameObject BackGround;
-    [SerializeField]
-    private AudioClip gameOverSound;
+    [SerializeField] private GameObject gameVictoryScene;
+    [SerializeField] private GameObject BackGround;
+    [SerializeField] private AudioClip gameOverSound;
     private RubyController ruby;
     private AudioSource bgAudioSource;
-    [SerializeField]
-    private AudioClip gameVictorySound;
-    [SerializeField]
-    private TMP_Text TimeTxt;
+    [SerializeField] private AudioClip gameVictorySound;
+
+    [SerializeField] private TMP_Text TimeTxt;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -29,16 +25,17 @@ public class GameOverController : MonoBehaviour
         ruby = FindObjectOfType<RubyController>();
         ruby.OnPlayerDeath += OnGameOver;
         bgAudioSource = BackGround.GetComponent<AudioSource>();
-
     }
-    
 
-    public void RestartGame(){
+
+    public void RestartGame()
+    {
         TitleController.instance.btnChoice = "Play";
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void MainMenu(){
+    public void MainMenu()
+    {
         SceneManager.LoadScene("Title");
     }
 
@@ -50,10 +47,11 @@ public class GameOverController : MonoBehaviour
         bgAudioSource.PlayOneShot(gameOverSound);
     }
 
-    private void OnGameWin(){
+    private void OnGameWin()
+    {
         gameVictoryScene.SetActive(true);
         bgAudioSource.Stop();
         bgAudioSource.PlayOneShot(gameVictorySound);
         TimeTxt.text = "Time: " + Mathf.RoundToInt(Time.timeSinceLevelLoad) + "s";
-    } 
+    }
 }

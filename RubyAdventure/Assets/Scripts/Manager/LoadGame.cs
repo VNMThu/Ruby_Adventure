@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+
 public class LoadGame : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -19,7 +20,7 @@ public class LoadGame : MonoBehaviour
             file.Close();
             return data;
         }
+
         return null;
     }
-
 }
