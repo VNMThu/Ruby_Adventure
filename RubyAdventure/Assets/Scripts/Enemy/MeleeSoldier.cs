@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MeleeSoldier : Enemy
 {
-    private static readonly int IsAttacking = Animator.StringToHash("IsAttacking");
+    private new static readonly int IsAttacking = Animator.StringToHash("IsAttacking");
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask playerLayerMask;
     [SerializeField] private ParticleSystem appearEffect;
@@ -27,11 +27,11 @@ public class MeleeSoldier : Enemy
         if (IsAlive)
         {
             Vector3 rubyPosition = GameManager.Instance.Ruby.transform.position;
-            if (Vector2.Distance(transform.position, rubyPosition) <= attackRange && !isAttacking)
+            if (Vector2.Distance(transform.position, rubyPosition) <= attackRange && !base.IsAttacking)
             {
                 StartAttack();
             }
-            else if (Vector2.Distance(transform.position, rubyPosition) > attackRange && isAttacking)
+            else if (Vector2.Distance(transform.position, rubyPosition) > attackRange && base.IsAttacking)
             {
                 StopAttack();
             }
@@ -42,7 +42,7 @@ public class MeleeSoldier : Enemy
     {
         while (IsAlive)
         {
-            if (!isAttacking)
+            if (!base.IsAttacking)
             {
                 Vector3 rubyPosition = GameManager.Instance.Ruby.transform.position;
                 //speed
@@ -78,27 +78,25 @@ public class MeleeSoldier : Enemy
         base.StartAttack();
 
         //Play animation attack
-        isAttacking = true;
+        base.IsAttacking = true;
         animator.SetBool(IsAttacking, true);
     }
 
     protected override void AttackConnect()
     {
         //Detect if player in range
-        Debug.Log("Enemy Attacking");
         var results = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayerMask);
-        Debug.Log("Enemy Attacking1:" + results.Length);
 
         //Hit nothing so return here
         if (results.Length <= 0) return;
 
         //Check all collider
-        foreach (var VARIABLE in results)
+        foreach (var variable in results)
         {
-            if (VARIABLE.CompareTag("Player"))
+            if (variable.CompareTag("Player"))
             {
                 //Hit Ruby
-                VARIABLE.GetComponent<RubyController>().ChangeHealth(-damage);
+                variable.GetComponent<RubyController>().ChangeHealth(-damage);
             }
         }
     }
@@ -106,7 +104,7 @@ public class MeleeSoldier : Enemy
     protected override void StopAttack()
     {
         base.StopAttack();
-        isAttacking = false;
+        base.IsAttacking = false;
         animator.SetBool(IsAttacking, false);
     }
 

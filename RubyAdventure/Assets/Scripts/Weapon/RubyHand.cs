@@ -10,6 +10,7 @@ public class RubyHand : MonoBehaviour
     private bool _isSpriteFlipLeft;
     private bool _isRotating;
     private bool _isAttacking;
+    private Action<object> _onStartLevelRef;
 
     private void Attack()
     {
@@ -19,8 +20,21 @@ public class RubyHand : MonoBehaviour
     private void Start()
     {
         SetWeapon();
+        _weapon.gameObject.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        //Event
+        _onStartLevelRef = _ => OnStartLevel();
+        EventDispatcher.Instance.RegisterListener(EventID.OnStartLevel,_onStartLevelRef);
+    }
+
+    private void OnStartLevel()
+    {
+        _weapon.gameObject.SetActive(true);
+    }
+    
     private void SetWeapon()
     {
         _weapon = GetComponentInChildren<Weapon>();

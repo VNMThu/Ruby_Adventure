@@ -22,6 +22,9 @@ public class LevelController : MonoBehaviour
 
     private bool _isSpawning;
 
+    private Action<object> _onStartLevelRef;
+
+    
     // Start is called before the first frame update
     private void OnDisable()
     {
@@ -31,6 +34,10 @@ public class LevelController : MonoBehaviour
     private void OnEnable()
     {
         timeCountDownUI.text = "Preparing";
+        
+        //Event
+        _onStartLevelRef = _ => StartLevel();
+        EventDispatcher.Instance.RegisterListener(EventID.OnStartLevel,_onStartLevelRef);
     }
 
 
@@ -67,7 +74,7 @@ public class LevelController : MonoBehaviour
         Debug.Log("Level ended");
     }
 
-    public void StartLevel()
+    private void StartLevel()
     {
         Debug.Log("@Enemy spawner: Start Level Here");
 

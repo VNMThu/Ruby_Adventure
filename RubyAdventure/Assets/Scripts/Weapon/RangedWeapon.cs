@@ -20,7 +20,7 @@ public class RangedWeapon : Weapon
     private bool _isAttacking;
     private Coroutine _attackCoroutine;
 
-    protected void Awake()
+    protected void OnEnable()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -37,6 +37,7 @@ public class RangedWeapon : Weapon
         //Start animation - Over Call
         if (_isAttacking)
         {
+            Debug.Log("Call Stop Attack");
             StopCoroutine(_attackCoroutine);
         }
 
@@ -68,6 +69,7 @@ public class RangedWeapon : Weapon
     public override void StopAttack()
     {
         //Stop firing
+        Debug.Log("Call Stop Attack");
         if (!_isAttacking) return;
         _isAttacking = false;
         StopCoroutine(_attackCoroutine);
