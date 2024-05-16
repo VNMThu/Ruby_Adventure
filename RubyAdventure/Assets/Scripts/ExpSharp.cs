@@ -41,12 +41,15 @@ public class ExpSharp : MonoBehaviour
         while (true)
         {
             // Move our position a step closer to the target.
-            var step = 6f * Time.deltaTime; // calculate distance to move
+            var step = 8f * Time.deltaTime; // calculate distance to move
 
+            Vector3 targetPosition = new Vector3(GameManager.Instance.Ruby.transform.position.x,
+                GameManager.Instance.Ruby.transform.position.y + 0.5f, GameManager.Instance.Ruby.transform.position.z); 
+            
             transform.position =
-                Vector3.MoveTowards(transform.position, GameManager.Instance.Ruby.transform.position, step);
+                Vector3.MoveTowards(transform.position,targetPosition,step);
 
-            if (Vector3.Distance(transform.position, GameManager.Instance.Ruby.transform.position) < 0.001f)
+            if (Vector3.Distance(transform.position, targetPosition) < 0.001f)
             {
                 Debug.Log("EXP hit ruby");
                 ObjectsPoolManager.SpawnObject(effectWhenHitRuby, GameManager.Instance.Ruby.transform);
