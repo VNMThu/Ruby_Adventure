@@ -69,7 +69,6 @@ public class RangedWeapon : Weapon
     public override void StopAttack()
     {
         //Stop firing
-        Debug.Log("Call Stop Attack");
         if (!_isAttacking) return;
         _isAttacking = false;
         StopCoroutine(_attackCoroutine);
