@@ -9,9 +9,10 @@ public class RubyHand : MonoBehaviour
     private Enemy _currentTargetEnemy;
     private bool _isSpriteFlipLeft;
     private bool _isRotating;
+    private bool _forceStopRotating;
     private bool _isAttacking;
     private Action<object> _onStartLevelRef;
-
+    private Rigidbody2D _rigidBody2D;
     private void Attack()
     {
         _weapon.Attack();
@@ -20,6 +21,7 @@ public class RubyHand : MonoBehaviour
     private void Start()
     {
         SetWeapon();
+        _rigidBody2D = GetComponent<Rigidbody2D>();
         _weapon.gameObject.SetActive(false);
     }
 
@@ -110,10 +112,21 @@ public class RubyHand : MonoBehaviour
         _currentTargetEnemy = _currentTarget.GetComponent<Enemy>();
 
         //Start rotate toward that enemy
-        if (!_isRotating)
+        if (!_isRotating && !_forceStopRotating)
         {
             StartCoroutine(C_RotateWeapon());
         }
+    }
+
+    //This for weapon that need to stop rotate mid animation
+    public void ForceStopRotating()
+    {
+        _forceStopRotating = true;
+    }
+    
+    public void StopForceStopRotating()
+    {
+        _forceStopRotating = false;
     }
 
     private void OnTriggerExit2D(Collider2D other)
