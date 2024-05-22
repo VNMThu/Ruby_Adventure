@@ -3638,7 +3638,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ruby: {fileID: 626746583090875887}
-  levelController: {fileID: 1040809463}
 --- !u!1001 &383972788
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8418,6 +8417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meleeSoldierPrefab: {fileID: 7099191634836985210, guid: ee972e5c924f6d54e807520643dfd78a, type: 3}
+  rangeSoldierPrefab: {fileID: 2593550110188774817, guid: 74bd795005794ecfac654c8b0b372349, type: 3}
   timeCountDownUI: {fileID: 1538185513}
   timeInLevel: 1
   spawnInterval: {x: 0, y: 3}
@@ -32461,7 +32461,6 @@ SpriteRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1917201904}
   - {fileID: 855845061}
   - {fileID: 519420032}
   - {fileID: 626746583090875886}
@@ -32471,4 +32470,5 @@ SceneRoots:
   - {fileID: 682233810}
   - {fileID: 1232474421}
   - {fileID: 988197611818913054}
+  - {fileID: 1917201904}
   - {fileID: 1190559534}

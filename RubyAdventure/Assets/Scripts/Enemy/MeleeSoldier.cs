@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class MeleeSoldier : Enemy
 {
-    private new static readonly int IsAttacking = Animator.StringToHash("IsAttacking");
+    private readonly int _isAttacking = Animator.StringToHash("IsAttacking");
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask playerLayerMask;
     [SerializeField] private ParticleSystem appearEffect;
-    private static readonly int IsDeath = Animator.StringToHash("IsDeath");
+    private readonly int _isDeath = Animator.StringToHash("IsDeath");
 
     protected override void OnEnable()
     {
         base.OnEnable();
-        animator.SetBool(IsAttacking, false);
+        animator.SetBool(_isAttacking, false);
         ObjectsPoolManager.SpawnObject(appearEffect.gameObject, transform.position, Quaternion.identity,
             ObjectsPoolManager.PoolType.ParticleSystem);
     }
@@ -79,7 +79,7 @@ public class MeleeSoldier : Enemy
 
         //Play animation attack
         base.IsAttacking = true;
-        animator.SetBool(IsAttacking, true);
+        animator.SetBool(_isAttacking, true);
     }
 
     protected override void AttackConnect()
@@ -105,15 +105,15 @@ public class MeleeSoldier : Enemy
     {
         base.StopAttack();
         base.IsAttacking = false;
-        animator.SetBool(IsAttacking, false);
+        animator.SetBool(_isAttacking, false);
     }
 
     protected override void Death()
     {
         base.Death();
-        animator.SetBool(IsAttacking, false);
+        animator.SetBool(_isAttacking, false);
         //Start death animation
-        animator.SetTrigger(IsDeath);
+        animator.SetTrigger(_isDeath);
     }
 
     //Get call in animation

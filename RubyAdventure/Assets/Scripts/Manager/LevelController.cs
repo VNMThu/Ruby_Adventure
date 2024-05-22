@@ -8,6 +8,8 @@ using Random = UnityEngine.Random;
 public class LevelController : MonoBehaviour
 {
     [SerializeField] private MeleeSoldier meleeSoldierPrefab;
+    [SerializeField] private RangeSoldier rangeSoldierPrefab;
+
     [SerializeField] private TextMeshProUGUI timeCountDownUI;
     [SerializeField] private int timeInLevel;
 
@@ -46,7 +48,7 @@ public class LevelController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         while (_isSpawning)
         {
-            ObjectsPoolManager.SpawnObject(meleeSoldierPrefab.gameObject,
+            ObjectsPoolManager.SpawnObject(rangeSoldierPrefab.gameObject,
                 RandomPointInArea(centerSpawnPoint.position, spawnAreaSize.x, spawnAreaSize.y),
                 Quaternion.identity, ObjectsPoolManager.PoolType.Enemy);
             yield return new WaitForSeconds(Random.Range(spawnInterval.x, spawnInterval.y + 1));
