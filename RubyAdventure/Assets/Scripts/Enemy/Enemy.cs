@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float fullHealth;
     [SerializeField] protected float speed;
     [SerializeField] protected Animator animator;
-    [SerializeField] protected SpriteRenderer[] spriteRenderer;
     [Header("EXP Drop")] [SerializeField] protected float percentageDrop;
     [SerializeField] protected ExpSharp expSharp;
 
@@ -57,7 +56,7 @@ public class Enemy : MonoBehaviour
         flashEffect.Flash();
         if (forcePushPower != 0)
         {
-            Vector2 force = (transform.position - GameManager.Instance.Ruby.transform.position).normalized;
+            Vector2 force = (transform.position -GameManager.Instance.RubyPosition).normalized;
             RigidBody2D.AddForce(forcePushPower * force, ForceMode2D.Impulse);
 
             //Apply opposite force to stop 

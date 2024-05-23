@@ -11,10 +11,13 @@ public class RangeSoldier : Enemy
     [SerializeField] private float attackRate;
     private readonly int _isDeath = Animator.StringToHash("IsDeath");
     private readonly int _isRunning = Animator.StringToHash("IsRunning");
-
+    [SerializeField] private RangeSoldierBullet bulletPrefab;
+    private bool _faceLeft = true;
+    private Coroutine _attackCoroutine;
     protected override void OnEnable()
     {
         base.OnEnable();
+        _faceLeft = true;
         animator.SetBool(_isRunning, false);
         ObjectsPoolManager.SpawnObject(appearEffect.gameObject, transform.position, Quaternion.identity,
             ObjectsPoolManager.PoolType.ParticleSystem);
@@ -32,7 +35,7 @@ public class RangeSoldier : Enemy
         if (!IsAlive) return;
         FlipToFaceRuby();
 
-        Vector3 rubyPosition = GameManager.Instance.Ruby.transform.position;
+        Vector3 rubyPosition = GameManager.Instance.RubyPosition;
         if (Vector2.Distance(transform.position, rubyPosition) <= attackRange && !IsAttacking)
         {
             StartAttack();
@@ -45,7 +48,17 @@ public class RangeSoldier : Enemy
 
     public void FireBullet()
     {
-        Debug.Log("Range Soldier Fire bullet");
+        //Create projectile
+        RangeSoldierBullet bullet = ObjectsPoolManager.SpawnObject(bulletPrefab.gameObject,
+            attackPoint.position, transform.rotation,
+            ObjectsPoolManager.PoolType.Projectile).GetComponent<RangeSoldierBullet>();
+
+        //Find direction to ruby
+        Vector2 direction = GameManager.Instance.RubyPosition - transform.position;
+        direction = direction.normalized;
+        
+        //Launch it
+        bullet.Launch(direction, 7, damage,0);
     }
 
     private IEnumerator MoveToRuby()
@@ -56,7 +69,7 @@ public class RangeSoldier : Enemy
             {
                 animator.SetBool(_isRunning, true);
 
-                Vector3 rubyPosition = GameManager.Instance.Ruby.transform.position;
+                Vector3 rubyPosition =GameManager.Instance.RubyPosition;
                 //speed
                 float step = speed * Time.deltaTime;
 
@@ -69,20 +82,16 @@ public class RangeSoldier : Enemy
 
     private void FlipToFaceRuby()
     {
-        //Flip sprite depend on ruby position
-        if ( GameManager.Instance.Ruby.transform.position.x < transform.position.x)
+        //Rotate depend on ruby position
+        if ( GameManager.Instance.RubyPosition.x >= transform.position.x && _faceLeft)
         {
-            foreach (var variable in spriteRenderer)
-            {
-                variable.flipX = false;
-            }
+                transform.RotateAround(transform.position, transform.up, 180f);
+                _faceLeft = false;
         }
-        else
+        else if(GameManager.Instance.RubyPosition.x < transform.position.x && !_faceLeft)
         {
-            foreach (var variable in spriteRenderer)
-            {
-                variable.flipX = true;
-            }
+                transform.RotateAround(transform.position, transform.up, -180f);
+                _faceLeft = true;
         }
     }
 
@@ -93,16 +102,23 @@ public class RangeSoldier : Enemy
         animator.SetBool(_isRunning, false);
         
         //Start coroutine attack
+
+        if (IsAttacking)
+        {
+            IsAttacking = false;
+            StopCoroutine(_attackCoroutine);
+        }
+        
         IsAttacking = true;
-        StartCoroutine(C_Attack());
+        _attackCoroutine = StartCoroutine(C_Attack());
     }
 
     private IEnumerator C_Attack()
     {
         while (IsAttacking)
         {
-            animator.SetTrigger(_isAttacking);
             yield return new WaitForSeconds(1 / attackRate);
+            animator.SetTrigger(_isAttacking);
         }
     }
     
@@ -111,9 +127,12 @@ public class RangeSoldier : Enemy
     {
         //Stop attack
         IsAttacking = false;
+        StopCoroutine(_attackCoroutine);
         
         //Start moving again
         animator.SetBool(_isRunning, true);
+        
+        
     }
 
     protected override void Death()

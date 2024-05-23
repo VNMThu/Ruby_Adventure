@@ -6,7 +6,9 @@ public class MeleeSoldier : Enemy
     private readonly int _isAttacking = Animator.StringToHash("IsAttacking");
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask playerLayerMask;
-    [SerializeField] private ParticleSystem appearEffect;
+    [SerializeField] private ParticleSystem appearEffect;    
+    [SerializeField] protected SpriteRenderer[] spriteRenderer;
+
     private readonly int _isDeath = Animator.StringToHash("IsDeath");
 
     protected override void OnEnable()
@@ -26,7 +28,7 @@ public class MeleeSoldier : Enemy
     {
         if (IsAlive)
         {
-            Vector3 rubyPosition = GameManager.Instance.Ruby.transform.position;
+            Vector3 rubyPosition = GameManager.Instance.RubyPosition;
             if (Vector2.Distance(transform.position, rubyPosition) <= attackRange && !base.IsAttacking)
             {
                 StartAttack();
@@ -44,7 +46,7 @@ public class MeleeSoldier : Enemy
         {
             if (!base.IsAttacking)
             {
-                Vector3 rubyPosition = GameManager.Instance.Ruby.transform.position;
+                Vector3 rubyPosition = GameManager.Instance.RubyPosition;
                 //speed
                 float step = speed * Time.deltaTime;
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 // ReSharper disable once CheckNamespace
 public class RangedWeapon : Weapon
@@ -7,8 +8,8 @@ public class RangedWeapon : Weapon
     [SerializeField] protected Animator animator;
     [SerializeField] protected SpriteRenderer muzzleFlash;
 
-    [Header("projectile")] [SerializeField]
-    protected Projectile projectilePrefab;
+    [FormerlySerializedAs("rubyProjectilePrefab")] [FormerlySerializedAs("projectilePrefab")] [Header("projectile")] [SerializeField]
+    protected RubyGunBullet rubyGunBulletPrefab;
 
     [SerializeField] protected Transform spawnProjectilePoint;
 
@@ -58,12 +59,12 @@ public class RangedWeapon : Weapon
     public virtual void FireProjectile()
     {
         //Create projectile
-        Projectile projectile = ObjectsPoolManager.SpawnObject(projectilePrefab.gameObject,
+        RubyGunBullet rubyGunBullet = ObjectsPoolManager.SpawnObject(rubyGunBulletPrefab.gameObject,
             spawnProjectilePoint.position, transform.rotation,
-            ObjectsPoolManager.PoolType.Projectile).GetComponent<Projectile>();
+            ObjectsPoolManager.PoolType.Projectile).GetComponent<RubyGunBullet>();
 
         //Launch it
-        projectile.Launch(transform.right, 40, damagePerAttack, forcePushBack);
+        rubyGunBullet.Launch(transform.right, 40, damagePerAttack, forcePushBack);
     }
 
     public override void StopAttack()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [SerializeField] protected float fireRate;
-    [SerializeField] protected float damagePerAttack;
+    [SerializeField] protected int damagePerAttack;
     [SerializeField] protected float forcePushBack;
     
 

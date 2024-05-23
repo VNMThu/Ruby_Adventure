@@ -4972,7 +4972,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1521626216}
   m_HandleRect: {fileID: 0}
@@ -32249,6 +32249,18 @@ PrefabInstance:
     - target: {fileID: 626746581723031676, guid: 66a79ea255a37a246901075fdd8cc888, type: 3}
       propertyPath: m_Name
       value: Ruby
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441805092734365476, guid: 66a79ea255a37a246901075fdd8cc888, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877145492783807276, guid: 66a79ea255a37a246901075fdd8cc888, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8434051617972303590, guid: 66a79ea255a37a246901075fdd8cc888, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

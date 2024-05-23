@@ -18,13 +18,13 @@ TagManager:
   - Gate
   - Background
   - Player
-  - Projectile
+  - RubyProjectile
   - Confiner
   - NPC
   - Enemy
   - DetectEnemy
   - Collectiable
-  - 
+  - EnemyProjectile
   - 
   - 
   - 

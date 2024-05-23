@@ -1,22 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
     // Start is called before the first frame update
-    private Rigidbody2D _rigidBody;
-    [SerializeField] private AudioClip hitClip;
-    [SerializeField] private ParticleSystem sparkHit;
-    private float _damageDeal;
-    private float _forcePushBack;
+    protected Rigidbody2D RigidBody;
+    protected int DamageDeal;
+    protected float ForcePushBack;
 
-    private void Awake()
+    protected void Awake()
     {
-        _rigidBody = GetComponent<Rigidbody2D>();
+        RigidBody = GetComponent<Rigidbody2D>();
     }
 
 
     // Update is called once per frame
-    private void Update()
+    protected void Update()
     {
         if (transform.position.magnitude > 100)
         {
@@ -24,40 +24,21 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    protected void OnDisable()
     {
-        _rigidBody.velocity = Vector3.zero;
+        RigidBody.velocity = Vector3.zero;
     }
 
-    public void Launch(Vector2 direction, float force, float damageDealValue, float forcePushBackValue)
+    public virtual void Launch(Vector2 direction, float force, int damageDealValue, float forcePushBackValue)
     {
-        _rigidBody.AddForce(direction * force, ForceMode2D.Impulse);
-        _damageDeal = damageDealValue;
-        _forcePushBack = forcePushBackValue;
+        RigidBody.AddForce(direction * force, ForceMode2D.Impulse);
+        DamageDeal = damageDealValue;
+        ForcePushBack = forcePushBackValue;
     }
+    
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        switch (other.tag)
-        {
-            case "Enemy":
-            {
-                Enemy enemyController = other.GetComponent<Enemy>();
 
-                //Spawn Particle
-                ObjectsPoolManager.SpawnObject(sparkHit.gameObject, transform.position, transform.rotation,
-                    ObjectsPoolManager.PoolType.ParticleSystem);
-
-                //Play audio
-                // enemyController.PlayAudio(hitClip);
-
-                //Change HP
-                enemyController.GetHitNormal(_damageDeal, _forcePushBack);
-
-                ObjectsPoolManager.ReturnObjectToPool(gameObject);
-
-                break;
-            }
-        }
     }
 }
