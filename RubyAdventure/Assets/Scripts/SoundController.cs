@@ -1,44 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using JSAM;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Audio;
 
 public class SoundController : MonoBehaviour
 {
-    const float minVolumn = -80;
-    float currentVolumn;
-    [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] GameObject soundButton;
     [SerializeField] private Sprite soundOn;
     [SerializeField] private Sprite soundOff;
+    [SerializeField] private bool isSound;
+    private bool _isOn = true;
+    private Image _image;
 
-    bool isOn = true;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        _image = GetComponent<Image>();
+        _image.sprite = soundOn;
     }
 
     public void ChangeSound()
     {
-        if (isOn)
+        if (_isOn)
         {
-            audioMixer.GetFloat("MasterVolumn", out currentVolumn);
-            soundButton.GetComponent<Image>().sprite = soundOff;
-            isOn = false;
-            audioMixer.SetFloat("MasterVolumn", minVolumn);
+            _isOn = false;
+            MuteOnOff(false);
+            _image.sprite = soundOff;
         }
         else
         {
-            soundButton.GetComponent<Image>().sprite = soundOn;
-            isOn = true;
-            audioMixer.SetFloat("MasterVolumn", currentVolumn);
+            _isOn = true;
+            MuteOnOff(true);
+            _image.sprite = soundOn;
+        }
+    }
+
+    private void MuteOnOff(bool toggle)
+    {
+        if (isSound)
+        {
+            AudioManager.SoundMuted = !toggle;
+        }
+        else
+        {
+            AudioManager.MusicMuted = !toggle;
         }
     }
 }

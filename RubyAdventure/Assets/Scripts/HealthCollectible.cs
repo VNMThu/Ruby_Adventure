@@ -1,8 +1,8 @@
+using JSAM;
 using UnityEngine;
 
 public class HealthCollectible : MonoBehaviour
 {
-    public AudioClip collectedClip;
     private RubyController _controller;
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -16,7 +16,7 @@ public class HealthCollectible : MonoBehaviour
 
         if (_controller.Health >= _controller.MaxHealth) return;
         _controller.ChangeHealth(1);
-        _controller.PlayAudio(collectedClip);
+        AudioManager.PlaySound(AudioLibrarySounds.CoinCollect);
         gameObject.SetActive(false);
     }
 }

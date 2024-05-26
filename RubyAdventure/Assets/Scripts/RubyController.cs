@@ -1,4 +1,5 @@
 using System.Collections;
+using JSAM;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Serialization;
@@ -48,9 +49,6 @@ public class RubyController : MonoBehaviour
     public ParticleSystem getHitEffect;
     public ParticleSystem pickHealthEffect;
     [SerializeField] private ParticleSystem deathEffect;
-    private AudioSource _audioSource;
-    public AudioClip getHitClip;
-    public AudioClip throwClip;
 
     private RubyControl _rubyControl;
     private readonly int _launch = Animator.StringToHash("Launch");
@@ -83,7 +81,6 @@ public class RubyController : MonoBehaviour
 
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Awake()
@@ -186,7 +183,8 @@ public class RubyController : MonoBehaviour
                 ObjectsPoolManager.SpawnObject(getHitEffect.gameObject, _rigidBody.position + Vector2.up * 0.5f,
                     Quaternion.identity,
                     ObjectsPoolManager.PoolType.ParticleSystem);
-                PlayAudio(getHitClip);
+                AudioManager.PlaySound(AudioLibrarySounds.RubyGetHit);
+
                 break;
             }
             case > 0:
@@ -205,7 +203,7 @@ public class RubyController : MonoBehaviour
     {
         //Animation and audio
         _animator.SetTrigger(_launch);
-        PlayAudio(throwClip);
+        AudioManager.PlaySound(AudioLibrarySounds.RubyDash);
         _isDashing = true;
         EventDispatcher.Instance.PostEvent(EventID.OnRubyDash,dashCoolDown);
         //Dash movement
@@ -221,11 +219,6 @@ public class RubyController : MonoBehaviour
         _isDashing = false;
         //Stop the dash
         _rigidBody.velocity = new Vector2(0f, 0f); // Stop dashing.
-    }
-
-    public void PlayAudio(AudioClip audioClip)
-    {
-        _audioSource.PlayOneShot(audioClip);
     }
 
     public void ChangeBullet(int value)
