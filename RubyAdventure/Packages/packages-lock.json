@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.brogrammist.jsam": {
+      "version": "https://github.com/jackyyang09/Simple-Unity-Audio-Manager.git#master",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "6d93b0b5050443d4a9f71cd804afb0b2bbcb1386"
+    },
     "com.unity.2d.animation": {
       "version": "9.0.4",
       "depth": 1,
