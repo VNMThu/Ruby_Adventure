@@ -1,5 +1,6 @@
 public enum UIPanelID
 {
     PauseMenu,
-    SureQuit
+    SureQuit,
+    LevelUp
 }

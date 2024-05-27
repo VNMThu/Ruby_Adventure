@@ -22,14 +22,14 @@ MonoBehaviour:
   relativeVolume: 1
   spatialize: 0
   maxDistance: 0
-  priority: 128
+  priority: 0
   startingPitch: 1
   pitchShift: 0.05
   loopMode: 1
   delay: 0
-  ignoreTimeScale: 0
+  ignoreTimeScale: 1
   maxPlayingInstances: 10
-  channelOverride: 0
+  channelOverride: 1
   mixerGroupOverride: {fileID: 0}
   fadeInOut: 1
   fadeInDuration: 0

@@ -4,5 +4,6 @@ public enum EventID
     OnExpReceive,
     OnHealthChange,
     OnRubyDash,
-    OnStartLevel
+    OnStartLevel,
+    OnLevelUp
 }

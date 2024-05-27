@@ -326,11 +326,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  attackRange: 5
+  attackRange: 10
   fullHealth: 5
   speed: 0.8
   animator: {fileID: 7289248543925582163}
-  percentageDrop: 1
+  percentageDrop: 10
   expSharp: {fileID: 2949721577349369614, guid: 921c28df18446bb46bcce9d537b92f09, type: 3}
   flashEffect: {fileID: 3383680001657380629}
   attackPoint: {fileID: 5752801026890116674}

@@ -16,9 +16,5 @@ public class GameManager : GenericSingleton<GameManager>
         //Turn on music
         AudioManager.PlayMusic(AudioLibraryMusic.GameplayMusic);
     }
-
-    private void OnDisable()
-    {
-        AudioManager.StopMusic(AudioLibraryMusic.GameplayMusic);
-    }
+    
 }

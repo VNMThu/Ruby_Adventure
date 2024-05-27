@@ -44,6 +44,7 @@ public class ExpManager : MonoBehaviour
 
         //Level up here
         _currentLevel++;
+        EventDispatcher.Instance.PostEvent(EventID.OnLevelUp);
         _currentExp = 0;
         expSliderUI.value = 0;
     }
