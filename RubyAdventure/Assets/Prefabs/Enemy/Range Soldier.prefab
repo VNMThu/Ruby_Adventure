@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  attackRange: 10
+  attackRange: 6
   fullHealth: 5
   speed: 0.8
   animator: {fileID: 7289248543925582163}
@@ -339,6 +339,7 @@ MonoBehaviour:
     m_Bits: 256
   appearEffect: {fileID: 442907092464650958, guid: 5773b0d31791d874097ec8f946dbefdc, type: 3}
   attackRate: 0.25
+  bulletSpeed: 4
   bulletPrefab: {fileID: 3213969742947955416, guid: 288e1f2ff0d7aac4d8c51e0fb46fca95, type: 3}
 --- !u!114 &3383680001657380629
 MonoBehaviour:
