@@ -105,7 +105,7 @@ MonoBehaviour:
   forcePushBack: 1
   animator: {fileID: 4012784556734816658}
   muzzleFlash: {fileID: 5760943459057554299}
-  projectilePrefab: {fileID: 2781493690843927216, guid: 0a7f3fdfeadbe664ab635db46bc87ada, type: 3}
+  rubyGunBulletPrefab: {fileID: 2781493690843927216, guid: 0a7f3fdfeadbe664ab635db46bc87ada, type: 3}
   spawnProjectilePoint: {fileID: 7127789235935821557}
 --- !u!95 &4012784556734816658
 Animator:

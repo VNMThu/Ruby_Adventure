@@ -21,7 +21,7 @@ public class ExpSharp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Player") || _isMoving) return;
+        if (!other.CompareTag(Constant.RubyTag) || _isMoving) return;
 
         //Hit ruby
         _isMoving = true;

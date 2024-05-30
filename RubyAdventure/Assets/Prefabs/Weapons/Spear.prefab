@@ -102,7 +102,7 @@ MonoBehaviour:
   fireRate: 1
   damagePerAttack: 2
   forcePushBack: 1
-  attackRange: 1.5
+  attackRange: 1
   sparkHit: {fileID: 6414356965754425502, guid: d702d250e9628a142987494c9b1e5108, type: 3}
 --- !u!61 &1098265527350561013
 BoxCollider2D:

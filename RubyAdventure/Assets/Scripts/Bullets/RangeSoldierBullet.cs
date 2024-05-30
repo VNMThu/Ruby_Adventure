@@ -11,7 +11,7 @@ public class RangeSoldierBullet : Projectile
     {
         switch (other.tag)
         {
-            case "Player":
+            case Constant.RubyHurtBoxTag:
             {
                 //Spawn Particle
                 ObjectsPoolManager.SpawnObject(sparkHit.gameObject, transform.position, transform.rotation,
