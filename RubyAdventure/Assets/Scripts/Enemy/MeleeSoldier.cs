@@ -95,7 +95,7 @@ public class MeleeSoldier : Enemy
         //Check all collider
         foreach (var variable in results)
         {
-            if (variable.CompareTag("Player"))
+            if (variable.CompareTag(Constant.RubyHurtBoxTag))
             {
                 //Hit Ruby
                 variable.GetComponent<RubyController>().ChangeHealth(-damage);

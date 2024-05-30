@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     protected FlashEffect flashEffect;
 
     protected Rigidbody2D RigidBody2D;
+    protected Collider2D collider;
     protected float CurrentHealth;
     public bool IsAlive { get; private set; }
     protected bool IsAttacking;
@@ -27,6 +28,16 @@ public class Enemy : MonoBehaviour
         if (RigidBody2D == null)
         {
             RigidBody2D = GetComponent<Rigidbody2D>();
+        }
+        
+        if (collider == null)
+        {
+            collider = GetComponent<Collider2D>();
+        }
+
+        if (!collider.isActiveAndEnabled)
+        {
+            collider.enabled = true;
         }
     }
 
@@ -52,6 +63,7 @@ public class Enemy : MonoBehaviour
     //React when hit by different kind of attack
     public virtual void GetHitNormal(float damageDeal, float forcePushPower = 0f)
     {
+        if (!IsAlive) return;
         CurrentHealth -= damageDeal;
         flashEffect.Flash();
         if (forcePushPower != 0)
@@ -74,6 +86,7 @@ public class Enemy : MonoBehaviour
     {
         IsAlive = false;
         IsAttacking = false;
+        collider.enabled = false;
         //Random and spawn exp
         int randomValue = Random.Range(1, 11);
         if (percentageDrop >= randomValue)

@@ -9,11 +9,13 @@ public class RangeSoldier : Enemy
     [SerializeField] private LayerMask playerLayerMask;
     [SerializeField] private ParticleSystem appearEffect;
     [SerializeField] private float attackRate;
+    [SerializeField] private float bulletSpeed;
     private readonly int _isDeath = Animator.StringToHash("IsDeath");
     private readonly int _isRunning = Animator.StringToHash("IsRunning");
     [SerializeField] private RangeSoldierBullet bulletPrefab;
     private bool _faceLeft = true;
     private Coroutine _attackCoroutine;
+    private float attackCountDown;
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -22,6 +24,7 @@ public class RangeSoldier : Enemy
         ObjectsPoolManager.SpawnObject(appearEffect.gameObject, transform.position, Quaternion.identity,
             ObjectsPoolManager.PoolType.ParticleSystem);
         StartMoving();
+        attackCountDown = 1/attackRate;
     }
 
     protected override void StartMoving()
@@ -58,7 +61,7 @@ public class RangeSoldier : Enemy
         direction = direction.normalized;
         
         //Launch it
-        bullet.Launch(direction, 7, damage,0);
+        bullet.Launch(direction, bulletSpeed, damage,0);
     }
 
     private IEnumerator MoveToRuby()
@@ -105,8 +108,7 @@ public class RangeSoldier : Enemy
 
         if (IsAttacking)
         {
-            IsAttacking = false;
-            StopCoroutine(_attackCoroutine);
+            return;
         }
         
         IsAttacking = true;
@@ -117,8 +119,15 @@ public class RangeSoldier : Enemy
     {
         while (IsAttacking)
         {
-            yield return new WaitForSeconds(1 / attackRate);
+            attackCountDown -= Time.deltaTime;
+            yield return null;
+            
+            //Not yet
+            if (!(attackCountDown <= 0)) continue;
+            
             animator.SetTrigger(_isAttacking);
+            
+            attackCountDown = 1 / attackRate;
         }
     }
     

@@ -8,7 +8,7 @@ public class RangedWeapon : Weapon
     [SerializeField] protected Animator animator;
     [SerializeField] protected SpriteRenderer muzzleFlash;
 
-    [FormerlySerializedAs("rubyProjectilePrefab")] [FormerlySerializedAs("projectilePrefab")] [Header("projectile")] [SerializeField]
+    [Header("projectile")] [SerializeField]
     protected RubyGunBullet rubyGunBulletPrefab;
 
     [SerializeField] protected Transform spawnProjectilePoint;
@@ -20,7 +20,6 @@ public class RangedWeapon : Weapon
     private SpriteRenderer _spriteRenderer;
     private bool _isAttacking;
     private Coroutine _attackCoroutine;
-
     protected void OnEnable()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -31,6 +30,9 @@ public class RangedWeapon : Weapon
 
         //Turn off muzzle flash
         muzzleFlash.gameObject.SetActive(false);
+        
+        //Reset attackCountDown
+        attackCountDown = 1 / fireRate;
     }
 
     public override void Attack()
@@ -38,8 +40,7 @@ public class RangedWeapon : Weapon
         //Start animation - Over Call
         if (_isAttacking)
         {
-            Debug.Log("Call Stop Attack");
-            StopCoroutine(_attackCoroutine);
+            return;
         }
 
         _isAttacking = true;
@@ -50,8 +51,19 @@ public class RangedWeapon : Weapon
     {
         while (_isAttacking)
         {
-            yield return new WaitForSeconds(1 / fireRate);
+            attackCountDown -= Time.deltaTime;
+            yield return null;
+            
+            //Not yet
+            if (!(attackCountDown <= 0)) continue;
+            
+            //Reach wait Time
+            
+            //Shoot
             animator.SetTrigger(_shoot);
+            
+            //Reset count down
+            attackCountDown = 1 / fireRate;
         }
     }
 

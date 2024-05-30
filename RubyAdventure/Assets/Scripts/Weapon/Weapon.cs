@@ -7,7 +7,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected float fireRate;
     [SerializeField] protected int damagePerAttack;
     [SerializeField] protected float forcePushBack;
-    
+    protected float attackCountDown;
+
 
     public virtual void Attack()
     {

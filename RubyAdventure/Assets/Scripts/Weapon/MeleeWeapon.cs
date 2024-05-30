@@ -12,9 +12,16 @@ public class MeleeWeapon : Weapon
     private Coroutine _attackCoroutine;
     private bool _isCausingDamage;
     private RubyHand _hand;
+
     private void Start()
     {
         _hand = transform.GetComponentInParent<RubyHand>();
+    }
+
+    private void OnEnable()
+    {
+        //Reset attackCountDown
+        attackCountDown = 1 / fireRate;
     }
 
     public override void Attack()
@@ -22,7 +29,7 @@ public class MeleeWeapon : Weapon
         //Start animation - Over Call
         if (_isAttacking)
         {
-            StopCoroutine(_attackCoroutine);
+            return;
         }
 
         _isAttacking = true;
@@ -34,9 +41,14 @@ public class MeleeWeapon : Weapon
     {
         while (_isAttacking)
         {
-            yield return new WaitForSeconds(1f/fireRate);
-            _isCausingDamage = true;
+
+            attackCountDown -= Time.deltaTime;
+            yield return null;
             
+            //Not yet
+            if (!(attackCountDown <= 0)) continue;
+            
+            _isCausingDamage = true;
             // stop rotation
             _hand.ForceStopRotating();
             
@@ -53,6 +65,7 @@ public class MeleeWeapon : Weapon
                 {
                     //Rotate again
                     _hand.StopForceStopRotating();
+                    attackCountDown = 1 / fireRate;
                 });
 
         }
