@@ -1,9 +1,23 @@
 public enum EventID
 {
-    None = 0,
+    //int: Exp receive
     OnExpReceive,
+    
+    //int: current health
     OnHealthChange,
+    
+    //float:Dash cool down
     OnRubyDash,
+    
+    //No param
     OnStartLevel,
-    OnLevelUp
+    
+    //No para,
+    OnLevelUp,
+    
+    //Weapon Suite
+    OnWeaponUpgrade,
+    
+    //Weapon Type
+    OnWeaponUnlock
 }

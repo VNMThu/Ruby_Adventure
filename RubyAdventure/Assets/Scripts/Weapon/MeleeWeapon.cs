@@ -21,7 +21,7 @@ public class MeleeWeapon : Weapon
     private void OnEnable()
     {
         //Reset attackCountDown
-        attackCountDown = 1 / fireRate;
+        attackCountDown = 1 / currentAttribute.FireRate;
     }
 
     public override void Attack()
@@ -65,7 +65,7 @@ public class MeleeWeapon : Weapon
                 {
                     //Rotate again
                     _hand.StopForceStopRotating();
-                    attackCountDown = 1 / fireRate;
+                    attackCountDown = 1 / currentAttribute.FireRate;
                 });
 
         }
@@ -95,7 +95,7 @@ public class MeleeWeapon : Weapon
                 // enemyController.PlayAudio(hitClip);
 
                 //Change HP
-                enemyController.GetHitNormal(damagePerAttack, forcePushBack);
+                enemyController.GetHitNormal(currentAttribute.DamagePerAttack, forcePushBack);
                 
                 break;
             }

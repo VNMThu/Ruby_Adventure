@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 // ReSharper disable once CheckNamespace
 public class RangedWeapon : Weapon
@@ -32,7 +31,7 @@ public class RangedWeapon : Weapon
         muzzleFlash.gameObject.SetActive(false);
         
         //Reset attackCountDown
-        attackCountDown = 1 / fireRate;
+        attackCountDown = 1 / currentAttribute.FireRate;
     }
 
     public override void Attack()
@@ -63,7 +62,7 @@ public class RangedWeapon : Weapon
             animator.SetTrigger(_shoot);
             
             //Reset count down
-            attackCountDown = 1 / fireRate;
+            attackCountDown = 1 / currentAttribute.FireRate;
         }
     }
 
@@ -76,7 +75,7 @@ public class RangedWeapon : Weapon
             ObjectsPoolManager.PoolType.Projectile).GetComponent<RubyGunBullet>();
 
         //Launch it
-        rubyGunBullet.Launch(transform.right, 40, damagePerAttack, forcePushBack);
+        rubyGunBullet.Launch(transform.right, 40, currentAttribute.DamagePerAttack, forcePushBack);
     }
 
     public override void StopAttack()
