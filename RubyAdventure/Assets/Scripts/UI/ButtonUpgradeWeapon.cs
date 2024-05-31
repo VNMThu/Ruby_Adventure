@@ -20,17 +20,25 @@ public class ButtonUpgradeWeapon : MonoBehaviour
     [SerializeField] private TextMeshProUGUI previousPower;
     [SerializeField] private Image powerArrowIcon;
     [SerializeField] private TextMeshProUGUI AfterPower;
-
     [Header("Sprites For Weapon")] [SerializeField]
     private Sprite pistolSprite;
     [SerializeField]
     private Sprite rifleSprite;
     [SerializeField]
     private Sprite spearSprite;
+
+    [Header("Button")] [SerializeField] private Button button;
     public void InitUI(KeyValuePair<WeaponAttributeSuit,int> pairValue)
     {
         //Name
         weaponName.text = pairValue.Key.Type.ToString();
+        
+        //Set button
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(() =>
+        {
+            GameManager.Instance.WeaponAttributeManagers.OnWeaponUpgrade(pairValue.Key.Type);
+        });
         
         if (pairValue.Value == 0)
         {
