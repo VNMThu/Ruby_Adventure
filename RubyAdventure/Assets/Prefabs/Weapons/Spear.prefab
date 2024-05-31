@@ -99,9 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aff7071356e5684ab8449119edacf35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 1
-  damagePerAttack: 2
   forcePushBack: 1
+  type: 1
   attackRange: 1
   sparkHit: {fileID: 6414356965754425502, guid: d702d250e9628a142987494c9b1e5108, type: 3}
 --- !u!61 &1098265527350561013

@@ -22,7 +22,6 @@ public class RubyHand : MonoBehaviour
     {
         SetWeapon();
         _rigidBody2D = GetComponent<Rigidbody2D>();
-        _weapon.gameObject.SetActive(false);
     }
 
     private void OnEnable()

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -8,6 +6,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected float forcePushBack;
     protected WeaponAttribute currentAttribute;
     [SerializeField] protected WeaponType type;
+    public WeaponType WeaponType => type;
     protected float attackCountDown;
     private Action<object> _onWeaponUpgrade;
 
@@ -21,14 +20,17 @@ public class Weapon : MonoBehaviour
 
     private void OnDisable()
     {
+        Debug.Log("Get Disable from somewhere");
         EventDispatcher.Instance.RemoveListener(EventID.OnWeaponUpgrade,_onWeaponUpgrade);
     }
 
 
-    private void SetAttribute(WeaponData data)
+    public void SetAttribute(WeaponData data)
     {
         if (type == data.Type)
         {
+            //Apply if correct type
+            Debug.Log("Set:"+type+",Fire Rate:"+data.Attribute.FireRate+",Power:"+data.Attribute.DamagePerAttack +",On object:"+gameObject.name);
             currentAttribute = data.Attribute;    
         }
         

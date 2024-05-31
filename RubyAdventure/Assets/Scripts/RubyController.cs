@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using JSAM;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine.Serialization;
 
 public class RubyController : MonoBehaviour
@@ -31,6 +33,10 @@ public class RubyController : MonoBehaviour
 
     private bool _isDashing;
 
+    [Header("Weapon And Hands")] [SerializeField]
+    private Weapon[] weapons;
+    [SerializeField] private RubyHand[] handSlot;
+    private int numberOfActiveHands;
     [Header("Others")]
     //Time invincible after talking damage
     [SerializeField]
@@ -57,10 +63,11 @@ public class RubyController : MonoBehaviour
     private readonly int _lookY = Animator.StringToHash("Look Y");
     private readonly int _speed = Animator.StringToHash("Speed");
 
-    public event System.Action OnPlayerDeath;
-
+    public event Action OnPlayerDeath;
+    private Action<object> _onWeaponUnlockPref;  
+    
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         if (TitleController.instance.btnChoice == "Load")
         {
@@ -91,7 +98,11 @@ public class RubyController : MonoBehaviour
     private void OnEnable()
     {
         _rubyControl.Enable();
+        _onWeaponUnlockPref = param => OnWeaponUnlock((WeaponType)param);
+        EventDispatcher.Instance.RegisterListener(EventID.OnWeaponUnlock,_onWeaponUnlockPref);
     }
+    
+    
 
     private void OnDisable()
     {
@@ -238,5 +249,42 @@ public class RubyController : MonoBehaviour
         ObjectsPoolManager.SpawnObject(deathEffect.gameObject, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity);
         gameObject.SetActive(false);
         OnPlayerDeath?.Invoke();
+    }
+
+    private void OnWeaponUnlock(WeaponType weaponType)
+    {
+        //Find Weapon
+        int findWeapon = -1;
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            if (weapons[i].WeaponType == weaponType)
+            {
+                findWeapon = i;
+            }
+        }
+        
+        //Find Correct hand slot
+        
+        if (findWeapon != -1)
+        {
+          Weapon weaponCreated = Instantiate(weapons[findWeapon], handSlot[numberOfActiveHands].transform);
+          
+          //Give it first Level
+          WeaponData levelZeroData = new WeaponData(weaponType,
+              GameManager.Instance.WeaponAttributeManagers.AttributeOfFirstLevel(weaponType));
+          weaponCreated.SetAttribute(levelZeroData);
+
+          //Activate the hand
+          handSlot[numberOfActiveHands].gameObject.SetActive(true);
+
+          
+          //Increase of active hands
+          numberOfActiveHands++;
+
+        }
+        else
+        {
+            Debug.LogError("No Weapon found at Ruby");
+        }
     }
 }
