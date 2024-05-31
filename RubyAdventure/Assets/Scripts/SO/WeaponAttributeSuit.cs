@@ -9,7 +9,7 @@ public class WeaponAttributeSuit : ScriptableObject
     public WeaponType Type => type;
     [SerializeField]
     private WeaponAttribute[] _list;
-    public WeaponAttribute[] _WeaponAttributePerLevel=>_list;
+    public WeaponAttribute[] WeaponAttributePerLevel=>_list;
 
     public WeaponAttribute FindAttributeWithLevel(int weaponLevel)
     {

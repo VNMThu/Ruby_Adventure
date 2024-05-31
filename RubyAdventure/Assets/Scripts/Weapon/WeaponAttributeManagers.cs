@@ -83,6 +83,22 @@ public class WeaponAttributeManagers : MonoBehaviour
             }
                 
         }
+    }
+
+    public Dictionary<WeaponAttributeSuit, int> GetAllWeaponDataInfo()
+    {
+        Dictionary<WeaponAttributeSuit, int> allData = new Dictionary<WeaponAttributeSuit, int>();
+
+        foreach (var pairValue in _currentLevelOfWeapons)
+        {
+            allData.Add(FindSuitWithType(pairValue.Key),pairValue.Value);    
+        }
         
+        return allData;
+    }
+
+    private WeaponAttributeSuit FindSuitWithType(WeaponType selectType)
+    {
+        return allWeaponAttributes.FirstOrDefault(VARIABLE => selectType == VARIABLE.Type);
     }
 }
