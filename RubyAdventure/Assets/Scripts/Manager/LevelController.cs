@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class LevelController : MonoBehaviour
@@ -15,13 +14,15 @@ public class LevelController : MonoBehaviour
 
     [Header("Spawn Config")] [SerializeField]
     private Vector2 spawnInterval; // how many seconds between 2 enemy
+    [SerializeField] private float percentageMelee = 0.7f;
+    [SerializeField] private float percentageRange = 0.3f;
+
 
     [SerializeField] private Transform centerSpawnPoint;
     [SerializeField] private Vector2 spawnAreaSize;
 
     private Coroutine _coroutineSpawnEnemy;
     private Coroutine _coroutineWinLevel;
-
     private bool _isSpawning;
 
     private Action<object> _onStartLevelRef;
@@ -48,7 +49,13 @@ public class LevelController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         while (_isSpawning)
         {
-            ObjectsPoolManager.SpawnObject(rangeSoldierPrefab.gameObject,
+            float random = Random.Range(0, 1);
+            
+            //Get Game Object base on random
+            var resultEnemy = random < percentageMelee ? meleeSoldierPrefab.gameObject : rangeSoldierPrefab.gameObject;
+
+            //Spawn it out
+            ObjectsPoolManager.SpawnObject(resultEnemy,
                 RandomPointInArea(centerSpawnPoint.position, spawnAreaSize.x, spawnAreaSize.y),
                 Quaternion.identity, ObjectsPoolManager.PoolType.Enemy);
             yield return new WaitForSeconds(Random.Range(spawnInterval.x, spawnInterval.y + 1));
