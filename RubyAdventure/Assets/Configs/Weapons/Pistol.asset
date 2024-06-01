@@ -20,3 +20,6 @@ MonoBehaviour:
   - level: 2
     fireRate: 2
     damagePerAttack: 0
+  - level: 0
+    fireRate: 1
+    damagePerAttack: 1

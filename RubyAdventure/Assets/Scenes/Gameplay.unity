@@ -2524,6 +2524,7 @@ MonoBehaviour:
   targetCloseScale: 0.9
   closeAnimationTime: 0.2
   id: 2
+  buttonUpgradeWeapons: []
 --- !u!114 &406773951
 MonoBehaviour:
   m_ObjectHideFlags: 0

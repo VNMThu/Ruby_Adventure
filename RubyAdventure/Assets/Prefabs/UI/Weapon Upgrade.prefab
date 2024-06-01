@@ -1983,6 +1983,7 @@ GameObject:
   - component: {fileID: 2579259333810001669}
   - component: {fileID: 6408366378536042970}
   - component: {fileID: 6266024684091454116}
+  - component: {fileID: 6382181295585496139}
   m_Layer: 5
   m_Name: Weapon Upgrade
   m_TagString: Untagged
@@ -2113,6 +2114,35 @@ MonoBehaviour:
   canPlaySoundActive: 1
   canPlaySoundInActive: 1
   canInnerBounce: 1
+--- !u!114 &6382181295585496139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8424433045851137910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78065c938534f46c082e151ed835e587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: {fileID: 2303194493785046298}
+  levelTitleText: {fileID: 2984612472026441438}
+  newWeaponText: {fileID: 6856389393581559754}
+  weaponIcon: {fileID: 2066245597862162751}
+  previousLevel: {fileID: 8782625982257840928}
+  levelArrowIcon: {fileID: 1641161189439304286}
+  AfterLevel: {fileID: 6993696101595263916}
+  previousSpeed: {fileID: 5407862379998654684}
+  speedArrowIcon: {fileID: 1398674998657597042}
+  AfterSpeed: {fileID: 4138830902449099450}
+  previousPower: {fileID: 2567618954436797074}
+  powerArrowIcon: {fileID: 3803076054029699010}
+  AfterPower: {fileID: 6446377647274750924}
+  pistolSprite: {fileID: 1351777881, guid: f738d3947c4fa994a951e377b8ac1067, type: 3}
+  rifleSprite: {fileID: 21300000, guid: c8ec360ad4f29e0478086cf9ed9e389a, type: 3}
+  spearSprite: {fileID: 21300000, guid: ba0403519a599964a99ee9a63194d6f5, type: 3}
+  button: {fileID: 6408366378536042970}
 --- !u!1 &8749610018206890322
 GameObject:
   m_ObjectHideFlags: 0

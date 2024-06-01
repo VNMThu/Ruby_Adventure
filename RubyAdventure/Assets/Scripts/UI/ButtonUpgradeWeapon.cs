@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class ButtonUpgradeWeapon : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI weaponName;
-    [SerializeField] private TextMeshProUGUI levelOrUnlock;
+    [Header("Weapon Icon")]
+    [SerializeField] private GameObject levelTitleText;
+    [SerializeField] private GameObject newWeaponText;
+    [Header("Weapon Icon")]
     [SerializeField] private Image weaponIcon;
     [Header("Level")]
     [SerializeField] private TextMeshProUGUI previousLevel;
@@ -43,7 +46,8 @@ public class ButtonUpgradeWeapon : MonoBehaviour
         if (pairValue.Value == 0)
         {
             //Unlock State
-            levelOrUnlock.text = "New!";
+            levelTitleText.gameObject.SetActive(false);
+            newWeaponText.gameObject.SetActive(true);
             
             //Set text
             WeaponAttribute attribute = pairValue.Key.FindAttributeWithLevel(pairValue.Value);
@@ -62,7 +66,8 @@ public class ButtonUpgradeWeapon : MonoBehaviour
         else
         {
             //Unlock State
-            levelOrUnlock.text = "+1 Level";
+            levelTitleText.gameObject.SetActive(false);        
+            newWeaponText.gameObject.SetActive(true);
             
             //Turn on UI
             previousLevel.gameObject.SetActive(true);
