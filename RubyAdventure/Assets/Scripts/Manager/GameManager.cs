@@ -12,7 +12,7 @@ public class GameManager : GenericSingleton<GameManager>
     public WeaponAttributeManagers WeaponAttributeManagers => weaponAttributeManagers;
     [SerializeField] private WeaponAttributeManagers weaponAttributeManagers;
     
-    public Vector3 RubyPosition => new(ruby.transform.position.x, ruby.transform.position.y + 0.5f, ruby.transform.position.z);
+    public Vector3 RubyPosition => new(ruby.transform.position.x, ruby.transform.position.y + 0.7f, ruby.transform.position.z);
 
     private void OnEnable()
     {

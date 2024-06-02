@@ -35,8 +35,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1501000157329532323}
   - {fileID: 1501000158286547390}
+  - {fileID: 1501000157329532323}
   - {fileID: 1501000157549141647}
   - {fileID: 6666706692151247654}
   m_Father: {fileID: 0}
@@ -131,18 +131,18 @@ MonoBehaviour:
   fullHealth: 5
   speed: 1
   animator: {fileID: 7076658022483903794}
-  spriteRenderer:
-  - {fileID: 1501000157181493716}
-  - {fileID: 1501000157329532320}
-  - {fileID: 1501000158286547391}
   percentageDrop: 10
   expSharp: {fileID: 2949721577349369614, guid: 921c28df18446bb46bcce9d537b92f09, type: 3}
   flashEffect: {fileID: 8953888307413366189}
   attackPoint: {fileID: 6666706692151247654}
   playerLayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 65536
   appearEffect: {fileID: 442907092464650958, guid: 5773b0d31791d874097ec8f946dbefdc, type: 3}
+  spriteRenderer:
+  - {fileID: 1501000157181493716}
+  - {fileID: 1501000157329532320}
+  - {fileID: 1501000158286547391}
 --- !u!50 &6066843974360539533
 Rigidbody2D:
   serializedVersion: 4
@@ -299,9 +299,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: 444821691
+  m_SortingLayer: 2
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: e33d73721ee7437192a375451ec413c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -467,9 +467,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: 444821691
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: ba919f94b1994ece8a579a9083f5ff0a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
