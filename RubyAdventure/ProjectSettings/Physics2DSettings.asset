@@ -39,10 +39,10 @@ Physics2DSettings:
     m_IslandSolverBodiesPerJob: 50
     m_IslandSolverContactsPerJob: 50
   m_SimulationMode: 0
-  m_QueriesHitTriggers: 0
+  m_QueriesHitTriggers: 1
   m_QueriesStartInColliders: 1
   m_CallbacksOnDisable: 1
   m_ReuseCollisionCallbacks: 1
   m_AutoSyncTransforms: 0
   m_GizmoOptions: 10
-  m_LayerCollisionMatrix: bf19feffbf19feffbf19feffffffffffbf19feffbf19feff0801feffbf1dfeffffdbfeff0819feff8818feffbf1ffeffbf3fffff0810feff0801feff0801ffff0890ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_LayerCollisionMatrix: bf19feffbf19feffbf19feffffffffffbf19feffbf19feff0801feffbf1dfeffffdbfeff0819feff8818feffbf1ffeffbf3fffff0810feff0801feff0801ffff0890feffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff

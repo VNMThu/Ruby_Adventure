@@ -20,6 +20,7 @@ public class LevelUpPanel : UIPanel
     public override void OnOpen()
     {
         Time.timeScale = 0f;
+        SetUpUpgradeSlot();
         base.OnOpen();
     }
 

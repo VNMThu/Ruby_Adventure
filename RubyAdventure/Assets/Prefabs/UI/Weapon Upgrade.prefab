@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 5459070299439377651}
   - component: {fileID: 4793496469888010057}
   m_Layer: 5
-  m_Name: Upgrade or unlock
+  m_Name: Upgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -477,8 +477,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7212140441497706939}
+  m_Children: []
   m_Father: {fileID: 4832908462527545719}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1022,7 +1021,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 7
+  m_text: 76
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2139a48239574544697b910edc1fcec8, type: 2}
   m_sharedMaterial: {fileID: -2037497089164596517, guid: 2139a48239574544697b910edc1fcec8, type: 2}
@@ -1049,15 +1048,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 34.85
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1085,7 +1084,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -0.23878865, w: 0}
+  m_margin: {x: 5.355854, y: 0, z: -0.23878865, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1191,7 +1190,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1325,7 +1324,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1371,7 +1370,7 @@ GameObject:
   - component: {fileID: 8408813758071135180}
   - component: {fileID: 8765280093562916795}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Unlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1384,16 +1383,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6856389393581559754}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4625869251240169250}
+  m_Father: {fileID: 4832908462527545719}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -21.000011, y: 183.00003}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8408813758071135180
@@ -2006,6 +2005,7 @@ RectTransform:
   - {fileID: 4557926751029234661}
   - {fileID: 7928217095491709831}
   - {fileID: 4625869251240169250}
+  - {fileID: 7212140441497706939}
   - {fileID: 952790152591362745}
   - {fileID: 6566857872600601743}
   - {fileID: 7485893852858597314}
@@ -2132,13 +2132,13 @@ MonoBehaviour:
   weaponIcon: {fileID: 2066245597862162751}
   previousLevel: {fileID: 8782625982257840928}
   levelArrowIcon: {fileID: 1641161189439304286}
-  AfterLevel: {fileID: 6993696101595263916}
+  afterLevel: {fileID: 6993696101595263916}
   previousSpeed: {fileID: 5407862379998654684}
   speedArrowIcon: {fileID: 1398674998657597042}
-  AfterSpeed: {fileID: 4138830902449099450}
+  afterSpeed: {fileID: 4138830902449099450}
   previousPower: {fileID: 2567618954436797074}
   powerArrowIcon: {fileID: 3803076054029699010}
-  AfterPower: {fileID: 6446377647274750924}
+  afterPower: {fileID: 6446377647274750924}
   pistolSprite: {fileID: 1351777881, guid: f738d3947c4fa994a951e377b8ac1067, type: 3}
   rifleSprite: {fileID: 21300000, guid: c8ec360ad4f29e0478086cf9ed9e389a, type: 3}
   spearSprite: {fileID: 21300000, guid: ba0403519a599964a99ee9a63194d6f5, type: 3}
@@ -2318,7 +2318,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
