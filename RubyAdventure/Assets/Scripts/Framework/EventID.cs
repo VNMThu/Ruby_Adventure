@@ -19,5 +19,8 @@ public enum EventID
     OnWeaponUpgrade,
     
     //Weapon Type
-    OnWeaponUnlock
+    OnWeaponUnlock,
+    
+    //No param
+    OnRubyDeath
 }

@@ -36,7 +36,7 @@ public class RubyController : MonoBehaviour
     [Header("Weapon And Hands")] [SerializeField]
     private Weapon[] weapons;
     [SerializeField] private RubyHand[] handSlot;
-    private int numberOfActiveHands;
+    private int _numberOfActiveHands;
     [Header("Others")]
     //Time invincible after talking damage
     [SerializeField]
@@ -63,8 +63,8 @@ public class RubyController : MonoBehaviour
     private readonly int _lookY = Animator.StringToHash("Look Y");
     private readonly int _speed = Animator.StringToHash("Speed");
 
-    public event Action OnPlayerDeath;
-    private Action<object> _onWeaponUnlockPref;  
+    private Action<object> _onWeaponUnlockPref;
+    private SpriteRenderer _spriteRenderer;
     
     // Start is called before the first frame update
     private void Start()
@@ -88,6 +88,7 @@ public class RubyController : MonoBehaviour
 
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Awake()
@@ -247,8 +248,8 @@ public class RubyController : MonoBehaviour
     private void PlayerDeath()
     {
         ObjectsPoolManager.SpawnObject(deathEffect.gameObject, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity);
-        gameObject.SetActive(false);
-        OnPlayerDeath?.Invoke();
+        _spriteRenderer.enabled = false;
+        EventDispatcher.Instance.PostEvent(EventID.OnRubyDeath);
     }
 
     private void OnWeaponUnlock(WeaponType weaponType)
@@ -267,7 +268,7 @@ public class RubyController : MonoBehaviour
         
         if (findWeapon != -1)
         {
-          Weapon weaponCreated = Instantiate(weapons[findWeapon], handSlot[numberOfActiveHands].transform);
+          Weapon weaponCreated = Instantiate(weapons[findWeapon], handSlot[_numberOfActiveHands].transform);
           
           //Give it first Level
           WeaponData levelZeroData = new WeaponData(weaponType,
@@ -275,11 +276,11 @@ public class RubyController : MonoBehaviour
           weaponCreated.SetAttribute(levelZeroData);
 
           //Activate the hand
-          handSlot[numberOfActiveHands].gameObject.SetActive(true);
+          handSlot[_numberOfActiveHands].gameObject.SetActive(true);
 
           
           //Increase of active hands
-          numberOfActiveHands++;
+          _numberOfActiveHands++;
 
         }
         else
