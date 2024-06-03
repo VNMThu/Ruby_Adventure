@@ -53,7 +53,7 @@ public class MeleeWeapon : Weapon
             _hand.ForceStopRotating();
             
             // This is the animation for attacking
-            DOTween.Sequence().Append(transform.DOLocalMoveX(transform.localPosition.x + attackRange, 0.3f).OnComplete(
+            DOTween.Sequence().Append(transform.DOLocalMoveX(attackRange, 0.2f).OnComplete(
                         () =>
                         {
                             //After done thrust -> No more causing damage
@@ -64,7 +64,7 @@ public class MeleeWeapon : Weapon
                 .OnComplete(() =>
                 {
                     //Rotate again
-                    _hand.StopForceStopRotating();
+                    _hand.ResumeRotating();
                     attackCountDown = 1 / currentAttribute.FireRate;
                 });
 

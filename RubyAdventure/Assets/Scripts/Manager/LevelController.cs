@@ -49,10 +49,9 @@ public class LevelController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         while (_isSpawning)
         {
-            float random = Random.Range(0, 1);
-            
+            float random = Random.Range(0.1f, 1f);
             //Get Game Object base on random
-            var resultEnemy = random < percentageMelee ? meleeSoldierPrefab.gameObject : rangeSoldierPrefab.gameObject;
+            var resultEnemy = random <= percentageMelee ? meleeSoldierPrefab.gameObject : rangeSoldierPrefab.gameObject;
 
             //Spawn it out
             ObjectsPoolManager.SpawnObject(resultEnemy,

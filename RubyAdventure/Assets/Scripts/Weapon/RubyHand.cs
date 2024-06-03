@@ -44,9 +44,8 @@ public class RubyHand : MonoBehaviour
     private IEnumerator C_RotateWeapon()
     {
         _isRotating = true;
-
         //Rotate to target
-        while (_isRotating && _currentTargetEnemy.IsAlive)
+        while (_isRotating && _currentTargetEnemy.IsAlive && !_forceStopRotating)
         {
             float angle = Mathf.Atan2(_currentTarget.position.y - transform.position.y,
                 _currentTarget.position.x - transform.position.x) * Mathf.Rad2Deg;
@@ -123,7 +122,7 @@ public class RubyHand : MonoBehaviour
         _forceStopRotating = true;
     }
     
-    public void StopForceStopRotating()
+    public void ResumeRotating()
     {
         _forceStopRotating = false;
     }
