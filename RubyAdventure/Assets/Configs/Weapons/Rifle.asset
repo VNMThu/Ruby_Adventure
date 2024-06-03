@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   _list:
-  - level: 1
-    fireRate: 2
-    damagePerAttack: 0
-  - level: 2
-    fireRate: 2
-    damagePerAttack: 0
   - level: 0
-    fireRate: 1
+    fireRate: 2
+    damagePerAttack: 1
+  - level: 1
+    fireRate: 3
+    damagePerAttack: 1
+  - level: 2
+    fireRate: 4
     damagePerAttack: 2
