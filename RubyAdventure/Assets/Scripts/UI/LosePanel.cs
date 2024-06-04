@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Lose : UIPanel
+public class LosePanel : UIPanel
 {
    private Action<object> _onRubyDeathRef;
    private void OnEnable()

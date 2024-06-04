@@ -3,5 +3,6 @@ public enum UIPanelID
     PauseMenu,
     SureQuit,
     LevelUp,
-    Lose
+    Lose,
+    Win
 }

@@ -22,5 +22,8 @@ public enum EventID
     OnWeaponUnlock,
     
     //No param
-    OnRubyDeath
+    OnRubyDeath,
+    
+    //No param
+    OnWinLevel
 }

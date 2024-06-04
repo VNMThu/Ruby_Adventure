@@ -77,8 +77,7 @@ public class LevelController : MonoBehaviour
         _isSpawning = false;
 
         //Tick some actions to auto kill of enemy here
-
-
+        EventDispatcher.Instance.PostEvent(EventID.OnWinLevel);
         Debug.Log("Level ended");
     }
 
