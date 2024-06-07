@@ -8,4 +8,6 @@ public static class Constant
     public const int MaxWeaponLevel = 3;
     public const string RubyHurtBoxTag = "RubyHurtBox";
     public const string RubyTag = "Player";
+    public const string EnemyTag = "Enemy";
+
 }

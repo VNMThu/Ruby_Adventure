@@ -9,6 +9,9 @@ public enum EventID
     //float:Dash cool down
     OnRubyDash,
     
+    //float:Dash cool down
+    OnRubyShockWave,
+    
     //No param
     OnStartLevel,
     
@@ -25,5 +28,7 @@ public enum EventID
     OnRubyDeath,
     
     //No param
-    OnWinLevel
+    OnWinLevel,
+    
+    
 }

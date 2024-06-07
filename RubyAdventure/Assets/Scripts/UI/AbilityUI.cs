@@ -10,15 +10,16 @@ public class AbilityUI : MonoBehaviour
     [SerializeField] private Image countDownUI;
     [SerializeField] private OnScreenButton buttonUI;
     [SerializeField] private TextMeshProUGUI timeText;
-
-    // Start is called before the first frame update
-    private Action<object> _onRubyDashRef;
+    [SerializeField] private EventID eventSubToReact;
     private float _countDownTime;
+    
+    // Start is called before the first frame update
+    private Action<object> _onAbilityUseRef;
     private void OnEnable()
     {
         AbilityEnable();
-        _onRubyDashRef = param => OnRubyDash((float)param);
-        EventDispatcher.Instance.RegisterListener(EventID.OnRubyDash,_onRubyDashRef);
+        _onAbilityUseRef = param => OnAbilityUse((float)param);
+        EventDispatcher.Instance.RegisterListener(eventSubToReact,_onAbilityUseRef);
     }
 
     private void AbilityEnable()
@@ -36,7 +37,7 @@ public class AbilityUI : MonoBehaviour
         timeText.gameObject.SetActive(true);
     }
     
-    private void OnRubyDash(float coolDownTime)
+    private void OnAbilityUse(float coolDownTime)
     {
         _countDownTime = coolDownTime;
         

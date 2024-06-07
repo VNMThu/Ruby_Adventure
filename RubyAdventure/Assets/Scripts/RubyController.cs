@@ -2,9 +2,6 @@ using System;
 using System.Collections;
 using JSAM;
 using UnityEngine;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEngine.Serialization;
 
 public class RubyController : MonoBehaviour
 {
@@ -31,6 +28,16 @@ public class RubyController : MonoBehaviour
     [SerializeField] private float dashSpeed = 0.5f;
     [SerializeField] private float dashCoolDown = 5f;
 
+    //Dash
+    [Header("Shockwave cooldown, range, damage")] 
+    [SerializeField] private float shockwaveRange = 0.5f;
+    [SerializeField] private float shockwaveCoolDown = 3f;
+    [SerializeField] private int shockwaveDamage = 2;
+    [SerializeField] private int shockwaveForce = 4;
+
+    [SerializeField] private LayerMask enemyLayerMask;
+    [SerializeField] private GameObject shockwaveEffect;
+    
     private bool _isDashing;
 
     [Header("Weapon And Hands")] [SerializeField]
@@ -143,7 +150,7 @@ public class RubyController : MonoBehaviour
 
             if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("Launch"))
             {
-                if (_rubyControl.Player.Fire.triggered)
+                if (_rubyControl.Player.Dash.triggered)
                 {
                     // Dash();
                     StartCoroutine(C_Dash());
@@ -151,18 +158,26 @@ public class RubyController : MonoBehaviour
             }
         }
 
-        if (!_rubyControl.Player.Talk.triggered) return;
-        RaycastHit2D hit = Physics2D.Raycast(_rigidBody.position + Vector2.up * 0.2f, _lookDirection, 1.5f,
-            LayerMask.GetMask("NPC"));
-       
-        if (hit.collider == null) return;
-        
-        NPC character = hit.collider.GetComponent<NPC>();
-        
-        if (character != null)
+        if (_rubyControl.Player.Shockwave.triggered)
         {
-            character.DisplayDialog();
+            Debug.Log("DO Trigger");
+            DoShockwave();
         }
+
+        //Talk with NPC
+        
+        // if (!_rubyControl.Player.Talk.triggered) return;
+        // RaycastHit2D hit = Physics2D.Raycast(_rigidBody.position + Vector2.up * 0.2f, _lookDirection, 1.5f,
+        //     LayerMask.GetMask("NPC"));
+        //
+        // if (hit.collider == null) return;
+        //
+        // NPC character = hit.collider.GetComponent<NPC>();
+        //
+        // if (character != null)
+        // {
+        //     character.DisplayDialog();
+        // }
     }
 
     private void FixedUpdate()
@@ -233,6 +248,33 @@ public class RubyController : MonoBehaviour
         _rigidBody.velocity = new Vector2(0f, 0f); // Stop dashing.
     }
 
+    private void DoShockwave()
+    {
+        //Create overlapped sphere to hit all enemy in a area
+        //Detect all enemy in range
+        var results = Physics2D.OverlapCircleAll(GameManager.Instance.RubyPosition, shockwaveRange, enemyLayerMask);
+
+        //Hit nothing so return here
+        if (results.Length > 0)
+        {
+            //Check all collider
+            foreach (var enemyCollider in results)
+            {
+                if (enemyCollider.CompareTag(Constant.EnemyTag))
+                {
+                    //Hit enemy
+                    enemyCollider.GetComponent<Enemy>().GetHitNormal(shockwaveDamage,shockwaveForce);
+                }
+            }
+        }
+        
+        //Turn on effect
+        shockwaveEffect.gameObject.SetActive(true);
+        
+        //Tick event 
+        EventDispatcher.Instance.PostEvent(EventID.OnRubyShockWave,shockwaveCoolDown);
+    }
+
     public void ChangeBullet(int value)
     {
         if (value > 0)
@@ -287,5 +329,10 @@ public class RubyController : MonoBehaviour
         {
             Debug.LogError("No Weapon found at Ruby");
         }
+    }
+    
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(GameManager.Instance.RubyPosition, shockwaveRange);
     }
 }
