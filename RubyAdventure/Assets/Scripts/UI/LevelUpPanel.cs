@@ -19,7 +19,6 @@ public class LevelUpPanel : UIPanel
 
     public override void OnOpen()
     {
-        Time.timeScale = 0f;
         SetUpUpgradeSlot();
         base.OnOpen();
     }
@@ -69,10 +68,5 @@ public class LevelUpPanel : UIPanel
             indexOfRandom++;
         }
     }
-
-    public override void OnClose()
-    {
-        Time.timeScale = 1f;
-        base.OnClose();
-    }
+    
 }

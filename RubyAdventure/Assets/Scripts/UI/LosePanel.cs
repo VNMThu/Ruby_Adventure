@@ -14,16 +14,12 @@ public class LosePanel : UIPanel
 
    public override void OnOpen()
    {
-      //Stop the game
-      Time.timeScale = 0f; 
-      base.OnOpen();
+      if (PlayerPrefsHelper.GetCurrentCoin()<Constant.CoinNeedToRevive)
+      {
+         base.OnOpen();
+      }
    }
 
-   public override void OnClose()
-   {
-      Time.timeScale = 1f;
-      base.OnClose();
-   }
 
    public void OnHomeClick()
    {

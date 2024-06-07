@@ -2,12 +2,10 @@ using System;
 using System.Collections;
 using JSAM;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class RubyController : MonoBehaviour
 {
-    //Use this for money now
-    [Header("Money")] [SerializeField] private int numberOfClog;
-    public int NumberOfClog => numberOfClog;
 
     //Health
     [Header("Max Health")] [SerializeField]
@@ -71,32 +69,19 @@ public class RubyController : MonoBehaviour
     private readonly int _speed = Animator.StringToHash("Speed");
 
     private Action<object> _onWeaponUnlockPref;
+    private Action<object> _onRevivePref;
+
     private SpriteRenderer _spriteRenderer;
     
     // Start is called before the first frame update
     private void Start()
     {
-        if (TitleController.instance.btnChoice == "Load")
-        {
-            LoadGame loadGame = FindObjectOfType<LoadGame>();
-            SaveData rubyData = loadGame.Load();
-            if (rubyData != null)
-            {
-                transform.position = new Vector2(rubyData._currentPositionX, rubyData._currentPositionY);
-                numberOfClog = rubyData._bulletAmount;
-                Health = rubyData._health;
-            }
-        }
-        else
-        {
-            numberOfClog = 0;
-            Health = maxHealth;
-        }
-
+        Health = maxHealth;
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
+    
 
     private void Awake()
     {
@@ -108,6 +93,9 @@ public class RubyController : MonoBehaviour
         _rubyControl.Enable();
         _onWeaponUnlockPref = param => OnWeaponUnlock((WeaponType)param);
         EventDispatcher.Instance.RegisterListener(EventID.OnWeaponUnlock,_onWeaponUnlockPref);
+        
+        _onRevivePref = _ => OnRevive();
+        EventDispatcher.Instance.RegisterListener(EventID.OnRubyRevive,_onRevivePref);
     }
     
     
@@ -275,7 +263,7 @@ public class RubyController : MonoBehaviour
         EventDispatcher.Instance.PostEvent(EventID.OnRubyShockWave,shockwaveCoolDown);
     }
 
-    public void ChangeBullet(int value)
+    public void ChangeCoin(int value)
     {
         if (value > 0)
         {
@@ -283,15 +271,26 @@ public class RubyController : MonoBehaviour
                 Quaternion.identity,
                 ObjectsPoolManager.PoolType.ParticleSystem);
         }
-
-        numberOfClog += value;
+        
+        PlayerPrefsHelper.IncreaseCurrentCoin(value);
+        EventDispatcher.Instance.PostEvent(EventID.OnCoinReceive);
     }
 
     private void PlayerDeath()
     {
-        ObjectsPoolManager.SpawnObject(deathEffect.gameObject, _rigidBody.position + Vector2.up * 0.5f, Quaternion.identity);
         _spriteRenderer.enabled = false;
         EventDispatcher.Instance.PostEvent(EventID.OnRubyDeath);
+    }
+
+    private void OnRevive()
+    {
+        _spriteRenderer.enabled = true;
+        //Update health
+        Health = maxHealth;
+        EventDispatcher
+            .Instance.PostEvent(EventID.OnHealthChange, Health);
+        
+        DoShockwave();
     }
 
     private void OnWeaponUnlock(WeaponType weaponType)

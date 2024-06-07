@@ -4,5 +4,6 @@ public enum UIPanelID
     SureQuit,
     LevelUp,
     Lose,
-    Win
+    Win,
+    Revive
 }

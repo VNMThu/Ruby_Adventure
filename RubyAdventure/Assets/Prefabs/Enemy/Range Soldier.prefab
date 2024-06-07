@@ -330,8 +330,10 @@ MonoBehaviour:
   fullHealth: 5
   speed: 0.8
   animator: {fileID: 7289248543925582163}
-  percentageDrop: 10
+  percentageDropExp: 3
   expSharp: {fileID: 2949721577349369614, guid: 921c28df18446bb46bcce9d537b92f09, type: 3}
+  percentageDropCoin: 7
+  coinPrefab: {fileID: 1189792733, guid: b7902e65cbde5ea47acb196333bb72ec, type: 3}
   flashEffect: {fileID: 3383680001657380629}
   attackPoint: {fileID: 5752801026890116674}
   playerLayerMask:

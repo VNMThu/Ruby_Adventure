@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
@@ -9,9 +10,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float fullHealth;
     [SerializeField] protected float speed;
     [SerializeField] protected Animator animator;
-    [Header("EXP Drop")] [SerializeField] protected float percentageDrop;
+    [Header("EXP Drop")] [SerializeField] protected float percentageDropExp;
     [SerializeField] protected ExpSharp expSharp;
-
+    [Header("Money Drop")] [SerializeField] protected float percentageDropCoin;
+    [SerializeField] protected CoinCollectible coinPrefab;
     [Header("Flash effect when die")] [SerializeField]
     protected FlashEffect flashEffect;
 
@@ -89,11 +91,18 @@ public class Enemy : MonoBehaviour
         collider.enabled = false;
         //Random and spawn exp
         int randomValue = Random.Range(1, 11);
-        if (percentageDrop >= randomValue)
+        if (percentageDropExp >= randomValue)
         {
             //Drop it
             ObjectsPoolManager.SpawnObject(expSharp.gameObject, transform.position, Quaternion.identity,
                 ObjectsPoolManager.PoolType.Exp);
+        }
+        else if (percentageDropCoin >= randomValue)
+        {
+            Vector3 spawnPosition =
+                new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
+            //Drop it
+            ObjectsPoolManager.SpawnObject(coinPrefab.gameObject, spawnPosition, Quaternion.identity);
         }
     }
 }

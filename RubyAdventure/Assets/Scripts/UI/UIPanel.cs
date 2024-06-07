@@ -20,6 +20,7 @@ public class UIPanel : MonoBehaviour
 
     public virtual void OnOpen()
     {
+        Time.timeScale = 0f;
         canvas.enabled = true;
         panel.transform.localScale = Vector3.one * defaultOpenScale;
         panel.transform.DOScale(Vector3.one, openAnimationTime).SetUpdate(true);
@@ -29,6 +30,7 @@ public class UIPanel : MonoBehaviour
     {
         panel.transform.DOScale(Vector3.one*targetCloseScale, closeAnimationTime).SetUpdate(true);
         canvas.enabled = false;
+        Time.timeScale = 1f;
     }
     
     
