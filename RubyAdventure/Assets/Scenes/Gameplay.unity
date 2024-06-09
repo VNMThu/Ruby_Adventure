@@ -7645,7 +7645,7 @@ MonoBehaviour:
   meleeSoldierPrefab: {fileID: 7099191634836985210, guid: ee972e5c924f6d54e807520643dfd78a, type: 3}
   rangeSoldierPrefab: {fileID: 2593550110188774817, guid: 74bd795005794ecfac654c8b0b372349, type: 3}
   timeCountDownUI: {fileID: 1538185513}
-  timeInLevel: 1
+  timeInLevel: 5
   spawnInterval: {x: 0, y: 3}
   percentageMelee: 0.7
   percentageRange: 0.3
@@ -11762,7 +11762,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 87b7bf594d7c84ebe8ed9ca57b0d940a, type: 2}
   - {fileID: 11400000, guid: a66b8a3e7b205404ea16d1f863cd8ea0, type: 2}
   - {fileID: 11400000, guid: 06764cad69f004541896f663a03e8b6c, type: 2}
-  OriginalWeapon: 02000000
+  originalWeapon: 02000000
 --- !u!1001 &1714856098
 PrefabInstance:
   m_ObjectHideFlags: 0

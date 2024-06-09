@@ -19,7 +19,7 @@ public class RangedWeapon : Weapon
     private SpriteRenderer _spriteRenderer;
     private bool _isAttacking;
     private Coroutine _attackCoroutine;
-    protected void OnEnable()
+    protected override void OnEnable()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -32,6 +32,9 @@ public class RangedWeapon : Weapon
         
         //Reset attackCountDown
         attackCountDown = 1 / currentAttribute.FireRate;
+        
+        base.OnEnable();
+
     }
 
     public override void Attack()

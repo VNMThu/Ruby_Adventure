@@ -27,32 +27,37 @@ public class LevelUpPanel : UIPanel
     {
         //Get all 
         Dictionary<WeaponAttributeSuit, int> allData = GameManager.Instance.WeaponAttributeManagers.GetAllWeaponDataInfo();
+        List<KeyValuePair<WeaponAttributeSuit, int>> allDataList = allData.ToList();
+        List<int> keysToKeep = new List<int>();
 
-        foreach (var VARIABLE in allData.ToList())
+        for (int i = 0; i <allDataList.Count; i++)
         {
-            //Filter it
-            // Already Reach max level
-            if (VARIABLE.Value > VARIABLE.Key.WeaponAttributePerLevel.Length)
+            foreach (WeaponAttribute weaponAttribute in allDataList[i].Key.WeaponAttributePerLevel)
             {
-                //Remove
-                allData.Remove(VARIABLE.Key);
+                //Check if next level is available to upgrade
+                if (allDataList[i].Value + 1 != weaponAttribute.Level) continue;
+                
+                //Is available
+                keysToKeep.Add(i);
+                break;
             }
         }
         
+
+
+
         //Find 3 random element
-        List<int> randomIndex = new List<int>();
-        int previousIndex = -1;
-        while (randomIndex.Count < buttonUpgradeWeapons.Length || randomIndex.Count < allData.Count)
-        {
-            int randomInt = Random.Range(0, allData.Count);
-            if (randomInt == previousIndex) continue;
-            randomIndex.Add(randomInt);
-            previousIndex = randomInt;
-        }
+        int amountNeed = Mathf.Min(buttonUpgradeWeapons.Length,keysToKeep.Count) ;
+
+        // Shuffle the array indices
+        Shuffle(keysToKeep);
+
+        // Select the first three shuffled indices
+        int[] randomIndex  = keysToKeep.Take(amountNeed).ToArray();
         
         //Turn it into UI
 
-        int differentBetweenUIAndData = allData.Count - buttonUpgradeWeapons.Length;
+        int differentBetweenUIAndData = Mathf.Abs(randomIndex.Length - buttonUpgradeWeapons.Length) ;
 
         for (int i = 0; i < differentBetweenUIAndData; i++)
         {
@@ -64,9 +69,22 @@ public class LevelUpPanel : UIPanel
         {
             if (!buttonUpgrade.gameObject.activeInHierarchy) continue;
             
-            buttonUpgrade.InitUI(allData.ToList()[randomIndex[indexOfRandom]]);
+            buttonUpgrade.InitUI(allDataList[randomIndex[indexOfRandom]]);
             indexOfRandom++;
         }
+
+        return;
+
+        void Shuffle(List<int> array)
+        {
+            for (int i = array.Count - 1; i > 0; i--)
+            {
+                int randomI = Random.Range(0, i + 1);
+                (array[i], array[randomI]) = (array[randomI], array[i]);
+            }
+        }
     }
+
+
     
 }

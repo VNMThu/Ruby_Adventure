@@ -86,8 +86,6 @@ public class ButtonUpgradeWeapon : MonoBehaviour
             //Tick weapon unlock
             button.onClick.AddListener(() =>
             {
-                
-                
                 EventDispatcher.Instance.PostEvent(EventID.OnWeaponUnlock,pairValue.Key.Type);
             });
         }

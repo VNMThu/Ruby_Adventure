@@ -18,10 +18,13 @@ public class MeleeWeapon : Weapon
         _hand = transform.GetComponentInParent<RubyHand>();
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
         //Reset attackCountDown
         attackCountDown = 1 / currentAttribute.FireRate;
+        
+        base.OnEnable();
+        
     }
 
     public override void Attack()

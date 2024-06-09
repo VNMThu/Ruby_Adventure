@@ -2,28 +2,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class WeaponAttributeManagers : MonoBehaviour
 {
     [SerializeField] private WeaponAttributeSuit[] allWeaponAttributes ;
 
     private Action<object> _onStartLevel;
-    
+    private Action<object> _onWeaponUnlockPref;
+
     
     //0: Not Unlock 
     //1: Base Level
-    private Dictionary<WeaponType,int> _currentLevelOfWeapons = new();
+    private readonly Dictionary<WeaponType,int> _currentLevelOfWeapons = new();
     
     
     [Header("Weapons in here will appear on the start of the level")]
-    [SerializeField] private WeaponType[] OriginalWeapon;
+    [SerializeField] private WeaponType[] originalWeapon;
     
     //Get call by buttons here
     public void OnWeaponUpgrade(WeaponType typeSelect)
     {
         //Find Suit with that type
         WeaponAttributeSuit tempSuit = 
-            allWeaponAttributes.FirstOrDefault(VARIABLE => VARIABLE.Type == typeSelect);
+            allWeaponAttributes.FirstOrDefault(variable => variable.Type == typeSelect);
 
 
         //Send event to chosen weapon
@@ -31,9 +33,14 @@ public class WeaponAttributeManagers : MonoBehaviour
         {
             //Level up
             _currentLevelOfWeapons[typeSelect] += 1;   
+            Debug.Log("Tick event through button");
             
+            //Give it first Level
+            WeaponData weaponData = new WeaponData(typeSelect,
+                tempSuit.FindAttributeWithLevel(_currentLevelOfWeapons[typeSelect]));
+
             //Send Upgrade event
-            EventDispatcher.Instance.PostEvent(EventID.OnWeaponUpgrade, tempSuit.FindAttributeWithLevel(_currentLevelOfWeapons[typeSelect]));
+            EventDispatcher.Instance.PostEvent(EventID.OnWeaponUpgrade, weaponData);
         }
         else
         {
@@ -45,7 +52,7 @@ public class WeaponAttributeManagers : MonoBehaviour
     {
         //Find Suit with that type
         WeaponAttributeSuit tempSuit = 
-            allWeaponAttributes.FirstOrDefault(VARIABLE => VARIABLE.Type == typeSelect);
+            allWeaponAttributes.FirstOrDefault(variable => variable.Type == typeSelect);
         return tempSuit!=null ? tempSuit.FindAttributeWithLevel(0) : null;
     }
     
@@ -54,24 +61,26 @@ public class WeaponAttributeManagers : MonoBehaviour
     {
         _onStartLevel = _ => InitAllWeaponsOnScene();
         EventDispatcher.Instance.RegisterListener(EventID.OnStartLevel,_onStartLevel);
+
+
     }
 
     private void InitAllWeaponsOnScene()
     {
         //Init weapons for ruby
         
-        foreach (var VARIABLE in allWeaponAttributes)
+        foreach (var variable in allWeaponAttributes)
         {
             //Init both dictionary
             //All level 0
             bool isActive = false;
-            foreach (var activeWeaponNow in OriginalWeapon)
+            foreach (var activeWeaponNow in originalWeapon)
             {
                 //If in this list then active it
-                if (VARIABLE.Type != activeWeaponNow) continue;
+                if (variable.Type != activeWeaponNow) continue;
                 
                 //Weapon need to be in ruby hand NOW
-                _currentLevelOfWeapons.Add(VARIABLE.Type, 1);
+                _currentLevelOfWeapons.Add(variable.Type, 1);
                 EventDispatcher.Instance.PostEvent(EventID.OnWeaponUnlock,activeWeaponNow);
                 isActive = true;
             }
@@ -79,10 +88,14 @@ public class WeaponAttributeManagers : MonoBehaviour
             if (!isActive)
             {
                 //This weapon type has not been unlocked
-                _currentLevelOfWeapons.Add(VARIABLE.Type, 0);
+                _currentLevelOfWeapons.Add(variable.Type, 0);
             }
                 
         }
+        
+        //This event only need to be active after initial base weapons
+        _onWeaponUnlockPref = param => OnWeaponUnlock((WeaponType)param);
+        EventDispatcher.Instance.RegisterListener(EventID.OnWeaponUnlock,_onWeaponUnlockPref);
     }
 
     public Dictionary<WeaponAttributeSuit, int> GetAllWeaponDataInfo()
@@ -99,6 +112,12 @@ public class WeaponAttributeManagers : MonoBehaviour
 
     private WeaponAttributeSuit FindSuitWithType(WeaponType selectType)
     {
-        return allWeaponAttributes.FirstOrDefault(VARIABLE => selectType == VARIABLE.Type);
+        return allWeaponAttributes.FirstOrDefault(variable => selectType == variable.Type);
+    }
+
+    private void OnWeaponUnlock(WeaponType weaponType)
+    {
+        //Update weapon level when unlock
+        _currentLevelOfWeapons[weaponType]++;
     }
 }

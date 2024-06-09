@@ -11,7 +11,7 @@ public class Weapon : MonoBehaviour
     private Action<object> _onWeaponUpgrade;
 
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         //Handle when a upgrade is chosen
         _onWeaponUpgrade = (param) => SetAttribute((WeaponData)param);
@@ -20,17 +20,16 @@ public class Weapon : MonoBehaviour
 
     private void OnDisable()
     {
-        Debug.Log("Get Disable from somewhere");
         EventDispatcher.Instance.RemoveListener(EventID.OnWeaponUpgrade,_onWeaponUpgrade);
     }
 
 
     public void SetAttribute(WeaponData data)
     {
+        Debug.Log("Set:"+type+",Fire Rate:"+data.Attribute.FireRate+",Power:"+data.Attribute.DamagePerAttack +",On object:"+gameObject.name);
         if (type == data.Type)
         {
             //Apply if correct type
-            Debug.Log("Set:"+type+",Fire Rate:"+data.Attribute.FireRate+",Power:"+data.Attribute.DamagePerAttack +",On object:"+gameObject.name);
             currentAttribute = data.Attribute;    
         }
         
