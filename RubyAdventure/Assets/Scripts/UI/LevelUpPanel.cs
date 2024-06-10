@@ -32,47 +32,54 @@ public class LevelUpPanel : UIPanel
 
         for (int i = 0; i <allDataList.Count; i++)
         {
-            foreach (WeaponAttribute weaponAttribute in allDataList[i].Key.WeaponAttributePerLevel)
+            if (allDataList[i].Key.WeaponAttributePerLevel.Any(weaponAttribute => allDataList[i].Value + 1 == weaponAttribute.Level))
             {
-                //Check if next level is available to upgrade
-                if (allDataList[i].Value + 1 != weaponAttribute.Level) continue;
-                
-                //Is available
                 keysToKeep.Add(i);
-                break;
             }
         }
         
-
-
-
         //Find 3 random element
         int amountNeed = Mathf.Min(buttonUpgradeWeapons.Length,keysToKeep.Count) ;
-
-        // Shuffle the array indices
-        Shuffle(keysToKeep);
-
-        // Select the first three shuffled indices
-        int[] randomIndex  = keysToKeep.Take(amountNeed).ToArray();
         
-        //Turn it into UI
-
-        int differentBetweenUIAndData = Mathf.Abs(randomIndex.Length - buttonUpgradeWeapons.Length) ;
-
-        for (int i = 0; i < differentBetweenUIAndData; i++)
+        //Show money mode cause no more upgrade available
+        if (amountNeed == 0)
         {
-            buttonUpgradeWeapons.Last().gameObject.SetActive(false);
+            foreach (var buttonUpgrade in buttonUpgradeWeapons)
+            {
+                buttonUpgrade.gameObject.SetActive(true);
+                buttonUpgrade.InitMoneyState(Constant.MoneyReceiveInUpgrade);
+            }
         }
-
-        int indexOfRandom = 0;
-        foreach (var buttonUpgrade in buttonUpgradeWeapons)
+        //Show weapon upgrade
+        else
         {
-            if (!buttonUpgrade.gameObject.activeInHierarchy) continue;
             
-            buttonUpgrade.InitUI(allDataList[randomIndex[indexOfRandom]]);
-            indexOfRandom++;
-        }
+            // Shuffle the array indices
+            Shuffle(keysToKeep);
 
+            // Select the first three shuffled indices
+            int[] randomIndex  = keysToKeep.Take(amountNeed).ToArray();
+        
+            //Turn it into UI
+
+            int differentBetweenUIAndData = Mathf.Abs(randomIndex.Length - buttonUpgradeWeapons.Length) ;
+
+            for (int i = 0; i < differentBetweenUIAndData; i++)
+            {
+                buttonUpgradeWeapons.Last().gameObject.SetActive(false);
+            }
+
+            int indexOfRandom = 0;
+            foreach (var buttonUpgrade in buttonUpgradeWeapons)
+            {
+                if (!buttonUpgrade.gameObject.activeInHierarchy) continue;
+            
+                buttonUpgrade.InitUI(allDataList[randomIndex[indexOfRandom]]);
+                indexOfRandom++;
+            }
+
+        }
+        
         return;
 
         void Shuffle(List<int> array)

@@ -14,16 +14,16 @@ public class WinPanel : UIPanel
         EventDispatcher.Instance.RegisterListener(EventID.OnWinLevel,_onWinRef);
     }
 
-    public override void OnOpen()
-    {
-        Time.timeScale = 0f;
-        base.OnOpen();
-    }
-
     public void OnHomeClick()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("Title");
+    }
+    
+    public void OnRestartClick()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Gameplay");
     }
     
 }

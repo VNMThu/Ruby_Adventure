@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ButtonUpgradeWeapon : MonoBehaviour
 {
+    [Header("Weapon Panel")] [SerializeField]
+    private GameObject weaponPanel;
     [SerializeField] private TextMeshProUGUI weaponName;
     [Header("Weapon Icon")]
     [SerializeField] private GameObject levelTitleText;
@@ -30,11 +33,19 @@ public class ButtonUpgradeWeapon : MonoBehaviour
     private Sprite rifleSprite;
     [SerializeField]
     private Sprite spearSprite;
+    
+    [Header("Button")] [SerializeField] private Button buttonWeaponUpgrade;
+    
+    [Header("Coin Panel")] [SerializeField]
+    private GameObject coinPanel;
+    [SerializeField] private TextMeshProUGUI amountText;
+    [Header("Button")] [SerializeField] private Button buttonIncreaseCoin;
 
-    [Header("Button")] [SerializeField] private Button button;
+    private int _currentMoneyAmount;
     public void InitUI(KeyValuePair<WeaponAttributeSuit,int> pairValue)
     {
-        
+        weaponPanel.gameObject.SetActive(true);
+        coinPanel.gameObject.SetActive(false);
         //Name
         weaponName.text = pairValue.Key.Type.ToString();
         Debug.Log("Weapon Upgrade UI:"+weaponName.text);
@@ -49,7 +60,7 @@ public class ButtonUpgradeWeapon : MonoBehaviour
         };
 
         //Set button
-        button.onClick.RemoveAllListeners();
+        buttonWeaponUpgrade.onClick.RemoveAllListeners();
 
         
         if (pairValue.Value == 0)
@@ -84,9 +95,10 @@ public class ButtonUpgradeWeapon : MonoBehaviour
             powerArrowIcon.gameObject.SetActive(false);
             
             //Tick weapon unlock
-            button.onClick.AddListener(() =>
+            buttonWeaponUpgrade.onClick.AddListener(() =>
             {
                 EventDispatcher.Instance.PostEvent(EventID.OnWeaponUnlock,pairValue.Key.Type);
+                GameManager.Instance.UIController.OnClose(UIPanelID.LevelUp);
             });
         }
         else
@@ -121,9 +133,11 @@ public class ButtonUpgradeWeapon : MonoBehaviour
             UpdateAttributeText(previousPower,afterPower,powerArrowIcon.gameObject, attributeBefore.DamagePerAttack,attributeBefore.DamagePerAttack);
 
             //Tick weapon upgrade
-            button.onClick.AddListener(() =>
+            buttonWeaponUpgrade.onClick.AddListener(() =>
             {
                 GameManager.Instance.WeaponAttributeManagers.OnWeaponUpgrade(pairValue.Key.Type);
+                GameManager.Instance.UIController.OnClose(UIPanelID.LevelUp);
+
             });
         }
 
@@ -147,6 +161,21 @@ public class ButtonUpgradeWeapon : MonoBehaviour
         }
         
         
+    }
+
+    public void InitMoneyState(int amount)
+    {
+        weaponPanel.gameObject.SetActive(false);
+        coinPanel.gameObject.SetActive(true);
+        amountText.text = "+" + amount;
+        _currentMoneyAmount = amount;
+    }
+
+    public void IncreaseMoneyClick()
+    {
+        PlayerPrefsHelper.IncreaseCurrentCoin(_currentMoneyAmount);
+        GameManager.Instance.UIController.OnClose(UIPanelID.LevelUp);
+        EventDispatcher.Instance.PostEvent(EventID.OnCoinReceive);
     }
 
 }
