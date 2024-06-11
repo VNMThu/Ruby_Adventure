@@ -6,5 +6,6 @@
         CoinCollect
     }
     public enum AudioLibraryMusic {
-        GameplayMusic
+        GameplayMusic,
+        TitleMusic
     }

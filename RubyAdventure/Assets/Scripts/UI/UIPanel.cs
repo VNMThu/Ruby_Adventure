@@ -8,7 +8,7 @@ public class UIPanel : MonoBehaviour
     
     [Header("Open and close animation")] 
     [SerializeField] private float defaultOpenScale;
-    [SerializeField] private float openAnimationTime;
+    [SerializeField] protected float openAnimationTime;
     [SerializeField] private float targetCloseScale;
     [SerializeField] private float closeAnimationTime;
     [Header("Panel ID")] [SerializeField] private UIPanelID id;

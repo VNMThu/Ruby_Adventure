@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using DG.Tweening;
+using JSAM;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -27,6 +29,16 @@ public class LoadingPanel : UIPanel
     public override void OnOpen(bool isFromGameplay = true)
     {
         base.OnOpen(false);
-        LoadGameplay();
+        DOVirtual.DelayedCall(openAnimationTime, LoadGameplay);
+    }
+    
+    public override void OnClose(bool isFromGameplay = true)
+    {
+        base.OnClose(false);
+    }
+
+    private void OnDisable()
+    {
+        AudioManager.StopMusic(AudioLibraryMusic.TitleMusic);
     }
 }

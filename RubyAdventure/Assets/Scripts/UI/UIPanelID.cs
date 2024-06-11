@@ -6,5 +6,6 @@ public enum UIPanelID
     Lose,
     Win,
     Revive,
-    Loading
+    Loading,
+    Tutorial
 }
