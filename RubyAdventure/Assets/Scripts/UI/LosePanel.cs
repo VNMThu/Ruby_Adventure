@@ -12,11 +12,11 @@ public class LosePanel : UIPanel
       EventDispatcher.Instance.RegisterListener(EventID.OnRubyDeath,_onRubyDeathRef);
    }
 
-   public override void OnOpen()
+   public override void OnOpen(bool isFromGameplay = true)
    {
       if (PlayerPrefsHelper.GetCurrentCoin()<Constant.CoinNeedToRevive)
       {
-         base.OnOpen();
+         base.OnOpen(isFromGameplay);
       }
    }
 

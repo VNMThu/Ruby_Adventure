@@ -5,5 +5,6 @@ public enum UIPanelID
     LevelUp,
     Lose,
     Win,
-    Revive
+    Revive,
+    Loading
 }

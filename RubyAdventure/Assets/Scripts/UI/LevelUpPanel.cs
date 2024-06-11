@@ -17,10 +17,10 @@ public class LevelUpPanel : UIPanel
     
     
 
-    public override void OnOpen()
+    public override void OnOpen(bool isFromGameplay = true)
     {
         SetUpUpgradeSlot();
-        base.OnOpen();
+        base.OnOpen(isFromGameplay);
     }
 
     private void SetUpUpgradeSlot()

@@ -1,42 +1,32 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
-public class LoadingController : MonoBehaviour
+public class LoadingPanel : UIPanel
 {
     [SerializeField] private Slider loadingSlider;
-    [SerializeField] private GameObject loadingScene;
-
 
     // Start is called before the first frame update
-    public void LoadGameplay()
+    private void LoadGameplay()
     {
         StartCoroutine(LoadSceneAsync());
     }
 
-    IEnumerator LoadSceneAsync()
+    private IEnumerator LoadSceneAsync()
     {
-        loadingScene.SetActive(true);
         AsyncOperation operation = SceneManager.LoadSceneAsync("Gameplay");
-        while (!operation.isDone)
+        while (operation != null && !operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
             loadingSlider.value = progress;
             yield return null;
         }
     }
-
-    public void PlayGame()
+    public override void OnOpen(bool isFromGameplay = true)
     {
-        TitleController.instance.btnChoice = EventSystem.current.currentSelectedGameObject.name;
+        base.OnOpen(false);
         LoadGameplay();
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
     }
 }
