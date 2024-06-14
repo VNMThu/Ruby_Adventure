@@ -272,7 +272,7 @@ public class RubyController : MonoBehaviour
                 ObjectsPoolManager.PoolType.ParticleSystem);
         }
         
-        PlayerPrefsHelper.IncreaseCurrentCoin(value);
+        PlayerPrefHelper.IncreaseCurrentCoin(value);
         EventDispatcher.Instance.PostEvent(EventID.OnCoinReceive);
     }
 

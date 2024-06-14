@@ -14,7 +14,7 @@ public class LosePanel : UIPanel
 
    public override void OnOpen(bool isFromGameplay = true)
    {
-      if (PlayerPrefsHelper.GetCurrentCoin()<Constant.CoinNeedToRevive)
+      if (PlayerPrefHelper.GetCurrentCoin()<Constant.CoinNeedToRevive)
       {
          base.OnOpen(isFromGameplay);
       }

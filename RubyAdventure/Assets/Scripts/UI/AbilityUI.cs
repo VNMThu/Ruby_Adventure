@@ -3,14 +3,16 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem.OnScreen;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class AbilityUI : MonoBehaviour
 {
     [SerializeField] private Image countDownUI;
-    [SerializeField] private OnScreenButton buttonUI;
+    [SerializeField] private OnScreenButton onScreenButtonUI;
     [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private EventID eventSubToReact;
+    [SerializeField] private Button normalButton;
     private float _countDownTime;
     
     // Start is called before the first frame update
@@ -25,16 +27,19 @@ public class AbilityUI : MonoBehaviour
     private void AbilityEnable()
     {
         countDownUI.fillAmount = 0;
-        buttonUI.enabled = true;
+        onScreenButtonUI.enabled = true;
+        normalButton.interactable = true;
         timeText.gameObject.SetActive(false);
     }
     
     private void AbilityDisable()
     {
         countDownUI.fillAmount = 1;
-        buttonUI.enabled = false;
+        onScreenButtonUI.enabled = false;
+        normalButton.interactable = false;
         timeText.text = _countDownTime.ToString("F1");
         timeText.gameObject.SetActive(true);
+        
     }
     
     private void OnAbilityUse(float coolDownTime)

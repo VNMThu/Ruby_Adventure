@@ -11011,9 +11011,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countDownUI: {fileID: 1526253096}
-  buttonUI: {fileID: 1455375447}
+  onScreenButtonUI: {fileID: 1455375447}
   timeText: {fileID: 1775889550}
   eventSubToReact: 3
+  normalButton: {fileID: 1455375446}
 --- !u!114 &1455375446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14580,9 +14581,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countDownUI: {fileID: 1430216001}
-  buttonUI: {fileID: 1986498363}
+  onScreenButtonUI: {fileID: 1986498363}
   timeText: {fileID: 1720867707}
   eventSubToReact: 2
+  normalButton: {fileID: 1986498365}
 --- !u!114 &1986498365
 MonoBehaviour:
   m_ObjectHideFlags: 0

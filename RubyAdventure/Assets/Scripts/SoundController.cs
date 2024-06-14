@@ -11,10 +11,27 @@ public class SoundController : MonoBehaviour
     private bool _isOn = true;
     private Image _image;
 
-    private void Start()
+    private void Awake()
     {
         _image = GetComponent<Image>();
         _image.sprite = soundOn;
+    }
+
+    private void OnEnable()
+    {
+        //Update status
+        bool toggle = isSound ? PlayerPrefHelper.GetSoundStatus() : PlayerPrefHelper.GetMusicStatus();
+        if (toggle)
+        {
+            _isOn = true;
+            _image.sprite = soundOn;
+        }
+        else
+        {
+            _isOn = false;
+            _image.sprite = soundOff;
+        }
+        
     }
 
     public void ChangeSound()
@@ -38,10 +55,13 @@ public class SoundController : MonoBehaviour
         if (isSound)
         {
             AudioManager.SoundMuted = !toggle;
+            PlayerPrefHelper.ToggleSound(toggle);
         }
         else
         {
             AudioManager.MusicMuted = !toggle;
+            PlayerPrefHelper.ToggleMusic(toggle);
+
         }
     }
 }

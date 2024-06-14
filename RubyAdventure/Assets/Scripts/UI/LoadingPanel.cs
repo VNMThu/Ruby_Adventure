@@ -14,6 +14,7 @@ public class LoadingPanel : UIPanel
     private void LoadGameplay()
     {
         StartCoroutine(LoadSceneAsync());
+        AudioManager.StopMusic(AudioLibraryMusic.TitleMusic);
     }
 
     private IEnumerator LoadSceneAsync()
@@ -36,9 +37,5 @@ public class LoadingPanel : UIPanel
     {
         base.OnClose(false);
     }
-
-    private void OnDisable()
-    {
-        AudioManager.StopMusic(AudioLibraryMusic.TitleMusic);
-    }
+    
 }

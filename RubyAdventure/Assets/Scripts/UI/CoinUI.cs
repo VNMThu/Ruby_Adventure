@@ -19,6 +19,6 @@ public class CoinUI : MonoBehaviour
 
     private void UpdateCoin()
     {
-        coinText.text = PlayerPrefsHelper.GetCurrentCoin().ToString();
+        coinText.text = PlayerPrefHelper.GetCurrentCoin().ToString();
     }
 }

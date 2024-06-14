@@ -15,7 +15,7 @@ public class RevivePanel : UIPanel
     public void OnReviveClick()
     {
         //Use coin
-        PlayerPrefsHelper.SubtractCoins(Constant.CoinNeedToRevive);
+        PlayerPrefHelper.SubtractCoins(Constant.CoinNeedToRevive);
         //Update coin
         EventDispatcher.Instance.PostEvent(EventID.OnCoinReceive);
         //Revive Ruby
@@ -25,7 +25,7 @@ public class RevivePanel : UIPanel
 
     public override void OnOpen(bool isFromGameplay = true)
     {
-        if (PlayerPrefsHelper.GetCurrentCoin()>=Constant.CoinNeedToRevive)
+        if (PlayerPrefHelper.GetCurrentCoin()>=Constant.CoinNeedToRevive)
         {
             base.OnOpen(isFromGameplay);
         }

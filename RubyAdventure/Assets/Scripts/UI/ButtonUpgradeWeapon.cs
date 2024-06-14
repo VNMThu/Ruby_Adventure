@@ -173,7 +173,7 @@ public class ButtonUpgradeWeapon : MonoBehaviour
 
     public void IncreaseMoneyClick()
     {
-        PlayerPrefsHelper.IncreaseCurrentCoin(_currentMoneyAmount);
+        PlayerPrefHelper.IncreaseCurrentCoin(_currentMoneyAmount);
         GameManager.Instance.UIController.OnClose(UIPanelID.LevelUp);
         EventDispatcher.Instance.PostEvent(EventID.OnCoinReceive);
     }
