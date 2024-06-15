@@ -63,10 +63,11 @@ public class LevelUpPanel : UIPanel
             //Turn it into UI
 
             int differentBetweenUIAndData = Mathf.Abs(randomIndex.Length - buttonUpgradeWeapons.Length) ;
-
+            
+            
             for (int i = 0; i < differentBetweenUIAndData; i++)
             {
-                buttonUpgradeWeapons.Last().gameObject.SetActive(false);
+                buttonUpgradeWeapons[^(1+i)].gameObject.SetActive(false);
             }
 
             int indexOfRandom = 0;
