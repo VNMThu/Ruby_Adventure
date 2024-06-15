@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JSAM;
 using UnityEngine;
 
 public class RangeSoldier : Enemy
@@ -62,6 +63,9 @@ public class RangeSoldier : Enemy
         
         //Launch it
         bullet.Launch(direction, bulletSpeed, damage,0);
+        
+        //Sound effect
+        AudioManager.PlaySound(AudioLibrarySounds.LazerGun);
     }
 
     private IEnumerator MoveToRuby()

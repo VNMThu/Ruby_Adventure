@@ -23,6 +23,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 562137836cb52a9498c358377ceb99a1, type: 2}
   - {fileID: 11400000, guid: 5127513f4e457b44ebbaaa7e2f74ef24, type: 2}
   - {fileID: 11400000, guid: 8d17c56a737c755409d8b5da9acd5ebf, type: 2}
+  - {fileID: 11400000, guid: e7156c4fe2dcbdb4688d63150408ff77, type: 2}
+  - {fileID: 11400000, guid: 3c596d0580aa2d143b712a1fb4b69a56, type: 2}
+  - {fileID: 11400000, guid: 8324e479cd426644bbf9d3073577dc00, type: 2}
+  - {fileID: 11400000, guid: 95190a8bfb5c11d4289d8aaca4d229c8, type: 2}
+  - {fileID: 11400000, guid: ace1c125a9004eb41b63762517b9fbff, type: 2}
+  - {fileID: 11400000, guid: 24bc1e2675235254e81238446a53b478, type: 2}
+  - {fileID: 11400000, guid: 35bbf6f0e8ce6af4584079bc11e0ac4c, type: 2}
+  - {fileID: 11400000, guid: 1b2aadd836a4b4343800bf426c23dc1c, type: 2}
   Music:
   - {fileID: 11400000, guid: 74e48c867517f884986fc8677d23255c, type: 2}
   - {fileID: 11400000, guid: 1f72d7408f627674dba86cbac48b4891, type: 2}
@@ -42,11 +50,19 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 562137836cb52a9498c358377ceb99a1, type: 2}
     - {fileID: 11400000, guid: 5127513f4e457b44ebbaaa7e2f74ef24, type: 2}
     - {fileID: 11400000, guid: 8d17c56a737c755409d8b5da9acd5ebf, type: 2}
+    - {fileID: 11400000, guid: 3c596d0580aa2d143b712a1fb4b69a56, type: 2}
+    - {fileID: 11400000, guid: 8324e479cd426644bbf9d3073577dc00, type: 2}
+    - {fileID: 11400000, guid: ace1c125a9004eb41b63762517b9fbff, type: 2}
+    - {fileID: 11400000, guid: 24bc1e2675235254e81238446a53b478, type: 2}
+    - {fileID: 11400000, guid: 35bbf6f0e8ce6af4584079bc11e0ac4c, type: 2}
+    - {fileID: 11400000, guid: 1b2aadd836a4b4343800bf426c23dc1c, type: 2}
     foldout: 1
   - name: UI
     files:
     - {fileID: 11400000, guid: 4940a6a7166282b4c85716ca9b4103d5, type: 2}
     - {fileID: 11400000, guid: d358dd7014e42e5478cfeae13336cdff, type: 2}
+    - {fileID: 11400000, guid: e7156c4fe2dcbdb4688d63150408ff77, type: 2}
+    - {fileID: 11400000, guid: 95190a8bfb5c11d4289d8aaca4d229c8, type: 2}
     foldout: 1
   musicCategoriesToList:
   - name: 

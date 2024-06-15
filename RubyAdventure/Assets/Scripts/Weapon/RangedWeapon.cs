@@ -1,4 +1,5 @@
 using System.Collections;
+using JSAM;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
@@ -77,6 +78,9 @@ public class RangedWeapon : Weapon
             spawnProjectilePoint.position, transform.rotation,
             ObjectsPoolManager.PoolType.Projectile).GetComponent<RubyGunBullet>();
 
+        //Sound Effect
+        AudioManager.PlaySound(soundEffect);
+        
         //Launch it
         rubyGunBullet.Launch(transform.right, 40, currentAttribute.DamagePerAttack, forcePushBack);
     }

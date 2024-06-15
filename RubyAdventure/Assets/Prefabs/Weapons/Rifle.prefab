@@ -102,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forcePushBack: 1
   type: 2
+  soundEffect: 11
   animator: {fileID: 4012784556734816658}
   muzzleFlash: {fileID: 5760943459057554299}
   rubyGunBulletPrefab: {fileID: 2781493690843927216, guid: 0a7f3fdfeadbe664ab635db46bc87ada, type: 3}

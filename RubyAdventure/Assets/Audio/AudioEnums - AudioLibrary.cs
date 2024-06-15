@@ -3,7 +3,15 @@
         ButtonDecline,
         RubyDash,
         RubyGetHit,
-        CoinCollect
+        CoinCollect,
+        AfterLevelUp,
+        CollectExp,
+        LazerGun,
+        LevelUp,
+        MovementHammer,
+        Pistol,
+        Rifle,
+        Spear
     }
     public enum AudioLibraryMusic {
         GameplayMusic,

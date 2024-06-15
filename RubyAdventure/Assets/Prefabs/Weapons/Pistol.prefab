@@ -121,9 +121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe974af6f0ea16d4da8400ae42f7a5ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 1
-  damagePerAttack: 1
   forcePushBack: 2
+  type: 0
+  soundEffect: 10
   animator: {fileID: 5758839873938541424}
   muzzleFlash: {fileID: 5760943459057554299}
   rubyGunBulletPrefab: {fileID: 2781493690843927216, guid: 0a7f3fdfeadbe664ab635db46bc87ada, type: 3}

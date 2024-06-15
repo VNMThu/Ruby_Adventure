@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JSAM;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -21,6 +22,13 @@ public class LevelUpPanel : UIPanel
     {
         SetUpUpgradeSlot();
         base.OnOpen(isFromGameplay);
+        AudioManager.PlaySound(AudioLibrarySounds.LevelUp);
+    }
+
+    public override void OnClose(bool isFromGameplay = true)
+    {
+        AudioManager.PlaySound(AudioLibrarySounds.AfterLevelUp);
+        base.OnClose(isFromGameplay);
     }
 
     private void SetUpUpgradeSlot()

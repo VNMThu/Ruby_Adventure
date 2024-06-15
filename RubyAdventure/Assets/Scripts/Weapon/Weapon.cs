@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
     public WeaponType WeaponType => type;
     protected float attackCountDown;
     private Action<object> _onWeaponUpgrade;
-
+    [SerializeField] protected AudioLibrarySounds soundEffect;
 
     protected virtual void OnEnable()
     {

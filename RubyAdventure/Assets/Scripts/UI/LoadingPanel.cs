@@ -30,6 +30,7 @@ public class LoadingPanel : UIPanel
     public override void OnOpen(bool isFromGameplay = true)
     {
         base.OnOpen(false);
+        loadingSlider.value = 0f;
         DOVirtual.DelayedCall(openAnimationTime, LoadGameplay);
     }
     

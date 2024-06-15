@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
 using DG.Tweening;
+using JSAM;
 using UnityEngine;
 
 public class MeleeWeapon : Weapon
@@ -61,6 +61,8 @@ public class MeleeWeapon : Weapon
                         {
                             //After done thrust -> No more causing damage
                             _isCausingDamage = false;
+                            //Sound Effect
+                            AudioManager.PlaySound(soundEffect);
                         })
                     .SetEase(Ease.OutCubic))
                 .Append(transform.DOLocalMoveX(0f, 0.1f))

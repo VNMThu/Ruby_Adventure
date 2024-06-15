@@ -1,4 +1,5 @@
 using System.Collections;
+using JSAM;
 using UnityEngine;
 
 public class MeleeSoldier : Enemy
@@ -86,6 +87,9 @@ public class MeleeSoldier : Enemy
 
     protected override void AttackConnect()
     {
+        //Play Sound Effect
+        AudioManager.PlaySound(AudioLibrarySounds.MovementHammer);
+        
         Debug.Log("Melee soldier connect 1");
         //Detect if player in range
         var results = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayerMask);

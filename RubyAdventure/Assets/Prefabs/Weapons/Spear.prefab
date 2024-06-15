@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forcePushBack: 1
   type: 1
+  soundEffect: 12
   attackRange: 2
   sparkHit: {fileID: 6414356965754425502, guid: d702d250e9628a142987494c9b1e5108, type: 3}
 --- !u!61 &1098265527350561013

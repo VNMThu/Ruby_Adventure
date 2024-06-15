@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
+using JSAM;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -51,6 +52,7 @@ public class ExpSharp : MonoBehaviour
                 Debug.Log("EXP hit ruby");
                 ObjectsPoolManager.SpawnObject(effectWhenHitRuby, GameManager.Instance.Ruby.transform);
                 EventDispatcher.Instance.PostEvent(EventID.OnExpReceive, expReceived);
+                AudioManager.PlaySound(AudioLibrarySounds.CollectExp);
                 ObjectsPoolManager.ReturnObjectToPool(gameObject);
                 //Tick event exp receive
                 break;
