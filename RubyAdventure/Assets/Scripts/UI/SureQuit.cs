@@ -8,9 +8,7 @@ public class SureQuit : UIPanel
 {
     public void OnYesClick()
     {
-        Time.timeScale = 1f;
-        AudioManager.StopMusic(AudioLibraryMusic.GameplayMusic);
-        SceneManager.LoadScene("Title");
+        GameManager.Instance.ReturnToHome();
     }
 
     public void OnNoClick()

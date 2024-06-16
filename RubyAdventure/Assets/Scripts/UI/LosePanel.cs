@@ -1,6 +1,4 @@
 using System;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LosePanel : UIPanel
 {
@@ -23,13 +21,11 @@ public class LosePanel : UIPanel
 
    public void OnHomeClick()
    {
-         Time.timeScale = 1f;
-         SceneManager.LoadScene("Title");
+         GameManager.Instance.ReturnToHome();
    }
 
    public void OnRestartClick()
    {
-      Time.timeScale = 1f;
-      SceneManager.LoadScene("Gameplay");
+      GameManager.Instance.RestartGameplay();
    }
 }

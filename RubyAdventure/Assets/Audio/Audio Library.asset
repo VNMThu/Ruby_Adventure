@@ -31,6 +31,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 24bc1e2675235254e81238446a53b478, type: 2}
   - {fileID: 11400000, guid: 35bbf6f0e8ce6af4584079bc11e0ac4c, type: 2}
   - {fileID: 11400000, guid: 1b2aadd836a4b4343800bf426c23dc1c, type: 2}
+  - {fileID: 11400000, guid: 3616b6c239d52314baf0bad99eb93c83, type: 2}
   Music:
   - {fileID: 11400000, guid: 74e48c867517f884986fc8677d23255c, type: 2}
   - {fileID: 11400000, guid: 1f72d7408f627674dba86cbac48b4891, type: 2}
@@ -56,6 +57,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 24bc1e2675235254e81238446a53b478, type: 2}
     - {fileID: 11400000, guid: 35bbf6f0e8ce6af4584079bc11e0ac4c, type: 2}
     - {fileID: 11400000, guid: 1b2aadd836a4b4343800bf426c23dc1c, type: 2}
+    - {fileID: 11400000, guid: 3616b6c239d52314baf0bad99eb93c83, type: 2}
     foldout: 1
   - name: UI
     files:

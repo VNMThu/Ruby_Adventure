@@ -12,9 +12,15 @@ public class MainMenu : MonoBehaviour
     }
 
     private void Start()
-    {
+    { 
+        //Update sound status
+        AudioManager.MusicMuted = !PlayerPrefHelper.GetMusicStatus();
+        AudioManager.SoundMuted = !PlayerPrefHelper.GetSoundStatus();
+
+        //Play title music
         AudioManager.PlayMusic(AudioLibraryMusic.TitleMusic);
     }
+    
 
     public void OnTutorialClick()
     {

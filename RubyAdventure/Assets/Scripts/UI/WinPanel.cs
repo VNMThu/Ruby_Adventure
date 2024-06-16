@@ -1,8 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class WinPanel : UIPanel
 {
@@ -16,14 +12,13 @@ public class WinPanel : UIPanel
 
     public void OnHomeClick()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("Title");
+        GameManager.Instance.ReturnToHome();
+
     }
     
     public void OnRestartClick()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("Gameplay");
+        GameManager.Instance.RestartGameplay();
     }
     
 }

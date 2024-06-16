@@ -259,6 +259,9 @@ public class RubyController : MonoBehaviour
         //Turn on effect
         shockwaveEffect.gameObject.SetActive(true);
         
+        //Play sound effect
+        AudioManager.PlaySound(AudioLibrarySounds.Shockwave);
+        
         //Tick event 
         EventDispatcher.Instance.PostEvent(EventID.OnRubyShockWave,shockwaveCoolDown);
     }

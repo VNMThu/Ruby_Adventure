@@ -11,7 +11,8 @@
         MovementHammer,
         Pistol,
         Rifle,
-        Spear
+        Spear,
+        Shockwave
     }
     public enum AudioLibraryMusic {
         GameplayMusic,

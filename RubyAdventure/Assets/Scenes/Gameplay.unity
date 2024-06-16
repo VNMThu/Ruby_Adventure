@@ -8072,7 +8072,7 @@ MonoBehaviour:
   meleeSoldierPrefab: {fileID: 7099191634836985210, guid: ee972e5c924f6d54e807520643dfd78a, type: 3}
   rangeSoldierPrefab: {fileID: 2593550110188774817, guid: 74bd795005794ecfac654c8b0b372349, type: 3}
   timeCountDownUI: {fileID: 1538185513}
-  timeInLevel: 5
+  timeInLevel: 1
   spawnInterval: {x: 0, y: 3}
   percentageMelee: 0.7
   percentageRange: 0.3

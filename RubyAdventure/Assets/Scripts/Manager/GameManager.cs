@@ -1,6 +1,7 @@
 using System;
 using JSAM;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : GenericSingleton<GameManager>
 {
@@ -18,6 +19,20 @@ public class GameManager : GenericSingleton<GameManager>
     {
         //Turn on music
         AudioManager.PlayMusic(AudioLibraryMusic.GameplayMusic);
+    }
+
+    public void ReturnToHome()
+    {
+        Time.timeScale = 1f;
+        AudioManager.StopMusic(AudioLibraryMusic.GameplayMusic);
+        SceneManager.LoadScene("Title");
+    }
+    
+    public void RestartGameplay()
+    {
+        Time.timeScale = 1f;
+        AudioManager.StopMusic(AudioLibraryMusic.GameplayMusic);
+        SceneManager.LoadScene("Gameplay");
     }
     
 }
