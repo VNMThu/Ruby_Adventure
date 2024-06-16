@@ -43,6 +43,9 @@ public class ButtonAdvance :MonoBehaviour,
         }
         
 
+        if (!_button.interactable)
+            return;
+
         if (canInnerBounce)
         {
             graphic.localScale = new Vector3(0.92f, 0.92f, 1f);
@@ -51,9 +54,6 @@ public class ButtonAdvance :MonoBehaviour,
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (!_button.interactable)
-            return;
-        
         if (canInnerBounce)
         {
             graphic.localScale = Vector3.one;
