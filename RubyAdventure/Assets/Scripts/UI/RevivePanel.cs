@@ -33,6 +33,7 @@ public class RevivePanel : UIPanel
 
     public void OnNoClick()
     {
+        base.OnClose();
         GameManager.Instance.UIController.OpenPanel(UIPanelID.Lose);
     }
 }

@@ -72,11 +72,14 @@ public class RubyController : MonoBehaviour
     private Action<object> _onRevivePref;
 
     private SpriteRenderer _spriteRenderer;
+
+    private bool _isDeath;
     
     // Start is called before the first frame update
     private void Start()
     {
         Health = maxHealth;
+        _isDeath = false;
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -108,9 +111,10 @@ public class RubyController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Health <= 0)
+        if (Health <= 0 && !_isDeath)
         {
             PlayerDeath();
+            _isDeath = true;
         }
 
         //If dashing then don't do anything else
@@ -290,6 +294,8 @@ public class RubyController : MonoBehaviour
         _spriteRenderer.enabled = true;
         //Update health
         Health = maxHealth;
+        _isDeath = false;
+
         EventDispatcher
             .Instance.PostEvent(EventID.OnHealthChange, Health);
         

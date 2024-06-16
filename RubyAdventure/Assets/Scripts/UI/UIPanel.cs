@@ -20,24 +20,28 @@ public class UIPanel : MonoBehaviour
 
     public virtual void OnOpen(bool isFromGameplay = true)
     {
-        if (isFromGameplay)
-        {
-            Time.timeScale = 0f;
-        }
-
         canvas.enabled = true;
         panel.transform.localScale = Vector3.one * defaultOpenScale;
-        panel.transform.DOScale(Vector3.one, openAnimationTime).SetUpdate(true);
+        panel.transform.DOScale(Vector3.one, openAnimationTime).SetUpdate(true).OnComplete(() =>
+        {
+            if (isFromGameplay)
+            {
+                Time.timeScale = 0f;
+            }
+        });
     }
     
     public virtual void OnClose(bool isFromGameplay = true)
     {
-        panel.transform.DOScale(Vector3.one*targetCloseScale, closeAnimationTime).SetUpdate(true);
-        canvas.enabled = false;
-        if (isFromGameplay)
+        panel.transform.DOScale(Vector3.one*targetCloseScale, closeAnimationTime).SetUpdate(true).OnComplete(() =>
         {
-            Time.timeScale = 1f;
-        }
+            if (isFromGameplay)
+            {
+                Time.timeScale = 1f;
+            }
+        });
+        canvas.enabled = false;
+
     }
     
     

@@ -4414,11 +4414,11 @@ RectTransform:
   m_Children:
   - {fileID: 898922004}
   - {fileID: 312856866}
-  m_Father: {fileID: 1816616180}
+  m_Father: {fileID: 1411022623}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -796, y: -224.00024}
+  m_AnchoredPosition: {x: -795.9999, y: -72.548065}
   m_SizeDelta: {x: 243.45264, y: 78.8264}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &523005206
@@ -10238,7 +10238,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1411022623}
   - component: {fileID: 1411022625}
-  - component: {fileID: 1411022624}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -10262,6 +10261,7 @@ RectTransform:
   - {fileID: 1873242541}
   - {fileID: 329249287}
   - {fileID: 968743570}
+  - {fileID: 523005205}
   m_Father: {fileID: 1816616180}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -10269,36 +10269,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000030518, y: 64}
   m_SizeDelta: {x: 1002.0717, y: 910.2012}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1411022624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1411022622}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4f345eaa10c9e3e40bb216ae394edaa9, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1411022625
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13604,7 +13574,6 @@ RectTransform:
   m_Children:
   - {fileID: 947497050}
   - {fileID: 1411022623}
-  - {fileID: 523005205}
   m_Father: {fileID: 1190559534}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

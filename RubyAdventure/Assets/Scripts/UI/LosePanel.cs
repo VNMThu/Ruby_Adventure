@@ -6,16 +6,16 @@ public class LosePanel : UIPanel
    private void OnEnable()
    {
       //Open when level up
-      _onRubyDeathRef = _ => OnOpen();
+      _onRubyDeathRef = _ => OpenWithCoinCondition();
       EventDispatcher.Instance.RegisterListener(EventID.OnRubyDeath,_onRubyDeathRef);
    }
 
-   public override void OnOpen(bool isFromGameplay = true)
+   private void OpenWithCoinCondition()
    {
       if (PlayerPrefHelper.GetCurrentCoin()<Constant.CoinNeedToRevive)
       {
-         base.OnOpen(isFromGameplay);
-      }
+         base.OnOpen();
+      }   
    }
 
 
