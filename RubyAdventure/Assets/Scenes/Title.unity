@@ -1010,6 +1010,53 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5bc382b88d03a940ab12fdfef01a8f5, type: 3}
+--- !u!1 &1069136575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1069136577}
+  - component: {fileID: 1069136576}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1069136576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069136575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 586d49fa2df6307489ab1e8d3bc4b2e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ruby: {fileID: 0}
+  uiController: {fileID: 0}
+  weaponAttributeManagers: {fileID: 0}
+--- !u!4 &1069136577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069136575}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1099163996
 GameObject:
   m_ObjectHideFlags: 0
@@ -2400,6 +2447,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2831584589807526245, guid: e9584cc6373a6e248af150bda7a42cf4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 45.946533
+      objectReference: {fileID: 0}
     - target: {fileID: 3640882178037824166, guid: e9584cc6373a6e248af150bda7a42cf4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2597,3 +2648,4 @@ SceneRoots:
   - {fileID: 1099163999}
   - {fileID: 1250190435}
   - {fileID: 1814268082}
+  - {fileID: 1069136577}

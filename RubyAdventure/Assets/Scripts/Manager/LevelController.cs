@@ -6,9 +6,16 @@ using Random = UnityEngine.Random;
 
 public class LevelController : MonoBehaviour
 {
+    [Header("Enemy Prefabs")]
     [SerializeField] private MeleeSoldier meleeSoldierPrefab;
     [SerializeField] private RangeSoldier rangeSoldierPrefab;
-
+    [Header("Boss")]
+    [SerializeField] private BossBug bossBug;
+    [SerializeField] private ParticleSystem bossPreAppearEffect;
+    [SerializeField] private ParticleSystem bossAppearEffect;
+    [SerializeField] private Transform bossSpawnPosition;
+    
+    [Header("UI")]
     [SerializeField] private TextMeshProUGUI timeCountDownUI;
     [SerializeField] private int timeInLevel;
 
@@ -61,7 +68,7 @@ public class LevelController : MonoBehaviour
         }
     }
 
-    private IEnumerator C_CountDownToEndLevel()
+    private IEnumerator C_CountDownToBoss()
     {
         TimeSpan timeLeft = new TimeSpan(0, 0, timeInLevel, 0); //minutes
         while (timeLeft.Seconds >= 0)
@@ -76,8 +83,8 @@ public class LevelController : MonoBehaviour
         //Stop spawning
         _isSpawning = false;
 
-        //Tick some actions to auto kill of enemy here
-        EventDispatcher.Instance.PostEvent(EventID.OnWinLevel);
+        StartCoroutine(C_SpawnBoss());
+
         Debug.Log("Level ended");
     }
 
@@ -90,7 +97,7 @@ public class LevelController : MonoBehaviour
         _coroutineSpawnEnemy = StartCoroutine(C_Spawn());
 
         //Finish level when spawn done
-        _coroutineWinLevel = StartCoroutine(C_CountDownToEndLevel());
+        _coroutineWinLevel = StartCoroutine(C_CountDownToBoss());
     }
 
     private Vector2 RandomPointInArea(Vector3 center, float sizeX, float sizeY)
@@ -105,5 +112,25 @@ public class LevelController : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(centerSpawnPoint.position, new Vector3(spawnAreaSize.x, spawnAreaSize.y));
+    }
+
+    private IEnumerator C_SpawnBoss()
+    {
+        //Spawn Effects
+        ParticleSystem preAppearEffect = ObjectsPoolManager.SpawnObject(bossPreAppearEffect.gameObject, bossSpawnPosition.position, Quaternion.identity,
+            ObjectsPoolManager.PoolType.ParticleSystem).GetComponent<ParticleSystem>();
+
+        yield return new WaitForSeconds(5f);
+        preAppearEffect.Stop();
+        
+        ObjectsPoolManager.SpawnObject(bossAppearEffect.gameObject, bossSpawnPosition.position, Quaternion.identity,
+            ObjectsPoolManager.PoolType.ParticleSystem).GetComponent<ParticleSystem>();
+        
+        yield return new WaitForSeconds(0.2f);
+        
+        //Spawn it out
+        ObjectsPoolManager.SpawnObject(bossBug.gameObject,
+            Vector3.zero, 
+            Quaternion.identity, ObjectsPoolManager.PoolType.Enemy);
     }
 }
