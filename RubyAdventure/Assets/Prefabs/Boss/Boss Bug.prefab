@@ -42,10 +42,10 @@ GameObject:
   - component: {fileID: 7289248543925582161}
   - component: {fileID: 7289248543925582160}
   - component: {fileID: 7289248543925582163}
+  - component: {fileID: 7447467594036858257}
   - component: {fileID: 3383680001657380629}
   - component: {fileID: 8758757986158488382}
   - component: {fileID: 5292931726353600091}
-  - component: {fileID: 7447467594036858257}
   m_Layer: 12
   m_Name: Boss Bug
   m_TagString: Enemy
@@ -108,8 +108,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 444821691
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7f45b4435b36d2742a766f62aa0cb903, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -143,6 +143,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7447467594036858257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7289248543925582162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04aa14b98ebf1394589bcc731fe3b0e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  attackRange: 0
+  fullHealth: 100
+  speed: 2
+  animator: {fileID: 7289248543925582163}
+  percentageDropExp: 0
+  expSharp: {fileID: 0}
+  percentageDropCoin: 0
+  coinPrefab: {fileID: 0}
+  flashEffect: {fileID: 3383680001657380629}
+  spriteRenderer: {fileID: 7289248543925582160}
 --- !u!114 &3383680001657380629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,30 +252,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.195836, y: 2.9448016}
   m_EdgeRadius: 0
---- !u!114 &7447467594036858257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7289248543925582162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04aa14b98ebf1394589bcc731fe3b0e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
-  attackRange: 0
-  fullHealth: 100
-  speed: 2
-  animator: {fileID: 7289248543925582163}
-  percentageDropExp: 0
-  expSharp: {fileID: 0}
-  percentageDropCoin: 0
-  coinPrefab: {fileID: 0}
-  flashEffect: {fileID: 3383680001657380629}
-  spriteRenderer: {fileID: 7289248543925582160}
-  appearEffect: {fileID: 0}
 --- !u!1 &7289248544911591983
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ using UnityEngine.Serialization;
 public class BossBug : Enemy
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
+    private readonly int _isMoving = Animator.StringToHash("IsMoving");
+    private readonly int _isDeath = Animator.StringToHash("IsDeath");
 
    protected override void StartMoving()
    {
@@ -19,6 +21,11 @@ public class BossBug : Enemy
    {
       while (IsAlive)
       {
+            if (!animator.GetBool(_isMoving))
+            {
+               animator.SetBool(_isMoving,true);
+            }
+         
             Vector3 rubyPosition = GameManager.Instance.RubyPosition;
             //speed
             float step = speed * Time.deltaTime;
@@ -38,8 +45,9 @@ public class BossBug : Enemy
    /// Hurt ruby when hit her
    /// </summary>
    /// <param name="other"></param>
-   private void OnTriggerEnter2D(Collider2D other)
+   private void OnTriggerStay2D(Collider2D other)
    {
+      Debug.Log("Boss hit:"+other.tag);
       switch (other.tag)
       {
          case Constant.RubyHurtBoxTag:
@@ -54,6 +62,9 @@ public class BossBug : Enemy
    protected override void Death()
    {
       base.Death();
+      
+      //Start death animation
+      animator.SetTrigger(_isDeath);
       
       //Tick win level
       EventDispatcher.Instance.PostEvent(EventID.OnWinLevel);

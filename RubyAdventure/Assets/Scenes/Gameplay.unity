@@ -8071,6 +8071,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeSoldierPrefab: {fileID: 7099191634836985210, guid: ee972e5c924f6d54e807520643dfd78a, type: 3}
   rangeSoldierPrefab: {fileID: 2593550110188774817, guid: 74bd795005794ecfac654c8b0b372349, type: 3}
+  bossBug: {fileID: 7447467594036858257, guid: a10ed767af3fd8c4c9d2bf20d886702f, type: 3}
+  bossPreAppearEffect: {fileID: 1558332597376287028, guid: 694f688f736a1714b88638892163e988, type: 3}
+  bossAppearEffect: {fileID: 59758037400367369, guid: 2da5d93246a8cb548bd1a5d6c672eca3, type: 3}
+  bossSpawnPosition: {fileID: 1834811362}
   timeCountDownUI: {fileID: 1538185513}
   timeInLevel: 1
   spawnInterval: {x: 0, y: 3}

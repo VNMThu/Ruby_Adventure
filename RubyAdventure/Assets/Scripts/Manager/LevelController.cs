@@ -70,7 +70,10 @@ public class LevelController : MonoBehaviour
 
     private IEnumerator C_CountDownToBoss()
     {
-        TimeSpan timeLeft = new TimeSpan(0, 0, timeInLevel, 0); //minutes
+        // TimeSpan timeLeft = new TimeSpan(0, 0, timeInLevel, 0); //minutes
+        //Cheat
+        TimeSpan timeLeft = new TimeSpan(0, 0, 0, timeInLevel); //minutes
+
         while (timeLeft.Seconds >= 0)
         {
             string formattedTime = $"{timeLeft.Minutes:D2}:{timeLeft.Seconds:D2}";
@@ -120,7 +123,7 @@ public class LevelController : MonoBehaviour
         ParticleSystem preAppearEffect = ObjectsPoolManager.SpawnObject(bossPreAppearEffect.gameObject, bossSpawnPosition.position, Quaternion.identity,
             ObjectsPoolManager.PoolType.ParticleSystem).GetComponent<ParticleSystem>();
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
         preAppearEffect.Stop();
         
         ObjectsPoolManager.SpawnObject(bossAppearEffect.gameObject, bossSpawnPosition.position, Quaternion.identity,
@@ -130,7 +133,7 @@ public class LevelController : MonoBehaviour
         
         //Spawn it out
         ObjectsPoolManager.SpawnObject(bossBug.gameObject,
-            Vector3.zero, 
+            bossSpawnPosition.position, 
             Quaternion.identity, ObjectsPoolManager.PoolType.Enemy);
     }
 }
