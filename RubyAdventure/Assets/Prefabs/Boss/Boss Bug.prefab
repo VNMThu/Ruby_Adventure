@@ -255,6 +255,8 @@ MonoBehaviour:
   energyBall: {fileID: 5056090135348417482, guid: 5b08e3300b771984c88e90234cb4f9f4, type: 3}
   attackPoint: {fileID: 1561361722233545188}
   ballSpeed: 3
+  laser: {fileID: 2621342036645472665, guid: e965ceed341e9c341ab5c3908aa10f42, type: 3}
+  distanceFromRubyToStrikeLaser: {x: 2, y: 2}
 --- !u!114 &3383680001657380629
 MonoBehaviour:
   m_ObjectHideFlags: 0

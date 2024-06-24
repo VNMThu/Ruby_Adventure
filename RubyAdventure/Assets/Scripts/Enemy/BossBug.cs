@@ -24,6 +24,12 @@ public class BossBug : Enemy
     [SerializeField]private Transform attackPoint;
     [SerializeField]private float ballSpeed;
 
+    [Header("Laser Attack")] 
+    [SerializeField]private BugBossLaser laser;
+    [SerializeField] private Vector2 distanceFromRubyToStrikeLaser;
+    
+    private bool _faceLeft = true;
+
    protected override void StartMoving()
    {
       StartCoroutine(MoveToRuby());
@@ -32,6 +38,7 @@ public class BossBug : Enemy
    protected override void OnEnable()
    {
       base.OnEnable();
+      _faceLeft = true;
       StartAttackSequence();
    }
 
@@ -53,7 +60,7 @@ public class BossBug : Enemy
             transform.position = Vector2.MoveTowards(transform.position, rubyPosition, step);
 
             //Flip sprite depend on ruby position
-            spriteRenderer.flipX = !(rubyPosition.x < transform.position.x);
+            FlipToFaceRuby();
             
             yield return null;
       }
@@ -108,16 +115,58 @@ public class BossBug : Enemy
       int result = Random.Range(0,10);
       
       //Choose Attack 
-      TriggerAttack(result<=4);
-      
+      // TriggerAttack(result<=4);
+      //Cheat on
+      TriggerAttack(false);
       //Reset
       StartAttackSequence();
+   }
+   
+   private void FlipToFaceRuby()
+   {
+      //Rotate depend on ruby position
+      if ( GameManager.Instance.RubyPosition.x >= transform.position.x && _faceLeft)
+      {
+         transform.RotateAround(transform.position, transform.up, 180f);
+         _faceLeft = false;
+      }
+      else if(GameManager.Instance.RubyPosition.x < transform.position.x && !_faceLeft)
+      {
+         transform.RotateAround(transform.position, transform.up, -180f);
+         _faceLeft = true;
+      }
    }
    
    private void TriggerAttack(bool isAttack1)
    {
       animator.SetTrigger(isAttack1 ? _triggerAttackEnergyBall : _triggerAttackLaser);
    }
+
+   /// <summary>
+   /// Call 5 lightning to strike randomly around ruby
+   /// </summary>
+   public void CallLasers()
+   {
+      //Get position
+      Vector2[] positions = new Vector2[5];
+      for (int i = 0; i < positions.Length; i++)
+      {
+         float randomDistanceX = Random.Range(-distanceFromRubyToStrikeLaser.x, distanceFromRubyToStrikeLaser.x);
+         float randomDistanceY = Random.Range(-distanceFromRubyToStrikeLaser.y, distanceFromRubyToStrikeLaser.y);
+
+         positions[i] = new Vector2(GameManager.Instance.RubyPosition.x + randomDistanceX,
+            GameManager.Instance.RubyPosition.y + randomDistanceY);
+      }
+      
+      //For loop to fire it off
+      foreach (var position in positions)
+      {
+         BugBossLaser tempLaser = ObjectsPoolManager.SpawnObject(laser.gameObject, position, Quaternion.identity,
+            ObjectsPoolManager.PoolType.Projectile).GetComponent<BugBossLaser>();
+         tempLaser.LaserAttack(damage);
+      }
+   }
+   
 
    /// <summary>
    /// This function get call to fire off balls in 8 direction

@@ -90,22 +90,17 @@ public class MeleeSoldier : Enemy
         //Play Sound Effect
         AudioManager.PlaySound(AudioLibrarySounds.MovementHammer);
         
-        Debug.Log("Melee soldier connect 1");
         //Detect if player in range
         var results = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayerMask);
-        Debug.Log("Melee soldier connect 2");
 
         //Hit nothing so return here
         if (results.Length <= 0) return;
         
-        Debug.Log("Melee soldier connect 3");
 
 
         //Check all collider
         foreach (var variable in results)
         {
-            Debug.Log("Melee soldier connect 4:"+variable.tag);
-
             if (variable.CompareTag(Constant.RubyHurtBoxTag))
             {
                 //Hit Ruby
