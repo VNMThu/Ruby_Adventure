@@ -54,7 +54,7 @@ public class RubyController : MonoBehaviour
 
 
     private Animator _animator;
-    private Vector2 _lookDirection = new(1, 0);
+    private Vector2 _lookDirection = new(0, -1);
 
 
     public ParticleSystem getHitEffect;
@@ -81,7 +81,6 @@ public class RubyController : MonoBehaviour
         Health = maxHealth;
         _isDeath = false;
         _rigidBody = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
     
@@ -89,6 +88,8 @@ public class RubyController : MonoBehaviour
     private void Awake()
     {
         _rubyControl = new RubyControl();
+        _animator = GetComponent<Animator>();
+
     }
 
     private void OnEnable()
@@ -343,4 +344,5 @@ public class RubyController : MonoBehaviour
     {
         Gizmos.DrawWireSphere(GameManager.Instance.RubyPosition, shockwaveRange);
     }
+    
 }

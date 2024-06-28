@@ -27,7 +27,7 @@ public class LoadingPanel : UIPanel
             yield return null;
         }
     }
-    public override void OnOpen(bool isFromGameplay = true)
+    public override void OnOpen(bool isStopTime = true)
     {
         base.OnOpen(false);
         loadingSlider.value = 0f;

@@ -44,7 +44,7 @@ public class TutorialPanel : UIPanel
         
     }
     
-    public override void OnOpen(bool isFromGameplay = true)
+    public override void OnOpen(bool isStopTime = true)
     {
         base.OnOpen(false);
     }

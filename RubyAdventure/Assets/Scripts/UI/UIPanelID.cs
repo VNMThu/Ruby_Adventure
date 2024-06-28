@@ -7,5 +7,6 @@ public enum UIPanelID
     Win,
     Revive,
     Loading,
-    Tutorial
+    Tutorial,
+    Dialog
 }

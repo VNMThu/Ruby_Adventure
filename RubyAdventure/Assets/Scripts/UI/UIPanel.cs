@@ -18,13 +18,13 @@ public class UIPanel : MonoBehaviour
         canvas.enabled = false;
     }
 
-    public virtual void OnOpen(bool isFromGameplay = true)
+    public virtual void OnOpen(bool isStopTime = true)
     {
         canvas.enabled = true;
         panel.transform.localScale = Vector3.one * defaultOpenScale;
         panel.transform.DOScale(Vector3.one, openAnimationTime).SetUpdate(true).OnComplete(() =>
         {
-            if (isFromGameplay)
+            if (isStopTime)
             {
                 Time.timeScale = 0f;
             }

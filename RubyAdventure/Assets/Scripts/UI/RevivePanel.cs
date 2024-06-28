@@ -23,11 +23,11 @@ public class RevivePanel : UIPanel
         OnClose();
     }
 
-    public override void OnOpen(bool isFromGameplay = true)
+    public override void OnOpen(bool isStopTime = true)
     {
         if (PlayerPrefHelper.GetCurrentCoin()>=Constant.CoinNeedToRevive)
         {
-            base.OnOpen(isFromGameplay);
+            base.OnOpen(isStopTime);
         }
     }
 

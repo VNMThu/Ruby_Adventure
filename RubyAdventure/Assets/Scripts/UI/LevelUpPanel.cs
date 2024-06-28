@@ -18,10 +18,10 @@ public class LevelUpPanel : UIPanel
     
     
 
-    public override void OnOpen(bool isFromGameplay = true)
+    public override void OnOpen(bool isStopTime = true)
     {
         SetUpUpgradeSlot();
-        base.OnOpen(isFromGameplay);
+        base.OnOpen(isStopTime);
         AudioManager.PlaySound(AudioLibrarySounds.LevelUp);
     }
 
