@@ -7,9 +7,14 @@ public class DialogPanel : UIPanel
     [SerializeField] private DialogBox jimboDialogBox;
     [SerializeField] private DialogBox rubyDialogBox;
     
+    [Header("Dialogs")]
     [SerializeField] private string[] dialogsInCutscene;
+    [SerializeField] private string dialogsInGame;
+
     [Header("For cinematic dialog")] [SerializeField]
     private float bufferBetweenDialog;
+
+    private bool _isShowDialog;
     
     //Get call in timeline
     public void ShowCinematicDialog()
@@ -44,6 +49,17 @@ public class DialogPanel : UIPanel
 
     public void ShowInGameDialog()
     {
-        
+        if (_isShowDialog) return;
+        OnOpen(false);
+        _isShowDialog = true;
+        StartCoroutine(C_ShowJambiDialog());
+    }
+
+    private IEnumerator C_ShowJambiDialog()
+    {
+        float waitTime = jimboDialogBox.ShowDialog(dialogsInGame) + bufferBetweenDialog;
+        yield return new WaitForSeconds(waitTime);
+        jimboDialogBox.HideDialog();
+        _isShowDialog = false;
     }
 }

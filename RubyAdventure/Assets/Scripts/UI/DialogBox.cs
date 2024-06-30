@@ -25,7 +25,6 @@ public class DialogBox: MonoBehaviour
 
     private IEnumerator C_ShowCharacterByCharacter(string textNeedToShow)
     {
-        Debug.Log("Character Show Dialog:"+gameObject.name);
         dialogText.text = "";
         foreach (var character in textNeedToShow)
         {
