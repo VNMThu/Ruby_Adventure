@@ -14,13 +14,15 @@ public class DialogPanel : UIPanel
     [Header("For cinematic dialog")] [SerializeField]
     private float bufferBetweenDialog;
 
-    private bool _isShowDialog;
+    private bool _isShowDialogInGame;
+    private bool _isShowDialogInCutScene = true;
+
     
     //Get call in timeline
     public void ShowCinematicDialog()
     {
         OnOpen(false);
-
+        
         DOVirtual.DelayedCall(openAnimationTime, () =>
         {
             StartCoroutine(C_ShowDialogSequence());
@@ -31,6 +33,11 @@ public class DialogPanel : UIPanel
     {
         for (int i = 0; i < dialogsInCutscene.Length; i++)
         {
+            if (!_isShowDialogInCutScene)
+            {
+                yield break;
+            }
+            
             float waitTime;
             if (i % 2 == 0)
             {
@@ -47,11 +54,18 @@ public class DialogPanel : UIPanel
         }
     }
 
+
+    //End timeline event
+    public void StopDialog()
+    {
+        _isShowDialogInCutScene = false;
+    }
+    
     public void ShowInGameDialog()
     {
-        if (_isShowDialog) return;
+        if (_isShowDialogInGame) return;
         OnOpen(false);
-        _isShowDialog = true;
+        _isShowDialogInGame = true;
         StartCoroutine(C_ShowJambiDialog());
     }
 
@@ -60,6 +74,6 @@ public class DialogPanel : UIPanel
         float waitTime = jimboDialogBox.ShowDialog(dialogsInGame) + bufferBetweenDialog;
         yield return new WaitForSeconds(waitTime);
         jimboDialogBox.HideDialog();
-        _isShowDialog = false;
+        _isShowDialogInGame = false;
     }
 }
