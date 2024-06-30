@@ -97,6 +97,10 @@ public class BossBug : Enemy
       //Start death animation
       animator.SetTrigger(_isDeath);
       
+   }
+
+   public void EndLevel()
+   {
       //Tick win level
       EventDispatcher.Instance.PostEvent(EventID.OnWinLevel);
    }

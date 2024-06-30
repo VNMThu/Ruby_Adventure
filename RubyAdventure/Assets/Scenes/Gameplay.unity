@@ -4902,6 +4902,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+        - m_Target: {fileID: 110503836}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 634579612}
@@ -9262,8 +9274,8 @@ MonoBehaviour:
   bossAppearEffect: {fileID: 59758037400367369, guid: 2da5d93246a8cb548bd1a5d6c672eca3, type: 3}
   bossSpawnPosition: {fileID: 1834811362}
   timeCountDownUI: {fileID: 1538185513}
-  timeInLevel: 1
-  spawnInterval: {x: 0, y: 3}
+  timeInLevel: 3
+  spawnInterval: {x: 1, y: 3}
   percentageMelee: 0.7
   percentageRange: 0.3
   centerSpawnPoint: {fileID: 1834811362}
@@ -13407,7 +13419,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 87b7bf594d7c84ebe8ed9ca57b0d940a, type: 2}
   - {fileID: 11400000, guid: a66b8a3e7b205404ea16d1f863cd8ea0, type: 2}
   - {fileID: 11400000, guid: 06764cad69f004541896f663a03e8b6c, type: 2}
-  originalWeapon: 02000000
+  originalWeapon: 00000000
 --- !u!1001 &1714856098
 PrefabInstance:
   m_ObjectHideFlags: 0

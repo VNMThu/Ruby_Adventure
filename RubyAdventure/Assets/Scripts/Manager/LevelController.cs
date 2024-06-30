@@ -72,7 +72,7 @@ public class LevelController : MonoBehaviour
     {
         // TimeSpan timeLeft = new TimeSpan(0, 0, timeInLevel, 0); //minutes
         //Cheat
-        TimeSpan timeLeft = new TimeSpan(0, 0, 0, timeInLevel); //minutes
+        TimeSpan timeLeft = new TimeSpan(0, 0, timeInLevel, 0); //minutes
 
         while (timeLeft.Seconds >= 0)
         {

@@ -128,12 +128,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   attackRange: 0.83
-  fullHealth: 5
+  fullHealth: 10
   speed: 1
   animator: {fileID: 7076658022483903794}
-  percentageDropExp: 10
+  percentageDropExp: 8
   expSharp: {fileID: 2949721577349369614, guid: 921c28df18446bb46bcce9d537b92f09, type: 3}
-  percentageDropCoin: 0
+  percentageDropCoin: 2
   coinPrefab: {fileID: 1189792733, guid: b7902e65cbde5ea47acb196333bb72ec, type: 3}
   flashEffect: {fileID: 8953888307413366189}
   attackPoint: {fileID: 6666706692151247654}
