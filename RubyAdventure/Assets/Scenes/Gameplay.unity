@@ -5118,7 +5118,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.79365784, y: -14.459881, z: -10}
+  m_LocalPosition: {x: 0.7936583, y: -14.460585, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9275,7 +9275,7 @@ MonoBehaviour:
   bossSpawnPosition: {fileID: 1834811362}
   timeCountDownUI: {fileID: 1538185513}
   timeInLevel: 3
-  spawnInterval: {x: 1, y: 3}
+  spawnInterval: {x: 2, y: 4}
   percentageMelee: 0.7
   percentageRange: 0.3
   centerSpawnPoint: {fileID: 1834811362}

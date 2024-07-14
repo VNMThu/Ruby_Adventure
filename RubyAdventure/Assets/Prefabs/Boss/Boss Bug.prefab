@@ -327,7 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   attackRange: 0
-  fullHealth: 50
+  fullHealth: 150
   speed: 2
   animator: {fileID: 7289248543925582163}
   percentageDropExp: 0
