@@ -8,7 +8,7 @@ public static class Constant
     public const string RubyHurtBoxTag = "RubyHurtBox";
     public const string RubyTag = "Player";
     public const string EnemyTag = "Enemy";
-    public const int CoinNeedToRevive = 100;
+    public const int CoinNeedToRevive = 500;
     public const int MoneyReceiveInUpgrade = 100;
 
 

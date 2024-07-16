@@ -71,11 +71,10 @@ public class LevelController : MonoBehaviour
 
     private IEnumerator C_CountDownToBoss()
     {
-        // TimeSpan timeLeft = new TimeSpan(0, 0, timeInLevel, 0); //minutes
-        
+        TimeSpan timeLeft = new TimeSpan(0, 0, timeInLevel, 0); //minutes
         
         //Cheat
-        TimeSpan timeLeft = new TimeSpan(0, 0, 0, timeInLevel); //minutes
+        // TimeSpan timeLeft = new TimeSpan(0, 0, 0, timeInLevel); //minutes
 
         while (timeLeft.Seconds >= 0)
         {

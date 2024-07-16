@@ -1,11 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RevivePanel : UIPanel
 {
     private Action<object> _onRubyDeathRef;
+    private int dealthCount = 1;
+    private bool isFirstDeath = true;
+    [SerializeField] private TextMeshProUGUI displayMessageText;
     private void OnEnable()
     {
         //Open when level up
@@ -15,7 +19,7 @@ public class RevivePanel : UIPanel
     public void OnReviveClick()
     {
         //Use coin
-        PlayerPrefHelper.SubtractCoins(Constant.CoinNeedToRevive);
+        PlayerPrefHelper.SubtractCoins(dealthCount * Constant.CoinNeedToRevive);
         //Update coin
         EventDispatcher.Instance.PostEvent(EventID.OnCoinReceive);
         //Revive Ruby
@@ -25,10 +29,15 @@ public class RevivePanel : UIPanel
 
     public override void OnOpen(bool isStopTime = true)
     {
-        if (PlayerPrefHelper.GetCurrentCoin()>=Constant.CoinNeedToRevive)
+        if (PlayerPrefHelper.GetCurrentCoin() < dealthCount * Constant.CoinNeedToRevive) return;
+        if (isFirstDeath)
         {
-            base.OnOpen(isStopTime);
+            dealthCount++;
+            isFirstDeath = false;
         }
+
+        displayMessageText.text = "Use "+dealthCount * Constant.CoinNeedToRevive+" Coins to \nREVIVE?";
+        base.OnOpen(isStopTime);
     }
 
     public void OnNoClick()
