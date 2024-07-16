@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d15ae218647a2d4f85e14306846c10c, type: 3}
-  m_Name: Spear
+  m_Name: Boss Appear
   m_EditorClassIdentifier: 
   safeName: 
   presetDescription: 
   files:
-  - {fileID: 8300000, guid: ff1351b15c6b0ab428790ed99b33e4ad, type: 3}
+  - {fileID: 8300000, guid: 7d349e9b6f5981a459f577198575d3d2, type: 3}
   loopStart: 0
   loopEnd: 0
   bpm: 120
-  relativeVolume: 1
+  relativeVolume: 0.3
   spatialize: 0
   maxDistance: 0
-  priority: 192
+  priority: 64
   startingPitch: 1
   pitchShift: 0.05
   loopMode: 0

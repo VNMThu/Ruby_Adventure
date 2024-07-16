@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using JSAM;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -71,8 +72,10 @@ public class LevelController : MonoBehaviour
     private IEnumerator C_CountDownToBoss()
     {
         // TimeSpan timeLeft = new TimeSpan(0, 0, timeInLevel, 0); //minutes
+        
+        
         //Cheat
-        TimeSpan timeLeft = new TimeSpan(0, 0, timeInLevel, 0); //minutes
+        TimeSpan timeLeft = new TimeSpan(0, 0, 0, timeInLevel); //minutes
 
         while (timeLeft.Seconds >= 0)
         {
@@ -122,18 +125,22 @@ public class LevelController : MonoBehaviour
         //Spawn Effects
         ParticleSystem preAppearEffect = ObjectsPoolManager.SpawnObject(bossPreAppearEffect.gameObject, bossSpawnPosition.position, Quaternion.identity,
             ObjectsPoolManager.PoolType.ParticleSystem).GetComponent<ParticleSystem>();
+        AudioManager.PlaySound(AudioLibrarySounds.BossAppear);
 
         yield return new WaitForSeconds(2f);
         preAppearEffect.Stop();
         
         ObjectsPoolManager.SpawnObject(bossAppearEffect.gameObject, bossSpawnPosition.position, Quaternion.identity,
             ObjectsPoolManager.PoolType.ParticleSystem).GetComponent<ParticleSystem>();
-        
+
+        AudioManager.PlaySound(AudioLibrarySounds.BossAppearExplose);
+
         yield return new WaitForSeconds(0.2f);
-        
+
         //Spawn it out
         ObjectsPoolManager.SpawnObject(bossBug.gameObject,
             bossSpawnPosition.position, 
             Quaternion.identity, ObjectsPoolManager.PoolType.Enemy);
+        
     }
 }

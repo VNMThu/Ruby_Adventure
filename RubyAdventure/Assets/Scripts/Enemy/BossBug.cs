@@ -45,24 +45,30 @@ public class BossBug : Enemy
 
    private IEnumerator MoveToRuby()
    {
-      while (IsAlive && !IsAttacking)
+      while (IsAlive)
       {
-            if (!animator.GetBool(_isMoving))
-            {
-               animator.SetBool(_isMoving,true);
-            }
-         
-            Vector3 rubyPosition = GameManager.Instance.RubyPosition;
-            //speed
-            float step = speed * Time.deltaTime;
-
-            // move towards the ruby location
-            transform.position = Vector2.MoveTowards(transform.position, rubyPosition, step);
-
-            //Flip sprite depend on ruby position
-            FlipToFaceRuby();
-            
+         if (IsAttacking)
+         {
             yield return null;
+            continue;
+         }
+         
+         if (!animator.GetBool(_isMoving))
+         {
+            animator.SetBool(_isMoving,true);
+         }
+         
+         Vector3 rubyPosition = GameManager.Instance.RubyPosition;
+         //speed
+         float step = speed * Time.deltaTime;
+
+         // move towards the ruby location
+         transform.position = Vector2.MoveTowards(transform.position, rubyPosition, step);
+
+         //Flip sprite depend on ruby position
+         FlipToFaceRuby();
+            
+         yield return null;
       }
    }
 
@@ -101,7 +107,13 @@ public class BossBug : Enemy
 
    public void EndLevel()
    {
+      AudioManager.PlaySound(AudioLibrarySounds.BossDeath);
       //Tick win level
+      Invoke(nameof(CallEventLevelEvent),1f);
+   }
+
+   private void CallEventLevelEvent()
+   {
       EventDispatcher.Instance.PostEvent(EventID.OnWinLevel);
    }
 
@@ -119,9 +131,9 @@ public class BossBug : Enemy
       int result = Random.Range(0,10);
       
       //Choose Attack 
-      // TriggerAttack(result<=4);
+      TriggerAttack(result<=4);
       //Cheat on
-      TriggerAttack(false);
+      // TriggerAttack(false);
       //Reset
       StartAttackSequence();
    }
@@ -143,6 +155,8 @@ public class BossBug : Enemy
    
    private void TriggerAttack(bool isAttack1)
    {
+      AudioManager.PlaySound(AudioLibrarySounds.BossCharging);
+
       animator.SetTrigger(isAttack1 ? _triggerAttackEnergyBall : _triggerAttackLaser);
    }
 
@@ -169,6 +183,18 @@ public class BossBug : Enemy
             ObjectsPoolManager.PoolType.Projectile).GetComponent<BugBossLaser>();
          tempLaser.LaserAttack(damage);
       }
+
+      IsAttacking = false;
+
+      AudioManager.StopSound(AudioLibrarySounds.BossCharging);
+      
+      Invoke(nameof(DelayPlaySoundEffect),0.2f);
+   }
+
+   private void DelayPlaySoundEffect()
+   {
+      AudioManager.PlaySound(AudioLibrarySounds.BossAttack2);
+
    }
    
 
@@ -198,7 +224,8 @@ public class BossBug : Enemy
 
       IsAttacking = false;
       //Sound effect
-      AudioManager.PlaySound(AudioLibrarySounds.LazerGun);
+      AudioManager.StopSound(AudioLibrarySounds.BossCharging);
+      AudioManager.PlaySound(AudioLibrarySounds.BossAttack1);
    }
 
    public override void GetHitNormal(float damageDeal, float forcePushPower = 0)

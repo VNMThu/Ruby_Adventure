@@ -12,7 +12,13 @@
         Pistol,
         Rifle,
         Spear,
-        Shockwave
+        Shockwave,
+        BossAppear,
+        BossAttack1,
+        BossDeath,
+        BossAttack2,
+        BossCharging,
+        BossAppearExplose
     }
     public enum AudioLibraryMusic {
         GameplayMusic,
