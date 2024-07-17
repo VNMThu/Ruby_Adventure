@@ -3,10 +3,9 @@ using UnityEngine;
 public static class PlayerPrefHelper
 {
     private const string CoinKey = "ruby_coin";
-    private const string levelNumber = "level_number";
-    private const string soundKey = "sound_toggle";
-    private const string musicKey = "music_toggle";
-
+    private const string SoundKey = "sound_toggle";
+    private const string MusicKey = "music_toggle";
+    // private static int CoinAmount = 0;
 
     public static int GetCurrentCoin()
     {
@@ -27,22 +26,22 @@ public static class PlayerPrefHelper
 
     public static void ToggleSound(bool toggleValue)
     {
-        PlayerPrefs.SetInt(soundKey, toggleValue ? 1 : 0);
+        PlayerPrefs.SetInt(SoundKey, toggleValue ? 1 : 0);
     }
     
     public static void ToggleMusic(bool toggleValue)
     {
-        PlayerPrefs.SetInt(musicKey, toggleValue ? 1 : 0);
+        PlayerPrefs.SetInt(MusicKey, toggleValue ? 1 : 0);
     }
 
     public static bool GetSoundStatus()
     {
-        return PlayerPrefs.GetInt(soundKey,1) == 1;
+        return PlayerPrefs.GetInt(SoundKey,1) == 1;
     }
     
     public static bool GetMusicStatus()
     {
-        return PlayerPrefs.GetInt(musicKey,1) == 1;
+        return PlayerPrefs.GetInt(MusicKey,1) == 1;
     }
     
     

@@ -21,11 +21,14 @@ public class LosePanel : UIPanel
 
    public void OnHomeClick()
    {
-         GameManager.Instance.ReturnToHome();
+      GameManager.Instance.ReturnToHome();
    }
 
    public void OnRestartClick()
    {
-      GameManager.Instance.RestartGameplay();
+      OnClose(() =>
+      {
+         GameManager.Instance.RestartGameplay();
+      });
    }
 }

@@ -18,7 +18,10 @@ public class WinPanel : UIPanel
     
     public void OnRestartClick()
     {
-        GameManager.Instance.RestartGameplay();
+        OnClose(() =>
+        {
+            GameManager.Instance.RestartGameplay();
+        });
     }
     
 }

@@ -112,8 +112,10 @@ public class RubyController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        
         if (Health <= 0 && !_isDeath)
         {
+            Debug.Log("OnDeath");
             PlayerDeath();
             _isDeath = true;
         }
@@ -135,7 +137,7 @@ public class RubyController : MonoBehaviour
             if (_isInvincible)
             {
                 _invincibleTimerWhenHurt -= Time.deltaTime;
-                if (_invincibleTimerWhenHurt < 0)
+                if (_invincibleTimerWhenHurt <= 0)
                 {
                     _isInvincible = false;
                 }
@@ -190,7 +192,6 @@ public class RubyController : MonoBehaviour
                 return;
             case < 0:
             {
-                _animator.SetTrigger(_hit);
 
                 if (_isInvincible)
                 {
@@ -199,7 +200,8 @@ public class RubyController : MonoBehaviour
 
                 _isInvincible = true;
                 _invincibleTimerWhenHurt = timeInvincible;
-
+               
+                _animator.SetTrigger(_hit);
                 ObjectsPoolManager.SpawnObject(getHitEffect.gameObject, _rigidBody.position + Vector2.up * 0.5f,
                     Quaternion.identity,
                     ObjectsPoolManager.PoolType.ParticleSystem);
@@ -298,9 +300,13 @@ public class RubyController : MonoBehaviour
     private void OnRevive()
     {
         _spriteRenderer.enabled = true;
+        _isDeath = false;
+        _isDashing = false;
+        _isInvincible = false;
+        
         //Update health
         Health = maxHealth;
-        _isDeath = false;
+
 
         EventDispatcher
             .Instance.PostEvent(EventID.OnHealthChange, Health);

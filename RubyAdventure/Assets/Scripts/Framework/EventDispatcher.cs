@@ -88,6 +88,7 @@ public class EventDispatcher : GenericSingleton<EventDispatcher>
     private void OnDisable()
     {
         ClearAllListener();
+        Debug.Log("Event Dispatcher:Call Disable");
     }
 }
 

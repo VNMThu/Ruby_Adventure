@@ -98,8 +98,9 @@ public class BossBug : Enemy
 
    protected override void Death()
    {
-      base.Death();
-      
+      IsAlive = false;
+      IsAttacking = false;
+      EnemyCollider.enabled = false;      
       //Start death animation
       animator.SetTrigger(_isDeath);
       

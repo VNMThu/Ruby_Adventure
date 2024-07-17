@@ -30,9 +30,10 @@ public class GameManager : GenericSingleton<GameManager>
     
     public void RestartGameplay()
     {
-        Time.timeScale = 1f;
         AudioManager.StopMusic(AudioLibraryMusic.GameplayMusic);
         SceneManager.LoadScene("Gameplay");
     }
+    
+    
     
 }

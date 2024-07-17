@@ -327,12 +327,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   attackRange: 0
-  fullHealth: 150
+  fullHealth: 200
   speed: 2
   animator: {fileID: 7289248543925582163}
   percentageDropExp: 0
   expSharp: {fileID: 0}
-  percentageDropCoin: 0
   coinPrefab: {fileID: 0}
   flashEffect: {fileID: 3383680001657380629}
   spriteRenderer: {fileID: 7289248543925582160}

@@ -33,7 +33,6 @@ public class RevivePanel : UIPanel
 
     public override void OnOpen(bool isStopTime = true)
     {
-        if (PlayerPrefHelper.GetCurrentCoin() < _deathCount * Constant.CoinNeedToRevive) return;
         if (_isFirstDeath)
         {
             _isFirstDeath = false;
@@ -42,6 +41,7 @@ public class RevivePanel : UIPanel
         {
             _deathCount++;
         }
+        if (PlayerPrefHelper.GetCurrentCoin() < _deathCount * Constant.CoinNeedToRevive) return;
 
         displayMessageText.text = "Use "+_deathCount * Constant.CoinNeedToRevive+" Coins to \nREVIVE?";
         base.OnOpen(isStopTime);

@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     protected Rigidbody2D RigidBody2D;
     protected Collider2D EnemyCollider;
     protected float CurrentHealth;
-    public bool IsAlive { get; private set; }
+    public bool IsAlive { get; protected set; }
     protected bool IsAttacking;
 
     protected virtual void OnEnable()
@@ -74,12 +74,10 @@ public class Enemy : MonoBehaviour
         {
             Vector2 force = (transform.position -GameManager.Instance.RubyPosition).normalized;
             RigidBody2D.AddForce(forcePushPower * force, ForceMode2D.Impulse);
-            Debug.Log("GetHitPushBack1");
 
             //Apply opposite force to stop 
             DOVirtual.DelayedCall(0.1f, () =>
             {
-                Debug.Log("GetHitPushBack2");
                 RigidBody2D.AddForce(-forcePushPower * force, ForceMode2D.Impulse);
             });
         }
@@ -98,7 +96,6 @@ public class Enemy : MonoBehaviour
         EnemyCollider.enabled = false;
         //Random and spawn exp
         int randomValue = Random.Range(1, 11);
-        Debug.Log("Enemy Random Value:"+randomValue);
         if (percentageDropExp >= randomValue)
         {
             //Drop it
