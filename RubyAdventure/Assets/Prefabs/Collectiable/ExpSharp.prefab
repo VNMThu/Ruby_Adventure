@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782c3ae44b5316f43aa7bc7c9316475d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expReceived: 4
+  expReceived: 2
   effectWhenHitRuby: {fileID: 8733514384126542107, guid: f0be7f1a0c2c7fd4486dec986556f8ca, type: 3}
 --- !u!61 &819251705483696951
 BoxCollider2D:

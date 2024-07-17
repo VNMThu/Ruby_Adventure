@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -41,8 +42,21 @@ public class UIPanel : MonoBehaviour
             }
         });
         canvas.enabled = false;
-
     }
     
-    
+    public virtual void OnClose(Action callback,bool isFromGameplay = true)
+    {
+        panel.transform.DOScale(Vector3.one*targetCloseScale, closeAnimationTime).SetUpdate(true).OnComplete(() =>
+        {
+            if (isFromGameplay)
+            {
+                Time.timeScale = 1f;
+            }
+            callback.Invoke();
+        });
+        canvas.enabled = false;
+    }
 }
+    
+    
+

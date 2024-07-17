@@ -241,7 +241,7 @@ public class RubyController : MonoBehaviour
         _rigidBody.velocity = new Vector2(0f, 0f); // Stop dashing.
     }
 
-    private void DoShockwave()
+    private void DoShockwave(bool isFromRevive = false)
     {
         //Create overlapped sphere to hit all enemy in a area
         //Detect all enemy in range
@@ -250,12 +250,14 @@ public class RubyController : MonoBehaviour
         //Hit nothing so return here
         if (results.Length > 0)
         {
+            Debug.Log("EnemyHitByShockWave:"+results.Length);
             //Check all collider
             foreach (var enemyCollider in results)
             {
                 if (enemyCollider.CompareTag(Constant.EnemyTag))
                 {
                     //Hit enemy
+                    Debug.Log("EnemyHitByShockWave2");
                     enemyCollider.GetComponent<Enemy>().GetHitNormal(shockwaveDamage,shockwaveForce);
                 }
             }
@@ -268,7 +270,10 @@ public class RubyController : MonoBehaviour
         AudioManager.PlaySound(AudioLibrarySounds.Shockwave);
         
         //Tick event 
-        EventDispatcher.Instance.PostEvent(EventID.OnRubyShockWave,shockwaveCoolDown);
+        if (!isFromRevive)
+        {
+            EventDispatcher.Instance.PostEvent(EventID.OnRubyShockWave, shockwaveCoolDown);
+        }
     }
 
     public void ChangeCoin(int value)
@@ -300,7 +305,7 @@ public class RubyController : MonoBehaviour
         EventDispatcher
             .Instance.PostEvent(EventID.OnHealthChange, Health);
         
-        DoShockwave();
+        DoShockwave(true);
     }
 
     private void OnWeaponUnlock(WeaponType weaponType)

@@ -23,14 +23,11 @@ public class LevelController : MonoBehaviour
     [Header("Spawn Config")] [SerializeField]
     private Vector2 spawnInterval; // how many seconds between 2 enemy
     [SerializeField] private float percentageMelee = 0.7f;
-    [SerializeField] private float percentageRange = 0.3f;
 
 
     [SerializeField] private Transform centerSpawnPoint;
     [SerializeField] private Vector2 spawnAreaSize;
 
-    private Coroutine _coroutineSpawnEnemy;
-    private Coroutine _coroutineWinLevel;
     private bool _isSpawning;
 
     private Action<object> _onStartLevelRef;
@@ -99,10 +96,10 @@ public class LevelController : MonoBehaviour
 
         //Spawn enemy
         _isSpawning = true;
-        _coroutineSpawnEnemy = StartCoroutine(C_Spawn());
+        StartCoroutine(C_Spawn());
 
         //Finish level when spawn done
-        _coroutineWinLevel = StartCoroutine(C_CountDownToBoss());
+        StartCoroutine(C_CountDownToBoss());
     }
 
     private Vector2 RandomPointInArea(Vector3 center, float sizeX, float sizeY)

@@ -7,8 +7,8 @@ using UnityEngine;
 public class RevivePanel : UIPanel
 {
     private Action<object> _onRubyDeathRef;
-    private int dealthCount = 1;
-    private bool isFirstDeath = true;
+    private int _deathCount = 1;
+    private bool _isFirstDeath = true;
     [SerializeField] private TextMeshProUGUI displayMessageText;
     private void OnEnable()
     {
@@ -19,24 +19,31 @@ public class RevivePanel : UIPanel
     public void OnReviveClick()
     {
         //Use coin
-        PlayerPrefHelper.SubtractCoins(dealthCount * Constant.CoinNeedToRevive);
+        PlayerPrefHelper.SubtractCoins(_deathCount * Constant.CoinNeedToRevive);
         //Update coin
         EventDispatcher.Instance.PostEvent(EventID.OnCoinReceive);
-        //Revive Ruby
-        EventDispatcher.Instance.PostEvent(EventID.OnRubyRevive);
-        OnClose();
+        OnClose(() =>
+        {
+            //Revive Ruby
+            EventDispatcher.Instance.PostEvent(EventID.OnRubyRevive);
+        });
+
+   
     }
 
     public override void OnOpen(bool isStopTime = true)
     {
-        if (PlayerPrefHelper.GetCurrentCoin() < dealthCount * Constant.CoinNeedToRevive) return;
-        if (isFirstDeath)
+        if (PlayerPrefHelper.GetCurrentCoin() < _deathCount * Constant.CoinNeedToRevive) return;
+        if (_isFirstDeath)
         {
-            dealthCount++;
-            isFirstDeath = false;
+            _isFirstDeath = false;
+        }
+        else
+        {
+            _deathCount++;
         }
 
-        displayMessageText.text = "Use "+dealthCount * Constant.CoinNeedToRevive+" Coins to \nREVIVE?";
+        displayMessageText.text = "Use "+_deathCount * Constant.CoinNeedToRevive+" Coins to \nREVIVE?";
         base.OnOpen(isStopTime);
     }
 

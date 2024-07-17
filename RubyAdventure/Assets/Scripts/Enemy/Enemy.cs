@@ -10,15 +10,17 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float fullHealth;
     [SerializeField] protected float speed;
     [SerializeField] protected Animator animator;
-    [Header("EXP Drop")] [SerializeField] protected float percentageDropExp;
+    [Header("Percentage Drop")]
+    [SerializeField] protected float percentageDropExp;
+    [Header("EXP Drop")]
     [SerializeField] protected ExpSharp expSharp;
-    [Header("Money Drop")] [SerializeField] protected float percentageDropCoin;
+    [Header("Money Drop")]
     [SerializeField] protected CoinCollectible coinPrefab;
     [Header("Flash effect when die")] [SerializeField]
     protected FlashEffect flashEffect;
 
     protected Rigidbody2D RigidBody2D;
-    protected Collider2D collider;
+    protected Collider2D EnemyCollider;
     protected float CurrentHealth;
     public bool IsAlive { get; private set; }
     protected bool IsAttacking;
@@ -32,14 +34,14 @@ public class Enemy : MonoBehaviour
             RigidBody2D = GetComponent<Rigidbody2D>();
         }
         
-        if (collider == null)
+        if (EnemyCollider == null)
         {
-            collider = GetComponent<Collider2D>();
+            EnemyCollider = GetComponent<Collider2D>();
         }
 
-        if (!collider.isActiveAndEnabled)
+        if (!EnemyCollider.isActiveAndEnabled)
         {
-            collider.enabled = true;
+            EnemyCollider.enabled = true;
         }
     }
 
@@ -72,9 +74,14 @@ public class Enemy : MonoBehaviour
         {
             Vector2 force = (transform.position -GameManager.Instance.RubyPosition).normalized;
             RigidBody2D.AddForce(forcePushPower * force, ForceMode2D.Impulse);
+            Debug.Log("GetHitPushBack1");
 
             //Apply opposite force to stop 
-            DOVirtual.DelayedCall(0.1f, () => { RigidBody2D.AddForce(-forcePushPower * force, ForceMode2D.Impulse); });
+            DOVirtual.DelayedCall(0.1f, () =>
+            {
+                Debug.Log("GetHitPushBack2");
+                RigidBody2D.AddForce(-forcePushPower * force, ForceMode2D.Impulse);
+            });
         }
 
         if (CurrentHealth <= 0)
@@ -88,21 +95,25 @@ public class Enemy : MonoBehaviour
     {
         IsAlive = false;
         IsAttacking = false;
-        collider.enabled = false;
+        EnemyCollider.enabled = false;
         //Random and spawn exp
         int randomValue = Random.Range(1, 11);
+        Debug.Log("Enemy Random Value:"+randomValue);
         if (percentageDropExp >= randomValue)
         {
             //Drop it
             ObjectsPoolManager.SpawnObject(expSharp.gameObject, transform.position, Quaternion.identity,
                 ObjectsPoolManager.PoolType.Exp);
         }
-        else if (percentageDropCoin >= randomValue)
+        else
         {
             Vector3 spawnPosition =
                 new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
             //Drop it
             ObjectsPoolManager.SpawnObject(coinPrefab.gameObject, spawnPosition, Quaternion.identity);
         }
+
+        
+
     }
 }
